@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using Unity.Mathematics;
 using Game.Map.Enum;
 using Game.Map.Data;
 
@@ -8,13 +9,31 @@ namespace Game.Map
     public class MapGenerator : MonoBehaviour
     {
         [SerializeField] private MapTile[] mapTiles;
+        [SerializeField] private int minMapSize;
+        [SerializeField] private int minMapRoomCount;
+
+        [ContextMenu("la vaca saturno saturnita de frente tu sei tanto bonita")]
+        public void LoadMapVisual()
+        {
+            for (int i = transform.childCount-1; i >= 0; i--)
+                Destroy(transform.GetChild(i).gameObject);
+
+            MapTile[,] map = GenerateMap(minMapSize,minMapRoomCount);
+
+            for (int i = 0; i < minMapSize; i++)
+                for (int j = 0; j < minMapSize; j++)
+                    if(map[i,j] != null)
+                    {
+                        Instantiate(map[i,j].tilePrefab, new Vector3(1.6f * j, -1.6f * i), quaternion.identity, transform);
+                    }
+        }
 
         public MapTile[,] GenerateMap(int mapSize, int minNumberOfRooms)
         {
             int roomCount = 0;
             MapTile[,] map = new MapTile[mapSize, mapSize];
         
-            int[] initialPosition =  {Random.Range(0, mapSize),Random.Range(0, mapSize)};
+            int[] initialPosition =  {UnityEngine.Random.Range(0, mapSize),UnityEngine.Random.Range(0, mapSize)};
         
             TileConnection[] mandatoryConnections = GetMandatoryConnections(initialPosition, mapSize, map);
             TileConnection[] forbiddenConnections = GetForbiddenConnections(initialPosition, mapSize, map);
@@ -89,10 +108,10 @@ namespace Game.Map
                 }
 
                 if(newPossibleTiles.Count > 0)
-                    return newPossibleTiles[Random.Range(0, newPossibleTiles.Count)];
+                    return newPossibleTiles[UnityEngine.Random.Range(0, newPossibleTiles.Count)];
             }
 
-            return possibleTiles[Random.Range(0, possibleTiles.Count)];
+            return possibleTiles[UnityEngine.Random.Range(0, possibleTiles.Count)];
         }
 
         private TileConnection[] GetMandatoryConnections(int[] position, int mapSize, MapTile[,] currentMap)

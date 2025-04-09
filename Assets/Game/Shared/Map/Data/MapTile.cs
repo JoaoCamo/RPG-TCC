@@ -1,6 +1,6 @@
-using Game.Character.Enemy;
-using Game.Map.Enum;
 using UnityEngine;
+using Game.Map.Enum;
+using Game.Character.Enemy;
 
 namespace Game.Map.Data
 {
@@ -8,6 +8,7 @@ namespace Game.Map.Data
     public class MapTile : ScriptableObject
     {
         [SerializeField] private TileConnection[] connections;
+        public GameObject tilePrefab;
         private EnemyController[] tileEnemies;
 
         public TileConnection[] Connections => connections;

@@ -13,3 +13,4 @@ MonoBehaviour:
   m_Name: T_B_L_R
   m_EditorClassIdentifier: 
   connections: 00000000010000000200000003000000
+  tilePrefab: {fileID: 5393116469781634159, guid: 3a66e50dd9cdacbbc8c60bc3f6c619fa, type: 3}
