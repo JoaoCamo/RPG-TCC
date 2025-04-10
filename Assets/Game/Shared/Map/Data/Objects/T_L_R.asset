@@ -13,4 +13,6 @@ MonoBehaviour:
   m_Name: T_L_R
   m_EditorClassIdentifier: 
   connections: 000000000200000003000000
-  tilePrefab: {fileID: 4510750830507611686, guid: db5881e6090e6e26aa373308ae4e57e1, type: 3}
+  tileSprite: {fileID: -1957181433, guid: dd1df5efa3abdc80fa585e4f6c4b6194, type: 3}
+  tileEnemies: []
+  isVisited: 0
