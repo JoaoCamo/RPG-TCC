@@ -11,18 +11,13 @@ namespace Game.UI
     {
         [SerializeField] private MapGenerator mapGenerator;
         [SerializeField] private Image tilePrefab;
-        [SerializeField] private Transform tileParent;
+        [SerializeField] private GridLayoutGroup grid;
         [SerializeField] private TextMeshProUGUI titleTextMesh;
-
-        void Awake()
-        {
-            LoadMap(true);
-        }
 
         public void LoadMap(bool requestNew = false)
         {
-            for (int i = tileParent.childCount - 1; i >= 0; i--)
-                Destroy(tileParent.GetChild(i).gameObject);
+            for (int i = grid.transform.childCount - 1; i >= 0; i--)
+                Destroy(grid.transform.GetChild(i).gameObject);
 
             if(requestNew)
             {
@@ -31,12 +26,13 @@ namespace Game.UI
             }
 
             int mapSize = GetMapSize();
+            grid.cellSize = new Vector2(600/mapSize,600/mapSize);
 
             for(int i = 0; i < mapSize; i++)
             {
                 for(int j = 0; j < mapSize; j++)
                 {
-                    Image tile = Instantiate(tilePrefab, tileParent);
+                    Image tile = Instantiate(tilePrefab, grid.transform);
                     MapSection mapSection = StaticVariables.CurrentMap[i,j];
                     tile.sprite = mapSection != null ? mapSection.SectionInfo.tileSprite : null;
                     tile.enabled = mapSection != null;

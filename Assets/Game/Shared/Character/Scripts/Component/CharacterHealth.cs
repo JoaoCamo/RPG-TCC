@@ -7,6 +7,9 @@ namespace Game.Character
         protected int _maxHealth = 0;
         protected int _currentHealth = 0;
 
+        public int MaxHealth => _maxHealth;
+        public int CurrentHealth => _currentHealth;
+
         public void CalculateHealth(int hitDice, int level, int characterConstitution)
         {
             int totalHealth = hitDice;
