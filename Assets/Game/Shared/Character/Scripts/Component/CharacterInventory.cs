@@ -9,6 +9,11 @@ namespace Game.Character
         private List<ItemBase> _items = new List<ItemBase>();
         private int _maxInventoryCapacity;
         private int _currentWeight;
+        private int _currentGold;
+
+        public int MaxInventoryCapacity => _maxInventoryCapacity;
+        public int CurrentWeight => _currentWeight; 
+        public int CurrentGold => _currentGold;
 
         private void UpdateCapacity(int characterStrength)
         {

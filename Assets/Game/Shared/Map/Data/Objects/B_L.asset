@@ -13,3 +13,6 @@ MonoBehaviour:
   m_Name: B_L
   m_EditorClassIdentifier: 
   connections: 0100000002000000
+  tileSprite: {fileID: 1736032289, guid: dd1df5efa3abdc80fa585e4f6c4b6194, type: 3}
+  tileEnemies: []
+  isVisited: 0

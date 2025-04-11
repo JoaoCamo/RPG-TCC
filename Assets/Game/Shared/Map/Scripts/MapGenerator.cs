@@ -2,6 +2,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using Game.Map.Enum;
 using Game.Map.Data;
+using Game.Static;
+using Game.Static.Enum;
 
 namespace Game.Map
 {
@@ -9,45 +11,46 @@ namespace Game.Map
     {
         [SerializeField] private MapTile[] mapTiles;
 
-        public MapTile[,] GenerateMap(int mapSize, int minNumberOfRooms)
+        public MapSection[,] GenerateMap()
         {
             int roomCount = 0;
-            MapTile[,] map = new MapTile[mapSize, mapSize];
+            int[] mapSize = GetMapSizeInfo();
+            MapSection[,] map = new MapSection[mapSize[0], mapSize[0]];
         
-            int[] initialPosition =  {Random.Range(0, mapSize),Random.Range(0, mapSize)};
+            int[] initialPosition =  {Random.Range(0, mapSize[0]),Random.Range(0, mapSize[0])};
         
-            TileConnection[] mandatoryConnections = GetMandatoryConnections(initialPosition, mapSize, map);
-            TileConnection[] forbiddenConnections = GetForbiddenConnections(initialPosition, mapSize, map);
+            TileConnection[] mandatoryConnections = GetMandatoryConnections(initialPosition, mapSize[0], map);
+            TileConnection[] forbiddenConnections = GetForbiddenConnections(initialPosition, mapSize[0], map);
         
-            MapTile tile = GetMapTile(mandatoryConnections, forbiddenConnections);
+            MapSection section = GetMapSection(mandatoryConnections, forbiddenConnections);
         
-            map[initialPosition[0],initialPosition[1]] = tile;
+            map[initialPosition[0],initialPosition[1]] = section;
             roomCount++;
         
-            foreach(TileConnection connection in tile.Connections)
+            foreach(TileConnection connection in section.SectionInfo.connections)
             {
                 int[] newPosition = GetNewPosition(connection, initialPosition);
         
                 if(map[newPosition[0],newPosition[1]] != null)
                     continue;
         
-                GenerateMap(mapSize, minNumberOfRooms, map, GetNewPosition(connection, initialPosition), roomCount);
+                GenerateMap(mapSize[0], mapSize[1], map, GetNewPosition(connection, initialPosition), roomCount);
             }
         
             return map;
         }
 
-        private void GenerateMap(int mapSize, int minNumberOfRooms, MapTile[,] currentMap, int[] position, int roomCount)
+        private void GenerateMap(int mapSize, int minNumberOfRooms, MapSection[,] currentMap, int[] position, int roomCount)
         {
             TileConnection[] mandatoryConnections = GetMandatoryConnections(position, mapSize, currentMap);
             TileConnection[] forbiddenConnections = GetForbiddenConnections(position, mapSize, currentMap);
 
-            MapTile tile = GetMapTile(mandatoryConnections, forbiddenConnections, roomCount >= minNumberOfRooms);
+            MapSection tile = GetMapSection(mandatoryConnections, forbiddenConnections, roomCount >= minNumberOfRooms);
 
             currentMap[position[0],position[1]] = tile;
             roomCount++;
 
-            foreach(TileConnection connection in tile.Connections)
+            foreach(TileConnection connection in tile.SectionInfo.connections)
             {
                 int[] newPosition = GetNewPosition(connection, position);
 
@@ -58,7 +61,7 @@ namespace Game.Map
             }
         }
 
-        private MapTile GetMapTile(TileConnection[] mandatoryConnections, TileConnection[] forbiddenConnections, bool canBeSingle = true)
+        private MapSection GetMapSection(TileConnection[] mandatoryConnections, TileConnection[] forbiddenConnections, bool canBeSingle = true)
         {
             List<MapTile> possibleTiles = new List<MapTile>();
 
@@ -67,11 +70,11 @@ namespace Game.Map
                 bool isValid = true;
 
                 foreach (TileConnection connection in mandatoryConnections)
-                    if(!CheckForConnection(tile.Connections, connection))
+                    if(!CheckForConnection(tile.connections, connection))
                         isValid = false;
                 
                 foreach (TileConnection connection in forbiddenConnections)
-                    if(CheckForConnection(tile.Connections, connection))
+                    if(CheckForConnection(tile.connections, connection))
                         isValid = false;
 
                 if(isValid)
@@ -84,42 +87,42 @@ namespace Game.Map
 
                 foreach (MapTile tile in possibleTiles)
                 {
-                    if(tile.Connections.Length == 1)
+                    if(tile.connections.Length == 1)
                         newPossibleTiles.Remove(tile);
                 }
 
                 if(newPossibleTiles.Count > 0)
-                    return newPossibleTiles[Random.Range(0, newPossibleTiles.Count)];
+                    return new MapSection() { SectionInfo = newPossibleTiles[Random.Range(0, newPossibleTiles.Count)] };
             }
 
-            return possibleTiles[Random.Range(0, possibleTiles.Count)];
+            return new MapSection() { SectionInfo = possibleTiles[Random.Range(0, possibleTiles.Count)] };
         }
 
-        private TileConnection[] GetMandatoryConnections(int[] position, int mapSize, MapTile[,] currentMap)
+        private TileConnection[] GetMandatoryConnections(int[] position, int mapSize, MapSection[,] currentMap)
         {
             List<TileConnection> mandatoryConnections = new List<TileConnection>();
 
             if (position[1] > 0 && currentMap[position[0], position[1] - 1] != null)
             {
-                if (CheckForConnection(currentMap[position[0], position[1] - 1].Connections, TileConnection.Right))
+                if (CheckForConnection(currentMap[position[0], position[1] - 1].SectionInfo.connections, TileConnection.Right))
                     mandatoryConnections.Add(TileConnection.Left);
             }
 
             if (position[1] < mapSize - 1 && currentMap[position[0], position[1] + 1] != null)
             {
-                if (CheckForConnection(currentMap[position[0], position[1] + 1].Connections, TileConnection.Left))
+                if (CheckForConnection(currentMap[position[0], position[1] + 1].SectionInfo.connections, TileConnection.Left))
                     mandatoryConnections.Add(TileConnection.Right);
             }
 
             if (position[0] > 0 && currentMap[position[0] - 1, position[1]] != null)
             {
-                if (CheckForConnection(currentMap[position[0] - 1, position[1]].Connections, TileConnection.Bottom))
+                if (CheckForConnection(currentMap[position[0] - 1, position[1]].SectionInfo.connections, TileConnection.Bottom))
                     mandatoryConnections.Add(TileConnection.Top);
             }
 
             if (position[0] < mapSize - 1 && currentMap[position[0] + 1, position[1]] != null)
             {
-                if (CheckForConnection(currentMap[position[0] + 1, position[1]].Connections, TileConnection.Top))
+                if (CheckForConnection(currentMap[position[0] + 1, position[1]].SectionInfo.connections, TileConnection.Top))
                     mandatoryConnections.Add(TileConnection.Bottom);
             }
 
@@ -127,7 +130,7 @@ namespace Game.Map
         }
 
 
-        private TileConnection[] GetForbiddenConnections(int[] position, int mapSize, MapTile[,] currentMap)
+        private TileConnection[] GetForbiddenConnections(int[] position, int mapSize, MapSection[,] currentMap)
         {
             List<TileConnection> forbiddenConnections = new List<TileConnection>();
 
@@ -137,8 +140,8 @@ namespace Game.Map
             }
             else
             {
-                MapTile topTile = currentMap[position[0] - 1, position[1]];
-                if (topTile != null && !CheckForConnection(topTile.Connections, TileConnection.Bottom))
+                MapSection topTile = currentMap[position[0] - 1, position[1]];
+                if (topTile != null && !CheckForConnection(topTile.SectionInfo.connections, TileConnection.Bottom))
                     forbiddenConnections.Add(TileConnection.Top);
             }
 
@@ -148,8 +151,8 @@ namespace Game.Map
             }
             else
             {
-                MapTile bottomTile = currentMap[position[0] + 1, position[1]];
-                if (bottomTile != null && !CheckForConnection(bottomTile.Connections, TileConnection.Top))
+                MapSection bottomTile = currentMap[position[0] + 1, position[1]];
+                if (bottomTile != null && !CheckForConnection(bottomTile.SectionInfo.connections, TileConnection.Top))
                     forbiddenConnections.Add(TileConnection.Bottom);
             }
 
@@ -159,8 +162,8 @@ namespace Game.Map
             }
             else
             {
-                MapTile leftTile = currentMap[position[0], position[1] - 1];
-                if (leftTile != null && !CheckForConnection(leftTile.Connections, TileConnection.Right))
+                MapSection leftTile = currentMap[position[0], position[1] - 1];
+                if (leftTile != null && !CheckForConnection(leftTile.SectionInfo.connections, TileConnection.Right))
                     forbiddenConnections.Add(TileConnection.Left);
             }
             
@@ -170,8 +173,8 @@ namespace Game.Map
             }
             else
             {
-                MapTile rightTile = currentMap[position[0], position[1] + 1];
-                if (rightTile != null && !CheckForConnection(rightTile.Connections, TileConnection.Left))
+                MapSection rightTile = currentMap[position[0], position[1] + 1];
+                if (rightTile != null && !CheckForConnection(rightTile.SectionInfo.connections, TileConnection.Left))
                     forbiddenConnections.Add(TileConnection.Right);
             }
 
@@ -197,6 +200,17 @@ namespace Game.Map
                 TileConnection.Left => new int[] { previousPosition[0], previousPosition[1] - 1},
                 TileConnection.Right => new int[] { previousPosition[0], previousPosition[1] + 1},
                 _ => new int[2]
+            };
+        }
+
+        private int[] GetMapSizeInfo()
+        {
+            return StaticVariables.GameDifficulty switch
+            {
+                GameDifficulty.Easy => new int[] {3,2},
+                GameDifficulty.Normal => new int[] {4,3},
+                GameDifficulty.Hard => new int[] {5,4},
+                _ => new int[] {3,2},
             };
         }
     }
