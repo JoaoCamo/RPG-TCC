@@ -1,10 +1,9 @@
 using System.Collections.Generic;
-using UnityEngine;
 using Game.Item;
 
 namespace Game.Character
 {
-    public class CharacterInventory : MonoBehaviour
+    public class CharacterInventory
     {
         private List<ItemBase> _items = new List<ItemBase>();
         private int _maxInventoryCapacity;

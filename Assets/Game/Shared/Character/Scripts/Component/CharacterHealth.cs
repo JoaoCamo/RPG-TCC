@@ -1,8 +1,6 @@
-using UnityEngine;
-
 namespace Game.Character
 {
-    public class CharacterHealth : MonoBehaviour
+    public class CharacterHealth
     {
         protected int _maxHealth = 0;
         protected int _currentHealth = 0;
@@ -12,14 +10,20 @@ namespace Game.Character
 
         public void CalculateHealth(int hitDice, int level, int characterConstitution)
         {
-            int totalHealth = hitDice;
+            _maxHealth = hitDice;
 
             for (int i = 1; i < level; i++)
-                totalHealth += Random.Range(1, hitDice + 1) + ((characterConstitution - 10) / 2);
+                _maxHealth += UnityEngine.Random.Range(1, hitDice + 1) + ((characterConstitution - 10) / 2);
             
-            _maxHealth = totalHealth;
+            _currentHealth = _maxHealth;
         }
 
-        public virtual void ReceiveDamage(int armorPoints, int hitRoll, int rawDamage, int dicesToRoll, int characterStrength, bool isCrit) {}
+        public virtual void ReceiveDamage(int armorPoints, int hitRoll, int totalDamage, bool isCrit)
+        {
+            if(!isCrit && hitRoll < armorPoints)
+                return;
+
+            _currentHealth -= totalDamage;
+        }
     }
 }

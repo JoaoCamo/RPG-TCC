@@ -14,13 +14,18 @@ namespace Game.UI
 
         public void FillUI(PlayerController playerInfo)
         {
-            nameTextMesh.text = playerInfo.name;
-            healthTextMesh.text = playerInfo.Health.CurrentHealth + "/" + playerInfo.Health.MaxHealth;
+            nameTextMesh.text = playerInfo.Name;
+            UpdateHealth(playerInfo.Health);
             UpdatePlayerStats(playerInfo.Stats);
             UpdateItemsStats(playerInfo.Equipment, playerInfo.Inventory);
         }
 
-        private void UpdatePlayerStats(CharacterStats stats)
+        public void UpdateHealth(PlayerHealth healthInfo)
+        {
+            healthTextMesh.text = healthInfo.CurrentHealth + "/" + healthInfo.MaxHealth;
+        }
+
+        public void UpdatePlayerStats(CharacterStats stats)
         {
             statsTextMeshes[0].text = stats.level.ToString();
             statsTextMeshes[1].text = stats.strength.ToString();
@@ -31,7 +36,7 @@ namespace Game.UI
             statsTextMeshes[6].text = stats.charisma.ToString();
         }
 
-        private void UpdateItemsStats(CharacterEquipment equipment, CharacterInventory inventory)
+        public void UpdateItemsStats(CharacterEquipment equipment, CharacterInventory inventory)
         {
             itemStatsTextMeshes[0].text = "Armor Class: " + equipment.GetTotalArmor().ToString();
             itemStatsTextMeshes[1].text = "Damage: " + equipment.Weapon.WeaponData.dicesToRoll + "d" + equipment.Weapon.WeaponData.rawDamage.ToString();

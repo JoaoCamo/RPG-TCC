@@ -1,17 +1,16 @@
-using UnityEngine;
 using Game.Item;
 using Game.Item.Enum;
 
 namespace Game.Character
 {
-    public class CharacterEquipment : MonoBehaviour
+    public class CharacterEquipment
     {
-        private ArmorBase headArmor;
-        private ArmorBase chestArmor;
-        private ArmorBase legsArmor;
-        private ArmorBase feetArmor;
-        private ArmorBase shield;
-        private WeaponBase weapon;
+        private ArmorBase headArmor = new ArmorBase();
+        private ArmorBase chestArmor = new ArmorBase();
+        private ArmorBase legsArmor = new ArmorBase();
+        private ArmorBase feetArmor = new ArmorBase();
+        private ArmorBase shield = new ArmorBase();
+        private WeaponBase weapon = new WeaponBase();
 
         public WeaponBase Weapon => weapon;
 
@@ -28,9 +27,9 @@ namespace Game.Character
             return totalArmor;
         }
 
-        public void EquipItem(ItemType itemType, ItemBase itemBase)
+        public void EquipItem(ItemBase itemBase)
         {
-            switch (itemType)
+            switch (itemBase.ItemData.itemType)
             {
                 case ItemType.Weapon:
                     weapon = itemBase as WeaponBase;

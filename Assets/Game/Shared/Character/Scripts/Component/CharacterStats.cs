@@ -1,9 +1,8 @@
 using Game.Character.Enum;
-using UnityEngine;
 
 namespace Game.Character
 {
-    public class CharacterStats : MonoBehaviour
+    public class CharacterStats
     {
         public int level;
         public int strength;
