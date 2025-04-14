@@ -11,6 +11,6 @@ namespace Game.Static
         public static GameDifficulty GameDifficulty;
         public static PlayerController PlayerController;
         public static MapSection[,] CurrentMap;
-        public static CanvasGroup currentCanvasGroup;
+        public static CanvasGroup CurrentCanvasGroup;
     }
 }

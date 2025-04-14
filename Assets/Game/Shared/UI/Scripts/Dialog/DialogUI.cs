@@ -1,3 +1,4 @@
+using Game.Controllers;
 using Game.Static;
 using Game.Static.Enum;
 using Game.UI.Data;
@@ -13,7 +14,7 @@ namespace Game.UI
         [SerializeField] private TextMeshProUGUI objectiveTextMesh;
         [SerializeField] private TextMeshProUGUI dialogTextMesh;
 
-        public void SetNewDialog(DialogData dialogData)
+        public void SetNewDialog(DialogData dialogData, DialogController dialogController)
         {
             objectiveTextMesh.text = dialogData.currentObjective;
             dialogTextMesh.text = dialogData.text;
@@ -23,13 +24,18 @@ namespace Game.UI
             foreach (DialogOptionData dialogOption in dialogData.dialogOptions)
             {
                 DialogButton dialogButton = Instantiate(dialogButtonPrefab, dialogButtonParent);
-                dialogButton.Initialize(() => DialogButtonOnClick(dialogOption.newGameState), dialogOption.text);
+                dialogButton.Initialize(() => DialogButtonOnClick(dialogController, dialogOption.text, dialogOption.newGameState), dialogOption.text);
             }
         }
 
-        private void DialogButtonOnClick(GameState newGameState)
+        private void DialogButtonOnClick(DialogController dialogController, string text, GameState newGameState)
         {
-            StaticVariables.CurrentGameState = newGameState;
+            if(newGameState != StaticVariables.CurrentGameState)
+                StaticFunctions.LoadGameState(newGameState);
+            else
+            {
+                dialogController.SendDialogToAI(text);
+            }
         }
 
         private void ClearPreviousDialog()

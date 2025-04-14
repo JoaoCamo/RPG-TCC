@@ -1,3 +1,4 @@
+using Game.Static.Enum;
 using UnityEngine;
 
 namespace Game.Static
@@ -6,20 +7,25 @@ namespace Game.Static
     {
         public static void ChangeCurrentUI(CanvasGroup newCanvas)
         {
-            if(StaticVariables.currentCanvasGroup == newCanvas) return;
+            if(StaticVariables.CurrentCanvasGroup == newCanvas) return;
 
-            if(StaticVariables.currentCanvasGroup != null)
+            if(StaticVariables.CurrentCanvasGroup != null)
             {
-                StaticVariables.currentCanvasGroup.interactable = false;
-                StaticVariables.currentCanvasGroup.blocksRaycasts = false;
-                StaticVariables.currentCanvasGroup.alpha = 0;
+                StaticVariables.CurrentCanvasGroup.interactable = false;
+                StaticVariables.CurrentCanvasGroup.blocksRaycasts = false;
+                StaticVariables.CurrentCanvasGroup.alpha = 0;
             }
 
             newCanvas.interactable = true;
             newCanvas.blocksRaycasts = true;
             newCanvas.alpha = 1;
 
-            StaticVariables.currentCanvasGroup = newCanvas;
+            StaticVariables.CurrentCanvasGroup = newCanvas;
+        }
+
+        public static void LoadGameState(GameState newGameState)
+        {
+            StaticVariables.CurrentGameState = newGameState;
         }
     }
 }
