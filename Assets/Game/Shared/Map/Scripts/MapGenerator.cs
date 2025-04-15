@@ -11,18 +11,17 @@ namespace Game.Map
     {
         [SerializeField] private MapTile[] mapTiles;
 
-        public MapSection[,] GenerateMap()
+        public MapSection[,] GenerateMap(int[] initialPosition)
         {
             int roomCount = 0;
             int[] mapSize = GetMapSizeInfo();
             MapSection[,] map = new MapSection[mapSize[0], mapSize[0]];
         
-            int[] initialPosition =  {Random.Range(0, mapSize[0]),Random.Range(0, mapSize[0])};
-        
             TileConnection[] mandatoryConnections = GetMandatoryConnections(initialPosition, mapSize[0], map);
             TileConnection[] forbiddenConnections = GetForbiddenConnections(initialPosition, mapSize[0], map);
         
             MapSection section = GetMapSection(mandatoryConnections, forbiddenConnections);
+            section.IsVisited = true;
         
             map[initialPosition[0],initialPosition[1]] = section;
             roomCount++;

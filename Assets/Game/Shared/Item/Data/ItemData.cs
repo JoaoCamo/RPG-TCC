@@ -5,6 +5,7 @@ namespace Game.Item.Data
     [System.Serializable]
     public struct ItemData
     {
+        public ItemType itemType;
         public string itemName;
         public string description;
         public int weight;
