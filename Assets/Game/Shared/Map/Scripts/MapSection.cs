@@ -1,16 +1,16 @@
-using Game.Map.Data;
 using Game.Character.Enemy;
+using Game.Map.Data;
 
 namespace Game.Map
 {
     public class MapSection
     {
-            private MapTile sectionInfo;
-            private EnemyController[] tileEnemies;
-            private bool isVisited = false;
+            private MapTile _sectionInfo;
+            private EnemyController[] _tileEnemies;
+            private bool _isVisited = false;
 
-            public MapTile SectionInfo { get { return sectionInfo; } set { sectionInfo = value; } }
-            public EnemyController[] TileEnemies { get { return tileEnemies;} set { tileEnemies = value;} }
-            public bool IsVisited { get { return isVisited; } set { isVisited = value; } }
+            public MapTile SectionInfo { get { return _sectionInfo; } set { _sectionInfo = value; } }
+            public EnemyController[] TileEnemies { get { return _tileEnemies;} set { _tileEnemies = value;} }
+            public bool IsVisited { get { return _isVisited; } set { _isVisited = value; } }
     }
 }

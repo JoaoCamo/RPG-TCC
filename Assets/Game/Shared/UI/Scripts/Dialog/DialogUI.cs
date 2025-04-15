@@ -13,6 +13,7 @@ namespace Game.UI
         [SerializeField] private Transform dialogButtonParent;
         [SerializeField] private TextMeshProUGUI objectiveTextMesh;
         [SerializeField] private TextMeshProUGUI dialogTextMesh;
+        [SerializeField] private CanvasGroup canvasGroup;
 
         public void SetNewDialog(DialogData dialogData, DialogController dialogController)
         {
