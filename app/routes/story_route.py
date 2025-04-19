@@ -1,5 +1,5 @@
 from flask import Blueprint, request, jsonify
-from services.story_service import generate_story
+from app.services.story_service import generate_story
 
 story_blueprint = Blueprint("story", __name__)
 

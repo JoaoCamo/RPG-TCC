@@ -1,5 +1,5 @@
 from flask import Blueprint, request, jsonify
-from services.dungeon_service import generate_dungeon
+from app.services.dungeon_service import generate_dungeon
 
 dungeon_blueprint = Blueprint("dungeon", __name__)
 
