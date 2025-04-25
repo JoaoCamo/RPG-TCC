@@ -1,6 +1,8 @@
+import json
 from openai import OpenAI
 
 from app.utils.schema_util import load_json_schema
+from app.utils.save_context import save_context
 
 client = OpenAI()
 
@@ -17,4 +19,6 @@ def generate_story():
         ],
         text=story_schema,
     )
+    main_story = json.loads(response.output_text)
+    save_context(main_story)
     return response.output_text

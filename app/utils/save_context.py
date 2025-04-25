@@ -21,5 +21,5 @@ def save_context(data: dict):
     base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
     data_dir = os.path.join(base_dir, "data")
     context_path = os.path.join(data_dir, "context.txt")
-    with open(context_path, "w", encoding="utf-8") as f:
+    with open(context_path, "a", encoding="utf-8") as f:
         return f.write(formatted_text.strip())

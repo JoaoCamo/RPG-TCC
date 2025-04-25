@@ -7,7 +7,7 @@ client = OpenAI()
 
 def generate_character(level: int):
     character_system = "You are an imaginative Dungeon Master."
-    character_user = f"Generate a character sheet for a level {level} RPG character."
+    character_user = f"Generate a creative character sheet for a level {level} RPG character, based on previous contexts (dungeon and kingdom)."
     character_schema = load_json_schema("character_schema.json")
     response = client.responses.create(
         model="gpt-4.1-nano",
