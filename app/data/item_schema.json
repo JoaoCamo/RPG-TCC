@@ -1,0 +1,50 @@
+{
+    "name":"item",
+    "strict":true,
+    "schema":{
+        "type":"object",
+        "properties":{
+            "itemType": {
+                "enum":["armor", "weapon"]
+            },
+            "itemName":{
+                "type":"string"
+            },
+            "itemDescription":{
+                "type":"string"
+            },
+            "itemWeight": {
+                "type": "integer"
+            },
+            "itemValue": {
+                "type": "integer"
+            },
+            "itemRarity": {
+                "enum": ["Common", "Uncommon", "Rare", "Epic", "Legendary"]
+            }
+        },
+        "required":[
+            "itemType",
+            "itemName",
+            "itemDescription",
+            "itemWeight",
+            "itemValue",
+            "itemRarity"
+        ],
+        "additionalProperties":false,
+        "allOf": [
+            {
+            "if": {
+                "properties": { "itemType": { "const": "armor" } }
+            },
+            "then": { "$ref": "/app/data/armor_schema.json" }
+            },
+            {
+            "if": {
+                "properties": { "itemType": { "const": "weapon" } }
+            },
+            "then": { "$ref": "/app/data/weapon_schema.json" }
+            }
+        ]
+    }
+}
