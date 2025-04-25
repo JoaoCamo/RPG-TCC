@@ -1,17 +1,20 @@
 from openai import OpenAI
 
-from app.utils.character_util import character_schema, character_system, character_user
+from app.utils.schema_util import load_json_schema
 
 client = OpenAI()
 
 
-def generate_character():
+def generate_character(level: int):
+    character_system = "You are an imaginative Dungeon Master."
+    character_user = f"Generate a character sheet for a level {level} RPG character."
+    character_schema = load_json_schema("character_schema.json")
     response = client.responses.create(
-        model="gpt-4o-2024-08-06",
+        model="gpt-4.1-nano",
         input=[
             {"role": "system", "content": character_system},
             {"role": "user", "content": character_user},
         ],
         text=character_schema,
     )
-    return response
+    return response.output_text

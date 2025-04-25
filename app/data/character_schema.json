@@ -56,7 +56,8 @@
             "required":[
                 "level",
                 "name",
-                "stats"
+                "stats",
+                "inventory"
             ],
             "additionalProperties":false
         }
