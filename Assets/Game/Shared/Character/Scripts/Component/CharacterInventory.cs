@@ -10,6 +10,7 @@ namespace Game.Character
         private int _currentWeight;
         private int _currentGold;
 
+        public List<ItemBase> Items => _items;
         public int MaxInventoryCapacity => _maxInventoryCapacity;
         public int CurrentWeight => _currentWeight; 
         public int CurrentGold => _currentGold;

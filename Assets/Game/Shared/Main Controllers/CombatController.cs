@@ -7,11 +7,13 @@ using Game.Character;
 using Game.Character.Enemy;
 using Game.Character.Enum;
 using Game.Static;
+using Game.Item;
 
 namespace Game.Controllers
 {
     public class CombatController : MonoBehaviour
     {
+        [SerializeField] private MapController mapController;
         [SerializeField] private CombatUI combatUI;
         [SerializeField] private PlayerStatsUI playerStatsUI;
 
@@ -28,7 +30,16 @@ namespace Game.Controllers
 
         private void ContinueCombat()
         {
-            //if(CheckForCombatEnd())
+            if(CheckForCombatEnd())
+            {
+                foreach(CharacterBase character in _charactersInCombat)
+                    if(character.CharacterType != CharacterType.Player)
+                        foreach(ItemBase item in character.Inventory.Items)
+                            mapController.GetCurrentSection().SectionItems.Add(item);
+
+                mapController.LoadMap();
+                return;
+            }
 
             bool isPlayer = _charactersInCombat[_currentIndex].CharacterType == CharacterType.Player;
             
