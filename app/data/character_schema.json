@@ -7,8 +7,7 @@
             "type":"object",
             "properties":{
                 "level":{
-                    "type":"integer",
-                    "minimum":1
+                    "type":"integer"
                 },
                 "name":{
                     "type":"string"
@@ -48,19 +47,16 @@
                     ],
                     "additionalProperties":false
                 },
-                "inventory":{
-                    "type":"array",
-                    "items":{
-                        "type":"string",
-                        "uniqueItems":true
-                    }
+                "dropQuantity":{
+                    "type":"integer"
                 }
             },
             "required":[
                 "level",
                 "name",
+                "size",
                 "stats",
-                "inventory"
+                "dropQuantity"
             ],
             "additionalProperties":false
         }

@@ -4,8 +4,66 @@
     "schema":{
         "type":"object",
         "properties":{
-            "itemType": {
-                "enum":["armor", "weapon"]
+            "itemType":{
+                "type":"object",
+                "properties":{
+                    "itemType":{
+                        "anyOf":[
+                            {
+                                "type":"object",
+                                "properties":{
+                                    "itemType":{
+                                        "type":"string",
+                                        "const":"weapon"
+                                    },
+                                    "rawDamage":{
+                                        "type":"integer"
+                                    },
+                                    "dicesToRoll":{
+                                        "type":"integer"
+                                    }
+                                },
+                                "required":[
+                                    "itemType",
+                                    "rawDamage",
+                                    "dicesToRoll"
+                                ],
+                                "additionalProperties":false
+                            },
+                            {
+                                "type":"object",
+                                "properties":{
+                                    "itemType":{
+                                        "type":"string",
+                                        "const":"armor"
+                                    },
+                                    "armorValue":{
+                                        "type":"integer"
+                                    },
+                                    "armorType":{
+                                        "enum":[
+                                            "Head",
+                                            "Chest",
+                                            "Legs",
+                                            "Feet",
+                                            "Shield"
+                                        ]
+                                    }
+                                },
+                                "required":[
+                                    "itemType",
+                                    "armorValue",
+                                    "armorType"
+                                ],
+                                "additionalProperties":false
+                            }
+                        ]
+                    }
+                },
+                "required":[
+                    "itemType"
+                ],
+                "additionalProperties":false
             },
             "itemName":{
                 "type":"string"
@@ -13,14 +71,20 @@
             "itemDescription":{
                 "type":"string"
             },
-            "itemWeight": {
-                "type": "integer"
+            "itemWeight":{
+                "type":"integer"
             },
-            "itemValue": {
-                "type": "integer"
+            "itemValue":{
+                "type":"integer"
             },
-            "itemRarity": {
-                "enum": ["Common", "Uncommon", "Rare", "Epic", "Legendary"]
+            "itemRarity":{
+                "enum":[
+                    "Common",
+                    "Uncommon",
+                    "Rare",
+                    "Epic",
+                    "Legendary"
+                ]
             }
         },
         "required":[
@@ -31,20 +95,6 @@
             "itemValue",
             "itemRarity"
         ],
-        "additionalProperties":false,
-        "allOf": [
-            {
-            "if": {
-                "properties": { "itemType": { "const": "armor" } }
-            },
-            "then": { "$ref": "/app/data/armor_schema.json" }
-            },
-            {
-            "if": {
-                "properties": { "itemType": { "const": "weapon" } }
-            },
-            "then": { "$ref": "/app/data/weapon_schema.json" }
-            }
-        ]
+        "additionalProperties":false
     }
 }
