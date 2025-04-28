@@ -7,7 +7,7 @@ client = OpenAI()
 
 def generate_item():
     item_system = "You are an imaginative Dungeon Master."
-    item_user = "Generate this item based on the character."
+    item_user = "Generate this item, either a weapon or armor, based on the character that will drop this item."
     item_room_schema = load_json_schema("item_schema.json")
     response = client.responses.create(
         model="gpt-4.1-nano",

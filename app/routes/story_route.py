@@ -6,4 +6,5 @@ story_blueprint = Blueprint("story", __name__)
 
 @story_blueprint.route("/", methods=["POST"])
 def story():
-    return
+    story = generate_story()
+    return jsonify({"story": story})

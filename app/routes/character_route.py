@@ -6,4 +6,7 @@ character_blueprint = Blueprint("character", __name__)
 
 @character_blueprint.route("/", methods=["POST"])
 def character():
-    return
+    data = request.get_json()
+    level = data.get("level")
+    character = generate_character(level)
+    return jsonify({"character": character})

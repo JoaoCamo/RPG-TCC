@@ -6,4 +6,5 @@ dungeon_room_blueprint = Blueprint("dungeon_room", __name__)
 
 @dungeon_room_blueprint.route("/", methods=["POST"])
 def dungeon_room():
-    return
+    dungeon_room = generate_dungeon_room()
+    return jsonify({"dungeon_room": dungeon_room})

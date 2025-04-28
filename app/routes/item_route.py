@@ -6,4 +6,5 @@ item_blueprint = Blueprint("item", __name__)
 
 @item_blueprint.route("/", methods=["POST"])
 def item():
-    return
+    item = generate_item()
+    return jsonify({"item": item})

@@ -9,7 +9,7 @@ client = OpenAI()
 
 def generate_story():
     story_system = "You are an imaginative Dungeon Master."
-    story_user = "Generate a story/response dialogue given by a named npc/item, based on the previous contexts of the story, then give the player three choices about what to say/do next."
+    story_user = "Generate a story/response dialogue given by a named npc, based on the previous contexts of the story, then give the player three choices about what to say/do next."
     story_schema = load_json_schema("story_schema.json")
     response = client.responses.create(
         model="gpt-4.1-mini",
