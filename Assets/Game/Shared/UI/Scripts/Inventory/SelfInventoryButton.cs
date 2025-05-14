@@ -1,18 +1,35 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
+using Game.Item;
+using Game.Character;
+using Game.Static;
 
-public class SelfInventoryButton : MonoBehaviour
+namespace Game.UI
 {
-    // Start is called before the first frame update
-    void Start()
+    public class SelfInventoryButton : MonoBehaviour
     {
-        
-    }
+        [SerializeField] private TextMeshProUGUI textMesh;
+        [SerializeField] private Image outline;
+        [SerializeField] private Button button;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+        private ItemBase _itemBase;
+
+        public void Initialize(ItemBase itemBase)
+        {
+            _itemBase = itemBase;
+            textMesh.text = itemBase.ItemData.itemName;
+        }
+
+        public void OnClick()
+        {
+            _itemBase.UseItem();
+            StaticEvents.OnItemUse();
+        }
+
+        public void UpdateOutline(CharacterEquipment characterEquipment)
+        {
+            outline.color = characterEquipment.CheckForItem(_itemBase) ? Color.yellow : Color.white;
+        }
     }
 }
