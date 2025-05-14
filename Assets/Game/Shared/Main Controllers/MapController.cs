@@ -103,5 +103,10 @@ namespace Game.Controllers
                 _ => 3,
             };
         }
+
+        public MapSection GetCurrentSection()
+        {
+            return _currentMap[_currentPosition[0], _currentPosition[1]];
+        }
     }
 }
