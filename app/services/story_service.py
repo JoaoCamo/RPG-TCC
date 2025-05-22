@@ -2,14 +2,15 @@ import json
 from openai import OpenAI
 
 from app.utils.schema_util import load_json_schema
-from app.utils.save_context import save_context
+from app.utils.save_context import save_context, load_context
 
 client = OpenAI()
 
 
-def generate_story():
+def generate_story(choice):
+    context = load_context("context.txt")
     story_system = "You are an imaginative Dungeon Master."
-    story_user = "Generate a story/response dialogue given by a named npc, based on the previous contexts of the story, then give the player three choices about what to say/do next."
+    story_user = f"Story Context: {context} {choice}\n\nPrompt: Generate a story/response dialogue given by a named npc, based on the previous contexts of the story, then give the player three choices about what to say/do next. One of these choices must be about the story, another one must be about the dungeon, and another one an agressive option towards the npc."
     story_schema = load_json_schema("story_schema.json")
     response = client.responses.create(
         model="gpt-4.1-mini",
@@ -20,5 +21,5 @@ def generate_story():
         text=story_schema,
     )
     main_story = json.loads(response.output_text)
-    save_context(main_story)
+    save_context(main_story, "context.txt")
     return response.output_text

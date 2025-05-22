@@ -6,5 +6,7 @@ story_blueprint = Blueprint("continue_story", __name__)
 
 @story_blueprint.route("/", methods=["POST"])
 def story():
-    story = generate_story()
+    data = request.get_json()
+    choice = data.get("choice")
+    story = generate_story(choice)
     return jsonify({"story": story})

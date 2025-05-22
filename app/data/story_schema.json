@@ -21,13 +21,31 @@
                     "type":"object",
                     "properties":{
                         "1":{
-                            "type":"string"
+                            "type":"string",
+                            "game_state":{
+                                "enum":[
+                                    "Dialogue",
+                                    "Dungeon"
+                                ]
+                            }
                         },
                         "2":{
-                            "type":"string"
+                            "type":"string",
+                            "game_state":{
+                                "enum":[
+                                    "Dialogue",
+                                    "Dungeon"
+                                ]
+                            }
                         },
                         "3":{
-                            "type":"string"
+                            "type":"string",
+                            "game_state":{
+                                "enum":[
+                                    "Dialogue",
+                                    "Dungeon"
+                                ]
+                            }
                         }
                     },
                     "required":[

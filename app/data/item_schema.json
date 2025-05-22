@@ -44,10 +44,7 @@
                                         },
                                         "armorType":{
                                             "enum":[
-                                                "Head",
                                                 "Chest",
-                                                "Legs",
-                                                "Feet",
                                                 "Shield"
                                             ]
                                         }
