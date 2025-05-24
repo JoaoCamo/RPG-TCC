@@ -6,5 +6,7 @@ item_blueprint = Blueprint("item", __name__)
 
 @item_blueprint.route("/", methods=["POST"])
 def item():
-    item = generate_item()
+    data = request.get_json()
+    character = data.get("character")
+    item = generate_item(character)
     return jsonify({"item": item})

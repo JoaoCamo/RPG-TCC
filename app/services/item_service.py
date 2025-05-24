@@ -5,9 +5,9 @@ from app.utils.schema_util import load_json_schema
 client = OpenAI()
 
 
-def generate_item():
+def generate_item(character):
     item_system = "You are an imaginative Dungeon Master."
-    item_user = "Generate an item, either a weapon or armor, based on the character that will drop it."
+    item_user = f"Generate an item, either a weapon or armor, based on the character passed bellow that will drop it.\nCharacter: {character}"
     item_room_schema = load_json_schema("item_schema.json")
     response = client.responses.create(
         model="gpt-4.1-nano",
