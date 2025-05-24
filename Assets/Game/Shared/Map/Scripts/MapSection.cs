@@ -7,14 +7,21 @@ namespace Game.Map
 {
     public class MapSection
     {
-            private MapTile _sectionInfo;
-            private EnemyController[] _tileEnemies;
-            private readonly List<ItemBase> _sectionItems = new List<ItemBase>();
-            private bool _isVisited = false;
+        private MapTile _sectionInfo;
+        private EnemyController[] _tileEnemies;
+        private readonly List<ItemBase> _sectionItems = new List<ItemBase>();
+        private bool _isVisited = false;
+        private bool _isObjective = false;
 
-            public MapTile SectionInfo { get { return _sectionInfo; } set { _sectionInfo = value; } }
-            public EnemyController[] TileEnemies { get { return _tileEnemies;} set { _tileEnemies = value;} }
-            public List<ItemBase> SectionItems => _sectionItems;
-            public bool IsVisited { get { return _isVisited; } set { _isVisited = value; } }
+        public MapTile SectionInfo { get { return _sectionInfo; } set { _sectionInfo = value; } }
+        public EnemyController[] TileEnemies { get { return _tileEnemies;} set { _tileEnemies = value;} }
+        public List<ItemBase> SectionItems => _sectionItems;
+        public bool IsVisited { get { return _isVisited; } set { _isVisited = value; } }
+        public bool isObjective { get { return _isObjective; } set { _isObjective = value; } }
+
+        public MapSection()
+        {
+            _tileEnemies = new EnemyController[0];
+        }
     }
 }

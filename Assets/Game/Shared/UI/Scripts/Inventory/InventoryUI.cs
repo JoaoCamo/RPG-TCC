@@ -1,3 +1,4 @@
+using Game.Static;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -22,6 +23,8 @@ namespace Game.UI
 
         private void ToggleUI()
         {
+            changeModeButton.gameObject.SetActive(StaticVariables.CurrentGameState == Static.Enum.GameState.Dungeon);
+
             _isOpen = !_isOpen;
 
             canvasGroup.alpha = _isOpen ? 1 : 0;

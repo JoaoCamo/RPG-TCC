@@ -1,10 +1,12 @@
 using System.Collections.Generic;
 using Game.Item;
+using Game.Static;
 
 namespace Game.Character
 {
     public class CharacterInventory
     {
+        private readonly CharacterBase _base;
         private List<ItemBase> _items = new List<ItemBase>();
         private int _maxInventoryCapacity;
         private int _currentWeight;
@@ -15,21 +17,32 @@ namespace Game.Character
         public int CurrentWeight => _currentWeight; 
         public int CurrentGold => _currentGold;
 
-        private void UpdateCapacity(int characterStrength)
+        public CharacterInventory(CharacterBase characterBase)
+        {
+            _base = characterBase;
+        }
+
+        public void UpdateCapacity(int characterStrength)
         {
             _maxInventoryCapacity = characterStrength* 15;
         }
 
-        public void AddItems(ItemBase[] items)
+        public void AddItem(ItemBase item)
         {
-            foreach (ItemBase item in items)
-            {
-                if(_currentWeight + item.ItemData.weight > _maxInventoryCapacity)
-                    break;
+            if (_currentWeight + item.ItemData.weight > _maxInventoryCapacity)
+                return;
 
-                _items.Add(item);
-                _currentWeight++;
-            }
+            _items.Add(item);
+            _currentWeight++;
+        }
+
+        public void RemoveItem(ItemBase item)
+        {
+            if(_base.Equipment.CheckForItem(item))
+                _base.Equipment.EquipItem(item);
+
+            _items.Remove(item);
+            StaticEvents.OnItemUse();
         }
     }
 }

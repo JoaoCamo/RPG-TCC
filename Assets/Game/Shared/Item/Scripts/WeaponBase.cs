@@ -9,6 +9,12 @@ namespace Game.Item
 
         public WeaponData WeaponData => _weaponData;
 
+        public WeaponBase()
+        {
+            _weaponData.rawDamage = 1;
+            _weaponData.dicesToRoll = 1;
+        }
+
         public override void SetInfoItem(WeaponData weaponData)
         {
             _weaponData = weaponData;

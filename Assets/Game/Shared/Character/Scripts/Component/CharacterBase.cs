@@ -21,7 +21,7 @@ namespace Game.Character
             _name = name;
             _characterType = type;
             _equipment = new CharacterEquipment();
-            _inventory = new CharacterInventory();
+            _inventory = new CharacterInventory(this);
             _stats = new CharacterStats();
         }
     }

@@ -3,8 +3,14 @@ namespace Game.UI.Data
     [System.Serializable]
     public struct DialogData
     {
-        public string currentObjective;
-        public string text;
-        public DialogOptionData[] dialogOptions;
+        public string name;
+        public string dialogue;
+        public DialogOptionData[] options;
+    }
+
+    [System.Serializable]
+    public struct DialogDataWrapper
+    {
+        public string story;
     }
 }

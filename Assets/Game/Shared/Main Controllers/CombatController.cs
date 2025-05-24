@@ -20,8 +20,11 @@ namespace Game.Controllers
         private List<CharacterBase> _charactersInCombat;
         private int _currentIndex = 0;
 
-        public void StartCombat(CharacterBase[] characterBases)
+        private bool _isAtObjective = false;
+
+        public void StartCombat(CharacterBase[] characterBases, bool isObjective)
         {
+            _isAtObjective = isObjective;
             _charactersInCombat = OrderCharacterList(characterBases);
             combatUI.LoadUI(characterBases);
             combatUI.UpdateContinueButton(ContinueCombat);
@@ -38,6 +41,10 @@ namespace Game.Controllers
                             mapController.GetCurrentSection().SectionItems.Add(item);
 
                 mapController.LoadMap();
+
+                if (_isAtObjective)
+                    mapController.ShowDungeonExitOption();
+
                 return;
             }
 
@@ -69,7 +76,7 @@ namespace Game.Controllers
             int totalArmorPoints = StaticVariables.PlayerController.Equipment.GetTotalArmor();
 
             int hitRoll = UnityEngine.Random.Range(0, 21);
-            int strengthModifier = (enemyController.Stats.strength - 10) / 2;
+            int strengthModifier = Math.Max(0, (StaticVariables.PlayerController.Stats.strength - 10) / 2);
 
             bool isCrit = hitRoll == 20;
             hitRoll += isCrit ? 0 : strengthModifier;
@@ -94,7 +101,7 @@ namespace Game.Controllers
             int totalArmorPoints = StaticVariables.PlayerController.Equipment.GetTotalArmor();
 
             int hitRoll = UnityEngine.Random.Range(0, 21);
-            int strengthModifier = (StaticVariables.PlayerController.Stats.strength - 10) / 2;
+            int strengthModifier = Math.Max(0 ,(StaticVariables.PlayerController.Stats.strength - 10) / 2);
 
             bool isCrit = hitRoll == 20;
             hitRoll += isCrit ? 0 : strengthModifier;
@@ -131,7 +138,7 @@ namespace Game.Controllers
 
         private List<CharacterBase> OrderCharacterList(CharacterBase[] characters)
         {
-            Dictionary<CharacterBase, int> map = characters.ToDictionary(c => c, c => UnityEngine.Random.Range(0, 21) + (c.Stats.dexterity - 10) / 2);
+            var map = characters.ToDictionary(c => c,c => UnityEngine.Random.Range(0, 21) + Math.Max(0, (c.Stats.dexterity - 10) / 2));
             Array.Sort(characters, (a, b) => map[a].CompareTo(map[b]));
             return characters.ToList();
         }

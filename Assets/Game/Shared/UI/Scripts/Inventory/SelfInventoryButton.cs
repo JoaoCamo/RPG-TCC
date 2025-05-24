@@ -19,6 +19,7 @@ namespace Game.UI
         {
             _itemBase = itemBase;
             textMesh.text = itemBase.ItemData.itemName;
+            button.onClick.AddListener(OnClick);
         }
 
         public void OnClick()

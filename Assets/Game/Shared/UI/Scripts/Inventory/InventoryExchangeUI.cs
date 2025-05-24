@@ -31,7 +31,9 @@ namespace Game.UI
 
         private void LoadContent(CharacterInventory playerInventory, List<ItemBase> exchangeItems)
         {
-            foreach(ItemBase item in playerInventory.Items)
+            RemoveItems();
+
+            foreach (ItemBase item in playerInventory.Items)
             {
                 InventoryExchangeButton button = Instantiate(inventoryExchangeButtonPrefab, playerItemsParent);
                 button.Initialize(item.ItemData.itemName, () => ItemButtonOnClick(item, true));
@@ -40,7 +42,7 @@ namespace Game.UI
 
             foreach(ItemBase item in exchangeItems)
             {
-                InventoryExchangeButton button = Instantiate(inventoryExchangeButtonPrefab, playerItemsParent);
+                InventoryExchangeButton button = Instantiate(inventoryExchangeButtonPrefab, exchangeItemsParent);
                 button.Initialize(item.ItemData.itemName, () => ItemButtonOnClick(item, false));
                 _itemButons.Add(button);
             }
@@ -58,7 +60,7 @@ namespace Game.UI
         {
             if(isInPlayerInventory)
             {
-                StaticVariables.PlayerController.Inventory.Items.Remove(itemBase);
+                StaticVariables.PlayerController.Inventory.RemoveItem(itemBase);
                 mapController.GetCurrentSection().SectionItems.Add(itemBase);
             }
             else
