@@ -13,7 +13,8 @@
                     "type":"string"
                 },
                 "size":{
-                    "enum": ["Tiny", "Small", "Medium", "Large", "Huge", "Gargantuan"]
+                    "type": "integer",
+                    "enum": [2,3,5,7,10,15]
                 },
                 "stats":{
                     "type":"object",

@@ -43,6 +43,7 @@
                                             "type":"integer"
                                         },
                                         "armorType":{
+                                            "type": "integer",
                                             "enum":[
                                                 "Chest",
                                                 "Shield"
@@ -77,6 +78,7 @@
                     "type":"integer"
                 },
                 "itemRarity":{
+                    "type": "integer",
                     "enum":[
                         "Common",
                         "Uncommon",

@@ -1,13 +1,15 @@
 from openai import OpenAI
 
 from app.utils.schema_util import load_json_schema
+from app.utils.save_context import load_context
 
 client = OpenAI()
 
 
 def generate_character(level: int):
+    context = load_context("context.txt")
     character_system = "You are an imaginative Dungeon Master."
-    character_user = f"Generate a creative character sheet for a level {level} character, based on previous dungeon and kingdom contexts, the chracter has a 50% chance to not have any itemDrop, 25% chance to have 1 itemDrop, 12.5% chance to have 2 itemDrops and 12.5% chance to have 3 itemDrops."
+    character_user = f"Story context: {context}\nGenerate a creative character sheet for a level {level} character, based on previous dungeon and kingdom contexts, the chracter has a 50% chance to not have any itemDrop, 25% chance to have 1 itemDrop, 12.5% chance to have 2 itemDrops and 12.5% chance to have 3 itemDrops."
     character_schema = load_json_schema("character_schema.json")
     response = client.responses.create(
         model="gpt-4.1-nano",
