@@ -66,10 +66,17 @@ namespace Game.UI
             continueButton.onClick.AddListener(onClick);
         }
 
-        public void UpdateInfoText(int hitroll, int totalDamage, bool isCrit, string characterName)
+        public void UpdateInfoText(int totalArmor, int hitroll, int totalDamage, bool isCrit, string characterName)
         {
-            string critText = isCrit ? " made a critical roll" : " rolled " + hitroll;
-            combatInfoTextMesh.text = characterName + critText + " and dealt " + totalDamage + "!";
+            if (hitroll < totalArmor)
+            {
+                combatInfoTextMesh.text = characterName + " missed the attack!";
+            }
+            else
+            {
+                string critText = isCrit ? " made a critical roll" : " rolled " + hitroll;
+                combatInfoTextMesh.text = characterName + critText + " and dealt " + totalDamage + "!";
+            }
         }
 
         public void UpdateInfoText(string text)
@@ -84,7 +91,7 @@ namespace Game.UI
             foreach (EnemyInfoButton enemyInfoButton in _enemyInfoButtons)
             {
                 enemyInfoButton.UpdateButtonAction( () =>  { continueButton.interactable = true;
-                                                             UpdateInfoText("You selected " + enemyInfoButton.EnemyInfo.Name);
+                                                             UpdateInfoText("You selected " + enemyInfoButton.EnemyController.Name);
                                                              UpdateContinueButton( () => combatController.PerformAttack(enemyInfoButton.Index) ); 
                                                              } );
             }

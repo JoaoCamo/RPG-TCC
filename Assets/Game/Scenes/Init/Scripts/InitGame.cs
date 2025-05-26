@@ -67,7 +67,7 @@ namespace Game.Scenes.Init
 
             WeaponData weaponData = new WeaponData()
             {
-                rawDamage = 6,
+                rawDamage = 3,
                 dicesToRoll = 2,
                 itemBonus = new ItemBonus[0]
             };

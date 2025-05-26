@@ -63,8 +63,9 @@ namespace Game.Character
             enemyController.Inventory.UpdateCapacity(enemyController.Stats.strength);
         }
 
-        private ItemBase RequestItem()
+        private ItemBase RequestItem(string characterString)
         {
+
             return null;
         }
     }

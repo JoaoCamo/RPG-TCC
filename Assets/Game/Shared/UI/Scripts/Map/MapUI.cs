@@ -64,7 +64,7 @@ namespace Game.UI
                     {
                         Image mapTile = _mapTiles[i,j];
                         mapTile.enabled = mapSection.IsVisited;
-                        mapTile.color = i == currentPosition[0] && j == currentPosition[1] ? Color.blue : Color.white;
+                        mapTile.color = i == currentPosition[0] && j == currentPosition[1] ? Color.white : Color.black;
                     }
                 }
             }

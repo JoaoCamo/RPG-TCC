@@ -2,7 +2,6 @@ using System.Collections;
 using System.Text;
 using UnityEngine;
 using UnityEngine.Networking;
-using Game.Backend.Data;
 using Game.UI;
 using Game.UI.Data;
 
@@ -17,12 +16,11 @@ namespace Game.Item
             messageUI = messageBoxUI;
         }
 
-        public IEnumerator GenerateItem(ArmorBase armorBase, int itemLevel)
+        public IEnumerator GenerateItem(ArmorBase armorBase, string character)
         {
             string url = "http://127.0.0.1:5000/generate/item/";
 
-            LevelSendData data = new LevelSendData() { level = itemLevel };
-            string dataJson = JsonUtility.ToJson(data);
+            string dataJson = JsonUtility.ToJson(character);
             byte[] bodyRaw = Encoding.UTF8.GetBytes(dataJson);
 
             UnityWebRequest request = new UnityWebRequest(url, "POST");
@@ -40,12 +38,11 @@ namespace Game.Item
             }
         }
 
-        public IEnumerator GenerateItem(WeaponBase weaponBase, int itemLevel)
+        public IEnumerator GenerateItem(WeaponBase weaponBase, string character)
         {
             string url = "http://127.0.0.1:5000/generate/item/";
         
-            LevelSendData data = new LevelSendData() { level = itemLevel };
-            string dataJson = JsonUtility.ToJson(data);
+            string dataJson = JsonUtility.ToJson(character);
             byte[] bodyRaw = Encoding.UTF8.GetBytes(dataJson);
         
             UnityWebRequest request = new UnityWebRequest(url, "POST");
