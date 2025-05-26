@@ -78,7 +78,7 @@
                     "type":"integer"
                 },
                 "itemRarity":{
-                    "type": "integer",
+                    "type": "string",
                     "enum":[
                         "Common",
                         "Uncommon",
