@@ -14,20 +14,20 @@
                         {
                             "type": "object",
                             "properties": {
-                                "enemiesPresent": {
+                                "isEnemiesPresent": {
                                     "type": "boolean",
                                     "const": false
                                 }
                             },
                             "required": [
-                                "enemiesPresent"
+                                "isEnemiesPresent"
                             ],
                             "additionalProperties": false
                         },
                         {
                             "type": "object",
                             "properties": {
-                                "enemiesPresent": {
+                                "isEnemiesPresent": {
                                     "type": "boolean",
                                     "const": true
                                 },
@@ -37,7 +37,7 @@
                                 }
                             },
                             "required": [
-                                "enemiesPresent",
+                                "isEnemiesPresent",
                                 "enemyAmount"
                             ],
                             "additionalProperties": false

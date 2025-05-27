@@ -6,7 +6,7 @@
         "schema": {
             "type": "object",
             "properties": {
-                "itemType": {
+                "itemData": {
                     "anyOf": [
                         {
                             "type": "object",
@@ -48,7 +48,7 @@
                                 }
                             },
                             "required": [
-                                "itemType",
+                                "itemData",
                                 "armorValue",
                                 "armorType"
                             ],
