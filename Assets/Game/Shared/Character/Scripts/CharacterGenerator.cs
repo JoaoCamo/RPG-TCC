@@ -13,9 +13,10 @@ using Game.Item;
 
 namespace Game.Character
 {
-    public class CharacterGenerator
+    public class CharacterGenerator : MonoBehaviour
     {
-        private readonly MessageBoxUI messageUI;
+        [SerializeField] private ItemGenerator itemGenerator;
+        [SerializeField] private MessageBoxUI messageUI;
 
         public CharacterGenerator(MessageBoxUI messageBoxUI)
         {
@@ -44,11 +45,11 @@ namespace Game.Character
                 string response = request.downloadHandler.text;
                 CharacterCreationDataWrapper wrapper = JsonUtility.FromJson<CharacterCreationDataWrapper>(response);
                 CharacterCreationData characterCreationData = JsonUtility.FromJson<CharacterCreationData>(wrapper.character);
-                FillCharacterData(enemyController, characterCreationData);
+                yield return StartCoroutine(FillCharacterData(enemyController, characterCreationData, wrapper.character));
             }
         }
 
-        private void FillCharacterData(EnemyController enemyController, CharacterCreationData data)
+        private IEnumerator FillCharacterData(EnemyController enemyController, CharacterCreationData data, string characterJson)
         {
             enemyController.LoadCharacter(data.name, CharacterType.Enemy);
             enemyController.Size = data.size;
@@ -61,12 +62,24 @@ namespace Game.Character
             enemyController.Stats.charisma = data.stats.charisma;
             enemyController.Health.CalculateHealth((int)enemyController.Size, enemyController.Stats.level, enemyController.Stats.constitution);
             enemyController.Inventory.UpdateCapacity(enemyController.Stats.strength);
-        }
 
-        private ItemBase RequestItem(string characterString)
-        {
-
-            return null;
+            for (int i = 0; i < data.dropQuantity; i++)
+            {
+                if(Random.value >= 0.5f)
+                {
+                    WeaponBase weaponBase = new WeaponBase();
+                    yield return StartCoroutine(itemGenerator.GenerateItem(weaponBase, characterJson));
+                    enemyController.Inventory.AddItem(weaponBase);
+                    enemyController.Equipment.EquipItem(weaponBase);
+                }
+                else
+                {
+                    ArmorBase armorBase = new ArmorBase();
+                    yield return StartCoroutine(itemGenerator.GenerateItem(armorBase, characterJson));
+                    enemyController.Inventory.AddItem(armorBase);
+                    enemyController.Equipment.EquipItem(armorBase);
+                }
+            }
         }
     }
 }

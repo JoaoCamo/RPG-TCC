@@ -35,10 +35,19 @@ namespace Game.Controllers
         {
             if(CheckForCombatEnd())
             {
-                foreach(CharacterBase character in _charactersInCombat)
-                    if(character.CharacterType != CharacterType.Player)
-                        foreach(ItemBase item in character.Inventory.Items)
+                foreach (CharacterBase character in _charactersInCombat)
+                {
+                    if (character.CharacterType != CharacterType.Player)
+                    {
+                        for (int i = 0; i < character.Inventory.Items.Count; i++)
+                        {
+                            ItemBase item = character.Inventory.Items[i];
                             mapController.GetCurrentSection().SectionItems.Add(item);
+                            character.Inventory.RemoveItem(item);
+                            i--;
+                        }
+                    }
+                }
 
                 mapController.LoadMap();
 

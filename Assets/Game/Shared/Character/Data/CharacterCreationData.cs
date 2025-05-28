@@ -2,6 +2,7 @@ using Game.Character.Enum;
 
 namespace Game.Character.Data
 {
+    [System.Serializable]
     public struct CharacterCreationData
     {
         public int level;
@@ -11,6 +12,7 @@ namespace Game.Character.Data
         public int dropQuantity;
     }
 
+    [System.Serializable]
     public struct StatsData
     {
         public int strength;

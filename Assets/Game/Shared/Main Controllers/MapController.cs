@@ -159,9 +159,8 @@ namespace Game.Controllers
         private IEnumerator LoadRoomEnemies(DungeonRoom dungeonRoom)
         {
             List<EnemyController> characters = new List<EnemyController>();
-            CharacterGenerator characterGenerator = new CharacterGenerator(messageUI);
 
-            for (int i = 0; i < dungeonRoom.enemiesPresent.enemyAmmount; i++)
+            for (int i = 0; i < dungeonRoom.enemiesPresent.enemyAmount; i++)
             {
                 EnemyController enemy = new EnemyController();
                 yield return StartCoroutine(characterGenerator.GenerateEnemy(enemy));
