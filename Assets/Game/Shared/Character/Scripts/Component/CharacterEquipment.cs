@@ -26,7 +26,10 @@ namespace Game.Character
             switch (itemBase.ItemData.itemType)
             {
                 case ItemType.Weapon:
-                    _weapon = itemBase as WeaponBase;
+                    if (CheckForItem(itemBase))
+                        _weapon = new WeaponBase();
+                    else
+                        _weapon = itemBase as WeaponBase;
                     break;
                 case ItemType.Armor:
                     EquipArmor(itemBase as ArmorBase);
@@ -41,10 +44,16 @@ namespace Game.Character
             switch (armor.ArmorData.type)
             {
                 case ArmorType.Chest:
-                    _chestArmor = armor;
+                    if (CheckForItem(armorBase))
+                        _chestArmor = new ArmorBase();
+                    else
+                        _chestArmor = armor;
                     break;
                 case ArmorType.Shield:
-                    _shield = armor;
+                    if (CheckForItem(armorBase))
+                        _chestArmor = new ArmorBase();
+                    else
+                        _shield = armor;
                     break;
             }
         }

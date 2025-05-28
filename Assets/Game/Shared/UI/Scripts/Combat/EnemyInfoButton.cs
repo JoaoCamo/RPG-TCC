@@ -12,25 +12,25 @@ namespace Game.UI
         [SerializeField] private TextMeshProUGUI nameTextMesh;
         [SerializeField] private TextMeshProUGUI infoTextMesh;
 
-        private EnemyController _enemyInfo;
+        private EnemyController _enemyController;
         private int _index;
 
-        public EnemyController EnemyInfo => _enemyInfo;
+        public EnemyController EnemyController => _enemyController;
         public int Index => _index;
 
-        public void Initialize(EnemyController enemyInfo, int index)
+        public void Initialize(EnemyController enemyController, int index)
         {
-            _enemyInfo = enemyInfo;
+            _enemyController = enemyController;
             _index = index;
-            nameTextMesh.text = enemyInfo.Name;
-            infoTextMesh.text = "HP: " + enemyInfo.Health.CurrentHealth + "/" + enemyInfo.Health.MaxHealth 
-                                + "\nArmor Class: " + enemyInfo.Equipment.GetTotalArmor() 
-                                + "\nDamage: " + enemyInfo.Equipment.Weapon.WeaponData.dicesToRoll + "d" + enemyInfo.Equipment.Weapon.WeaponData.rawDamage;
+            nameTextMesh.text = enemyController.Name;
+            UpdateInfo(enemyController);
         }
 
         public void UpdateInfo(EnemyController enemyInfo)
         {
-            infoTextMesh.text = "HP: " + enemyInfo.Health.CurrentHealth + "/" + enemyInfo.Health.MaxHealth 
+            int currentHealth = enemyInfo.Health.CurrentHealth > 0 ? enemyInfo.Health.CurrentHealth : 0;
+
+            infoTextMesh.text = "HP: " + currentHealth + "/" + enemyInfo.Health.MaxHealth 
                                 + "\nArmor Class: " + enemyInfo.Equipment.GetTotalArmor() 
                                 + "\nDamage: " + enemyInfo.Equipment.Weapon.WeaponData.dicesToRoll + "d" + enemyInfo.Equipment.Weapon.WeaponData.rawDamage;
         }

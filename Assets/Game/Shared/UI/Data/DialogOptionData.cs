@@ -6,6 +6,6 @@ namespace Game.UI.Data
     public struct DialogOptionData
     {
         public string text;
-        public GameState newGameState;
+        public GameState game_state;
     }
 }

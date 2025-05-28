@@ -1,3 +1,5 @@
+using System;
+
 namespace Game.Character
 {
     public class CharacterHealth
@@ -12,8 +14,8 @@ namespace Game.Character
         {
             _maxHealth = hitDice;
 
-            for (int i = 1; i < level; i++)
-                _maxHealth += UnityEngine.Random.Range(1, hitDice + 1) + ((characterConstitution - 10) / 2);
+            for (int i = 0; i < level; i++)
+                _maxHealth += UnityEngine.Random.Range(1, hitDice + 1) + Math.Max(0, (characterConstitution - 10) / 2);
             
             _currentHealth = _maxHealth;
         }

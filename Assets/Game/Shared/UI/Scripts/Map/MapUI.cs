@@ -44,10 +44,10 @@ namespace Game.UI
 
         public void LoadButtons(MapController mapController)
         {
-            movementButtons[0].onClick.AddListener(() => mapController.MovePlayer(0,-1));
-            movementButtons[1].onClick.AddListener(() => mapController.MovePlayer(1,0));
-            movementButtons[2].onClick.AddListener(() => mapController.MovePlayer(-1,0));
-            movementButtons[3].onClick.AddListener(() => mapController.MovePlayer(0,1));
+            movementButtons[0].onClick.AddListener(() => StartCoroutine(mapController.MovePlayer(0,-1)));
+            movementButtons[1].onClick.AddListener(() => StartCoroutine(mapController.MovePlayer(1,0)));
+            movementButtons[2].onClick.AddListener(() => StartCoroutine(mapController.MovePlayer(-1,0)));
+            movementButtons[3].onClick.AddListener(() => StartCoroutine(mapController.MovePlayer(0,1)));
         }
 
         public void UpdateMap(MapSection[,] map, int[] currentPosition)
@@ -64,7 +64,7 @@ namespace Game.UI
                     {
                         Image mapTile = _mapTiles[i,j];
                         mapTile.enabled = mapSection.IsVisited;
-                        mapTile.color = i == currentPosition[0] && j == currentPosition[1] ? Color.blue : Color.white;
+                        mapTile.color = i == currentPosition[0] && j == currentPosition[1] ? Color.white : Color.black;
                     }
                 }
             }

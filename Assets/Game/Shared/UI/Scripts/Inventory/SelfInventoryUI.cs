@@ -38,11 +38,13 @@ namespace Game.UI
 
         public void LoadContent(CharacterInventory playerInventory)
         {
+            RemoveItems();
+
             foreach (ItemBase item in playerInventory.Items)
             {
                 SelfInventoryButton button = Instantiate(selfInventoryButtonPrefab, itemsParent);
-                button.UpdateOutline(StaticVariables.PlayerController.Equipment);
                 button.Initialize(item);
+                button.UpdateOutline(StaticVariables.PlayerController.Equipment);
                 _itemButons.Add(button);
             }
         }
