@@ -42,7 +42,7 @@ namespace Game.Controllers
             GetMapObjective();
 
             mapUI.LoadMap(_currentMap);
-            mapUI.UpdateMap(_currentMap, _currentPosition);
+            mapUI.UpdateMap(_currentMap, _currentPosition, "");
             mapUI.UpdateButtons(_currentMap, _currentPosition, mapSize);
         }
 
@@ -50,7 +50,7 @@ namespace Game.Controllers
         {
             int mapSize = GetMapSize();
             mapUI.LoadMap(_currentMap);
-            mapUI.UpdateMap(_currentMap, _currentPosition);
+            mapUI.UpdateMap(_currentMap, _currentPosition, GetCurrentSection().RoomDescription);
             mapUI.UpdateButtons(_currentMap, _currentPosition, mapSize);
         }
 
@@ -85,7 +85,7 @@ namespace Game.Controllers
             }
 
             currentSection.IsVisited = true;
-            mapUI.UpdateMap(_currentMap, _currentPosition);
+            mapUI.UpdateMap(_currentMap, _currentPosition, GetCurrentSection().RoomDescription);
             mapUI.UpdateButtons(_currentMap, _currentPosition, GetMapSize());
         }
 
@@ -98,11 +98,6 @@ namespace Game.Controllers
                 GameDifficulty.Hard => 5,
                 _ => 3,
             };
-        }
-
-        public MapSection GetCurrentSection()
-        {
-            return _currentMap[_currentPosition[0], _currentPosition[1]];
         }
 
         private void GetMapObjective()
@@ -145,6 +140,7 @@ namespace Game.Controllers
                 string response = request.downloadHandler.text;
                 DungeonRoomWrapper wrapper = JsonUtility.FromJson<DungeonRoomWrapper>(response);
                 DungeonRoom dungeonRoom = JsonUtility.FromJson<DungeonRoom>(wrapper.dungeon_room);
+                GetCurrentSection().RoomDescription = dungeonRoom.roomDescription;
 
                 if (dungeonRoom.enemiesPresent.enemiesPresent)
                 {
@@ -191,6 +187,11 @@ namespace Game.Controllers
             MessageBoxButtonData boxButtonDataContinue = new MessageBoxButtonData(messageUI.CloseMessageBox, "Continue Fighting");
 
             messageUI.RequestMessageBox(message, boxButtonDataExit, boxButtonDataContinue);
+        }
+
+        public MapSection GetCurrentSection()
+        {
+            return _currentMap[_currentPosition[0], _currentPosition[1]];
         }
     }
 }

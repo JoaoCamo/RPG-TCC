@@ -12,7 +12,7 @@ namespace Game.UI
     {
         [SerializeField] private Image tilePrefab;
         [SerializeField] private GridLayoutGroup grid;
-        [SerializeField] private TextMeshProUGUI titleTextMesh;
+        [SerializeField] private TextMeshProUGUI descriptionTextMesh;
         [SerializeField] private Button[] movementButtons;
         [SerializeField] private CanvasGroup canvasGroup;
 
@@ -50,9 +50,10 @@ namespace Game.UI
             movementButtons[3].onClick.AddListener(() => StartCoroutine(mapController.MovePlayer(0,1)));
         }
 
-        public void UpdateMap(MapSection[,] map, int[] currentPosition)
+        public void UpdateMap(MapSection[,] map, int[] currentPosition, string roomDescription)
         {
             int mapSize = map.GetLength(0);
+            descriptionTextMesh.text = roomDescription;
 
             for(int i = 0; i < mapSize; i++)
             {

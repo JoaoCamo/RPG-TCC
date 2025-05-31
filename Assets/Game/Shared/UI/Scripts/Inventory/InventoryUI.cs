@@ -1,4 +1,5 @@
 using Game.Static;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -8,8 +9,9 @@ namespace Game.UI
     {
         [SerializeField] private SelfInventoryUI selfInventoryUI;
         [SerializeField] private InventoryExchangeUI inventoryExchangeUI;
-        [SerializeField] private Button changeModeButton;
         [SerializeField] private Button toggleInventoryButton;
+        [SerializeField] private Button changeModeButton;
+        [SerializeField] private TextMeshProUGUI inventoryButtonTextMesh;
         [SerializeField] private CanvasGroup canvasGroup;
 
         private bool _isInExchange = false;
@@ -33,6 +35,7 @@ namespace Game.UI
 
             selfInventoryUI.ToggleUI(!_isInExchange);
             inventoryExchangeUI.ToggleUI(_isInExchange);
+            GetButtonText();
         }
 
         private void ToggleMode()
@@ -40,6 +43,14 @@ namespace Game.UI
             _isInExchange = !_isInExchange;
             selfInventoryUI.ToggleUI(!_isInExchange);
             inventoryExchangeUI.ToggleUI(_isInExchange);
+        }
+
+        private void GetButtonText()
+        {
+            if (_isOpen)
+                inventoryButtonTextMesh.text = StaticVariables.CurrentGameState == Static.Enum.GameState.Dungeon ? "Dungeon" : "Dialog";
+            else
+                inventoryButtonTextMesh.text = "Inventory";
         }
     }  
 }
