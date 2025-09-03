@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 1805476523300784893}
   - component: {fileID: 4575777198390282159}
   - component: {fileID: 4232757104386855649}
+  - component: {fileID: 5802561151801535268}
   m_Layer: 5
   m_Name: '[Button] Message Box'
   m_TagString: Untagged
@@ -61,15 +62,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.23529413, g: 0.23529413, b: 0.23529413, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
-  m_Type: 1
+  m_Sprite: {fileID: -1726659529, guid: 14626a663106956428e1b527897c9caa, type: 3}
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -136,6 +137,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   button: {fileID: 4575777198390282159}
   textMesh: {fileID: 3255065959220323700}
+--- !u!114 &5802561151801535268
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 884872188357456799}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1d3c5018123e21a4a8e0ff3961602637, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sprites:
+  - {fileID: -1726659529, guid: 14626a663106956428e1b527897c9caa, type: 3}
+  - {fileID: -505329450, guid: 14626a663106956428e1b527897c9caa, type: 3}
+  spriteRenderer: {fileID: 1805476523300784893}
 --- !u!1 &4010778782350934184
 GameObject:
   m_ObjectHideFlags: 0
@@ -171,7 +188,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_SizeDelta: {x: -20, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4109525317740103368
 CanvasRenderer:
@@ -203,8 +220,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 4a397331a52e0f64f9401267c9e6c32f, type: 2}
-  m_sharedMaterial: {fileID: -232594648330779776, guid: 4a397331a52e0f64f9401267c9e6c32f, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: c78f2e7a89e24ea4493a61255236d11b, type: 2}
+  m_sharedMaterial: {fileID: 1500555903255787455, guid: c78f2e7a89e24ea4493a61255236d11b, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -228,12 +245,12 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 40
+  m_fontSize: 15
   m_fontSizeBase: 40
   m_fontWeight: 400
   m_enableAutoSizing: 1
-  m_fontSizeMin: 10
-  m_fontSizeMax: 40
+  m_fontSizeMin: 12.5
+  m_fontSizeMax: 15
   m_fontStyle: 0
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512

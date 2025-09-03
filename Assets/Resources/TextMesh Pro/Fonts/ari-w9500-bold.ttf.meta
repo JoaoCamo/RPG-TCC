@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 913542f81e91b4ad48d06e1d9d6a1bc3
+guid: ffc7ac88bfc664348ad36c263932a1df
 TrueTypeFontImporter:
   externalObjects: {}
   serializedVersion: 4
@@ -9,7 +9,7 @@ TrueTypeFontImporter:
   characterPadding: 1
   includeFontData: 1
   fontNames:
-  - Enchanted Land
+  - Ari-W9500 Bold
   fallbackFontReferences: []
   customCharacters: 
   fontRenderingMode: 0
