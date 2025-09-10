@@ -7,7 +7,7 @@ namespace Game.Character
     public class CharacterInventory
     {
         private readonly CharacterBase _base;
-        private List<ItemBase> _items = new List<ItemBase>();
+        private readonly List<ItemBase> _items = new List<ItemBase>();
         private int _maxInventoryCapacity = 0;
         private int _currentWeight = 0;
         private int _currentGold = 0;

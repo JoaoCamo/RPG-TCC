@@ -10,5 +10,7 @@ namespace Game.Static
         public static GameDifficulty GameDifficulty;
         public static PlayerController PlayerController;
         public static CanvasGroup CurrentCanvasGroup;
+
+        public static string HistoryContext = string.Empty;
     }
 }

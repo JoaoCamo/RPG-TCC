@@ -7,7 +7,7 @@ namespace Game.Character.Player
         private ClassType _class;
         private PlayerHealth _health;
 
-        public ClassType Class { get { return _class; } set { _class = value; } }
+        public ClassType Class { get => _class; set => _class = value; }
         public PlayerHealth Health => _health;
 
         public override void LoadCharacter(string name, CharacterType type)

@@ -4,13 +4,13 @@ namespace Game.Character
 {
     public class CharacterStats
     {
-        public int level;
-        public int strength;
-        public int dexterity;
-        public int constitution;
-        public int intelligence;
-        public int wisdom;
-        public int charisma;
+        public int level = 1;
+        public int strength = 0;
+        public int dexterity = 0;
+        public int constitution = 0;
+        public int intelligence = 0;
+        public int wisdom = 0;
+        public int charisma = 0;
 
         public void AddStat(StatsType type, int value)
         {
