@@ -1,0 +1,36 @@
+{
+  "format": {
+    "type": "json_schema",
+    "name": "armor",
+    "strict": true,
+    "schema": {
+      "type": "object",
+      "properties": {
+        "itemData": {
+          "type": "object",
+          "properties": {
+            "itemType": { "type": "integer", "const": 0 },
+            "armorValue": { "type": "integer" },
+            "armorType": { "type": "integer", "enum": [0, 1] }
+          },
+          "required": ["itemType", "armorValue", "armorType"],
+          "additionalProperties": false
+        },
+        "itemName": { "type": "string" },
+        "itemDescription": { "type": "string" },
+        "itemWeight": { "type": "integer" },
+        "itemValue": { "type": "integer" },
+        "itemRarity": { "type": "integer", "enum": [0, 1, 2, 3, 4] }
+      },
+      "required": [
+        "itemData",
+        "itemName",
+        "itemDescription",
+        "itemWeight",
+        "itemValue",
+        "itemRarity"
+      ],
+      "additionalProperties": false
+    }
+  }
+}

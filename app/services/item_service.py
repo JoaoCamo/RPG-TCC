@@ -1,3 +1,4 @@
+import json
 from openai import OpenAI
 
 from app.utils.schema_util import load_json_schema
@@ -5,10 +6,15 @@ from app.utils.schema_util import load_json_schema
 client = OpenAI()
 
 
-def generate_item(character):
+def generate_item(character: str, item_type: str):
     item_system = "You are an imaginative Dungeon Master."
-    item_user = f"Generate an item, either a weapon or armor, based on the character that will drop it, the item should be corresponding to the character.\nCharacter: {character}"
-    item_schema = load_json_schema("item_schema.json")
+    item_user = f"Generate a {item_type}, based on the character that will drop it, the item should be corresponding to the character: {character}"
+
+    if item_type == "Weapon":
+        item_schema = load_json_schema("weapon_schema.json")
+    else:
+        item_schema = load_json_schema("armor_schema.json")
+
     response = client.responses.create(
         model="gpt-4.1-nano",
         input=[
@@ -17,4 +23,4 @@ def generate_item(character):
         ],
         text=item_schema,
     )
-    return response.output_text
+    return json.loads(response.output_text)

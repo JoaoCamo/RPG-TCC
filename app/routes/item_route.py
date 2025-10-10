@@ -8,5 +8,6 @@ item_blueprint = Blueprint("item", __name__)
 def item():
     data = request.get_json()
     character = data.get("character")
-    item = generate_item(character)
-    return jsonify({"item": item})
+    item_type = data.get("itemType")
+    item = generate_item(character, item_type)
+    return jsonify(item)

@@ -9,4 +9,4 @@ def story():
     data = request.get_json()
     choice = data.get("choice")
     story = generate_story(choice)
-    return jsonify({"story": story})
+    return jsonify(story)

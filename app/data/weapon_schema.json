@@ -1,0 +1,36 @@
+{
+  "format": {
+    "type": "json_schema",
+    "name": "weapon",
+    "strict": true,
+    "schema": {
+      "type": "object",
+      "properties": {
+        "itemData": {
+          "type": "object",
+          "properties": {
+            "itemType": { "type": "integer", "const": 1 },
+            "rawDamage": { "type": "integer" },
+            "dicesToRoll": { "type": "integer" }
+          },
+          "required": ["itemType", "rawDamage", "dicesToRoll"],
+          "additionalProperties": false
+        },
+        "itemName": { "type": "string" },
+        "itemDescription": { "type": "string" },
+        "itemWeight": { "type": "integer" },
+        "itemValue": { "type": "integer" },
+        "itemRarity": { "type": "integer", "enum": [0, 1, 2, 3, 4] }
+      },
+      "required": [
+        "itemData",
+        "itemName",
+        "itemDescription",
+        "itemWeight",
+        "itemValue",
+        "itemRarity"
+      ],
+      "additionalProperties": false
+    }
+  }
+}
