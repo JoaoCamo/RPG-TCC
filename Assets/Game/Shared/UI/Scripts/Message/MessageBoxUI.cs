@@ -1,9 +1,8 @@
 using UnityEngine;
-using UnityEngine.UI;
 using TMPro;
 using DG.Tweening;
-using UnityEngine.Events;
 using Game.UI.Data;
+using Game.Static;
 
 namespace Game.UI
 {
@@ -19,6 +18,17 @@ namespace Game.UI
         private const Ease CANVAS_FADE_EASE = Ease.Linear;
         private const float CANVAS_FADE_DELAY = 0.5f;
 
+        private void OnEnable()
+        {
+            StaticEvents.RequestMessageBoxUI += RequestMessageBox;
+            StaticEvents.RequestMessageBoxUIWithOptions += RequestMessageBox;
+        }
+
+        private void OnDisable()
+        {
+            StaticEvents.RequestMessageBoxUI -= RequestMessageBox;
+            StaticEvents.RequestMessageBoxUIWithOptions -= RequestMessageBox;
+        }
 
         private void ToggleCanvas(bool mode)
         {

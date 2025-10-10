@@ -22,10 +22,4 @@ namespace Game.Character.Data
         public int wisdom;
         public int charisma;
     }
-
-    [System.Serializable]
-    public struct CharacterCreationDataWrapper
-    {
-        public string character;
-    }
 }

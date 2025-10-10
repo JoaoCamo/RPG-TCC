@@ -12,6 +12,7 @@ namespace Game.UI
         [SerializeField] private Button toggleInventoryButton;
         [SerializeField] private Button changeModeButton;
         [SerializeField] private TextMeshProUGUI inventoryButtonTextMesh;
+        [SerializeField] private TextMeshProUGUI changeModeButtonTextMesh;
         [SerializeField] private CanvasGroup canvasGroup;
 
         private bool _isInExchange = false;
@@ -26,6 +27,7 @@ namespace Game.UI
         private void ToggleUI()
         {
             changeModeButton.gameObject.SetActive(StaticVariables.CurrentGameState == Static.Enum.GameState.Dungeon);
+            changeModeButtonTextMesh.text = _isInExchange ? "Return to Inventory" : "Search floor for items";
 
             _isOpen = !_isOpen;
 
@@ -41,6 +43,7 @@ namespace Game.UI
         private void ToggleMode()
         {
             _isInExchange = !_isInExchange;
+            changeModeButtonTextMesh.text = _isInExchange ? "Return to Inventory" : "Search floor for items";
             selfInventoryUI.ToggleUI(!_isInExchange);
             inventoryExchangeUI.ToggleUI(_isInExchange);
         }

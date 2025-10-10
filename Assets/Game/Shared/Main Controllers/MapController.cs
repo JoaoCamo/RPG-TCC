@@ -1,16 +1,18 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.Networking;
-using Game.Static;
-using Game.Static.Enum;
+using Game.Backend.Data;
 using Game.Character;
 using Game.Character.Enemy;
-using Game.UI;
-using Game.UI.Data;
+using Game.Character.Player;
 using Game.Map;
 using Game.Map.Data;
-using Game.Character.Player;
+using Game.Static;
+using Game.Static.Enum;
+using Game.UI;
+using Game.UI.Data;
+using System.Collections;
+using System.Collections.Generic;
+using System.Text;
+using UnityEngine;
+using UnityEngine.Networking;
 
 namespace Game.Controllers
 {
@@ -127,7 +129,12 @@ namespace Game.Controllers
             messageUI.RequestMessageBox("Waiting for Response");
             string url = "http://127.0.0.1:5000/generate/dungeon_room/";
 
+            DungeonRoomRequestData data = new DungeonRoomRequestData(StaticVariables.CampaignStartInfo.dungeon.description);
+            string dataJson = JsonUtility.ToJson(data);
+            byte[] bodyRaw = Encoding.UTF8.GetBytes(dataJson);
+
             UnityWebRequest request = new UnityWebRequest(url, "POST");
+            request.uploadHandler = new UploadHandlerRaw(bodyRaw);
             request.downloadHandler = new DownloadHandlerBuffer();
             request.SetRequestHeader("Content-Type", "application/json");
 
@@ -138,11 +145,10 @@ namespace Game.Controllers
             else
             {
                 string response = request.downloadHandler.text;
-                DungeonRoomWrapper wrapper = JsonUtility.FromJson<DungeonRoomWrapper>(response);
-                DungeonRoom dungeonRoom = JsonUtility.FromJson<DungeonRoom>(wrapper.dungeon_room);
+                DungeonRoom dungeonRoom = JsonUtility.FromJson<DungeonRoom>(response);
                 GetCurrentSection().RoomDescription = dungeonRoom.roomDescription;
 
-                if (dungeonRoom.enemiesPresent.enemiesPresent)
+                if (dungeonRoom.enemiesPresent.isEnemiesPresent)
                 {
                     yield return StartCoroutine(LoadRoomEnemies(dungeonRoom));
                     messageUI.CloseMessageBox();

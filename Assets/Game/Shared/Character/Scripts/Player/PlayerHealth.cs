@@ -1,7 +1,21 @@
+using UnityEngine.SceneManagement;
+using Game.Static;
+using Game.UI.Data;
+
 namespace Game.Character.Player
 {
     public class PlayerHealth : CharacterHealth
     {
-        
+        public override void ReceiveDamage(int armorPoints, int hitRoll, int totalDamage, bool isCrit)
+        {
+            base.ReceiveDamage(armorPoints, hitRoll, totalDamage, isCrit);
+
+            if (_currentHealth > 0)
+                return;
+
+            StaticEvents.RequestMessageBoxUIWithOptions?.Invoke("You have been defeated",
+                new MessageBoxButtonData(() => SceneManager.LoadSceneAsync(0, LoadSceneMode.Single), "Return to main menu"),
+                new MessageBoxButtonData(null, string.Empty));
+        }
     }
 }

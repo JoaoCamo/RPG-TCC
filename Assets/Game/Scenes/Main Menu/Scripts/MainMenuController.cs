@@ -19,12 +19,12 @@ namespace Game.Scenes.Main_Menu.Scripts
 
         private void StartGame()
         {
-            SceneManager.LoadScene(2, LoadSceneMode.Additive);
+            SceneManager.LoadScene(1, LoadSceneMode.Additive);
         }
 
         private void OpenOptions()
         {
-            
+            SceneManager.LoadScene(3, LoadSceneMode.Additive);
         }
 
         private void QuitGame()

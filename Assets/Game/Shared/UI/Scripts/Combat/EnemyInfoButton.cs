@@ -11,9 +11,13 @@ namespace Game.UI
         [SerializeField] private Button button;
         [SerializeField] private TextMeshProUGUI nameTextMesh;
         [SerializeField] private TextMeshProUGUI infoTextMesh;
+        [SerializeField] private Image outline;
 
         private EnemyController _enemyController;
         private int _index;
+
+        private readonly Color _selectedColor = new Color32(230,180,130,255);
+        private readonly Color _unselectedColor = new Color32(40,40,40,255);
 
         public EnemyController EnemyController => _enemyController;
         public int Index => _index;
@@ -41,6 +45,11 @@ namespace Game.UI
 
             if(onClick != null)
                 button.onClick.AddListener(onClick);
+        }
+
+        public void ToggleSelectedOutline()
+        {
+            outline.color = outline.color == _selectedColor ? _unselectedColor : _selectedColor;
         }
     }
 }

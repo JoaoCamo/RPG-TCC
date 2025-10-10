@@ -10,9 +10,9 @@ namespace Game.Character.Enemy
         public EnemySize Size { get { return _size; } set { _size = value; } }
         public EnemyHealth Health => _health;
 
-        public override void LoadCharacter(string name, CharacterType type)
+        public override void LoadCharacter(string name, CharacterType type, int level = 1)
         {
-            base.LoadCharacter(name, type);
+            base.LoadCharacter(name, type, level);
             _health = new EnemyHealth();
         }
     }

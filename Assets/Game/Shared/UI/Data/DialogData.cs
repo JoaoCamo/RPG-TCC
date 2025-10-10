@@ -7,10 +7,4 @@ namespace Game.UI.Data
         public string dialogue;
         public DialogOptionData[] options;
     }
-
-    [System.Serializable]
-    public struct DialogDataWrapper
-    {
-        public string story;
-    }
 }

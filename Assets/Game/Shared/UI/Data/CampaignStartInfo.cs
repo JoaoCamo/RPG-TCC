@@ -21,10 +21,4 @@ namespace Game.UI.Data
         public string name;
         public string description;
     }
-
-    [System.Serializable]
-    public struct CampaignStartWrapper
-    {
-        public string main_story;
-    }
 }

@@ -1,8 +1,8 @@
 using UnityEngine;
 using TMPro;
+using Game.Static;
 using Game.Character;
 using Game.Character.Player;
-using Game.Static;
 
 namespace Game.UI
 {
@@ -10,7 +10,6 @@ namespace Game.UI
     {
         [SerializeField] private TextMeshProUGUI nameTextMesh;
         [SerializeField] private TextMeshProUGUI healthTextMesh;
-        [SerializeField] private TextMeshProUGUI locationTextMesh;
         [SerializeField] private TextMeshProUGUI[] statsTextMeshes;
         [SerializeField] private TextMeshProUGUI[] itemStatsTextMeshes;
 
@@ -58,11 +57,6 @@ namespace Game.UI
             itemStatsTextMeshes[0].text = "Armor Class: " + equipment.GetTotalArmor().ToString();
             itemStatsTextMeshes[1].text = "Damage: " + equipment.Weapon.WeaponData.dicesToRoll + "d" + equipment.Weapon.WeaponData.rawDamage.ToString();
             itemStatsTextMeshes[2].text = "Gold: " + inventory.CurrentGold;
-        }
-
-        public void SetLocation(string location)
-        {
-            locationTextMesh.text = location;
         }
     }
 }

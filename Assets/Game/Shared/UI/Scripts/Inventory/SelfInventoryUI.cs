@@ -44,7 +44,7 @@ namespace Game.UI
             {
                 SelfInventoryButton button = Instantiate(selfInventoryButtonPrefab, itemsParent);
                 button.Initialize(item);
-                button.UpdateOutline(StaticVariables.PlayerController.Equipment);
+                button.SetItemEquipped = StaticVariables.PlayerController.Equipment.CheckForItem(button.ItemBase);
                 _itemButons.Add(button);
             }
         }
@@ -52,7 +52,7 @@ namespace Game.UI
         public void UpdateItems()
         {
             foreach (SelfInventoryButton button in _itemButons)
-                button.UpdateOutline(StaticVariables.PlayerController.Equipment);
+                button.SetItemEquipped = StaticVariables.PlayerController.Equipment.CheckForItem(button.ItemBase);
         }
 
         private void RemoveItems()

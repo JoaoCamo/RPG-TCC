@@ -1,13 +1,13 @@
-using System.Collections;
 using System.Text;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.Networking;
 using Game.UI;
+using Game.Static;
 using Game.UI.Data;
+using Game.Static.Enum;
 using Game.Backend.Data;
 using Game.Character.Enum;
-using Game.Static;
-using Game.Static.Enum;
 
 namespace Game.Controllers
 {
@@ -29,7 +29,7 @@ namespace Game.Controllers
 
             string url = "http://127.0.0.1:5000/generate/main_story/";
 
-            StartCampaignData startCampaignData = new StartCampaignData() { name = playerName, type = classType.ToString() };
+            StartCampaignData startCampaignData = new StartCampaignData(classType.ToString(), playerName, StaticVariables.CharacterHistory, StaticVariables.HistoryContext);
             string dataJson = JsonUtility.ToJson(startCampaignData);
             byte[] bodyRaw = Encoding.UTF8.GetBytes(dataJson);
 
@@ -45,10 +45,9 @@ namespace Game.Controllers
             else
             {
                 string response = request.downloadHandler.text;
-                CampaignStartWrapper wrapper = JsonUtility.FromJson<CampaignStartWrapper>(response);
-                CampaignStartInfo campaignStartInfo = JsonUtility.FromJson<CampaignStartInfo>(wrapper.main_story);
+                CampaignStartInfo campaignStartInfo = JsonUtility.FromJson<CampaignStartInfo>(response);
+                StaticVariables.CampaignStartInfo = campaignStartInfo;
                 dialogUI.SetCampaignStartText(campaignStartInfo, this);
-                playerStatsUI.SetLocation(campaignStartInfo.kingdom.name);
                 messageUI.CloseMessageBox();
             }
         }
@@ -59,7 +58,7 @@ namespace Game.Controllers
 
             string url = "http://127.0.0.1:5000/generate/story/";
 
-            DialogSendData data = new DialogSendData() { choice = dialog };
+            DialogSendData data = new DialogSendData(dialog);
             string dataJson = JsonUtility.ToJson(data);
             byte[] bodyRaw = Encoding.UTF8.GetBytes(dataJson);
 
@@ -75,8 +74,7 @@ namespace Game.Controllers
             else
             {
                 string response = request.downloadHandler.text;
-                DialogDataWrapper wrapper = JsonUtility.FromJson<DialogDataWrapper>(response);
-                DialogData dialogData = JsonUtility.FromJson<DialogData>(wrapper.story);
+                DialogData dialogData = JsonUtility.FromJson<DialogData>(response);
                 dialogUI.SetNewDialog(dialogData, this);
                 messageUI.CloseMessageBox();
             }

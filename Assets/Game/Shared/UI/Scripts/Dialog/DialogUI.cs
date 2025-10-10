@@ -1,9 +1,9 @@
 using UnityEngine;
-using Game.Controllers;
-using Game.Static;
-using Game.Static.Enum;
-using Game.UI.Data;
 using TMPro;
+using Game.Static;
+using Game.UI.Data;
+using Game.Static.Enum;
+using Game.Controllers;
 
 
 namespace Game.UI
@@ -31,20 +31,16 @@ namespace Game.UI
 
         public void SetNewDialog(DialogData dialogData, DialogController dialogController)
         {
-            if(StaticVariables.CurrentCanvasGroup != canvasGroup)
-                StaticFunctions.ChangeCurrentUI(canvasGroup);
+            StaticFunctions.ChangeCurrentUI(canvasGroup);
 
             objectiveTextMesh.text = dialogData.name;
             dialogTextMesh.text = dialogData.dialogue;
 
             ClearPreviousDialog();
 
-            int i = 0;
-
-            foreach (DialogOptionData dialogOption in dialogData.options)
+            for (int i = 0; i < dialogData.options.Length; i++)
             {
-                i++;
-            
+                DialogOptionData dialogOption = dialogData.options[i];
                 DialogButton dialogButton = Instantiate(dialogButtonPrefab, dialogButtonParent);
                 dialogButton.Initialize(() => DialogButtonOnClick(dialogController, dialogOption.text, dialogOption.game_state), dialogOption.text);
             }

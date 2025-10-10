@@ -1,14 +1,14 @@
 using System;
-using Game.Character.Enum;
-using Game.Character.Player;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using Game.Static;
+using Game.Character.Enum;
+using Game.Character.Player;
+using Game.Shared.Item.Scripts.Systems;
 using Game.Scenes.Character_Creation.Scripts.Character_Lore;
 using Game.Scenes.Character_Creation.Scripts.History_Context;
 using Game.Scenes.Character_Creation.Scripts.Stats_Selection;
-using Game.Shared.Item.Scripts.Systems;
-using Game.Static;
 
 namespace Game.Scenes.Character_Creation.Scripts
 {
@@ -36,7 +36,7 @@ namespace Game.Scenes.Character_Creation.Scripts
             if (_currentPosition == 2)
             {
                 SetPlayerData();
-                SceneManager.LoadScene(3);
+                SceneManager.LoadScene(2, LoadSceneMode.Single);
             }
             else
             {
@@ -48,7 +48,7 @@ namespace Game.Scenes.Character_Creation.Scripts
         private void ReturnButtonOnClick()
         {
             if (_currentPosition == 0)
-                SceneManager.UnloadSceneAsync(2);
+                SceneManager.UnloadSceneAsync(1);
             else
             {
                 _currentPosition--;
@@ -85,9 +85,11 @@ namespace Game.Scenes.Character_Creation.Scripts
             playerController.LoadCharacter(characterLoreController.CharacterName, CharacterType.Player);
             playerController.Class = characterLoreController.SelectedClass;
             statSelectionController.SetCharacterStats(playerController);
+            playerController.Health.CalculateHealth(10, 1, playerController.Stats.constitution);
             ClassKit.GiveClassKit(playerController);
             
             StaticVariables.HistoryContext = historyContextController.Context;
+            StaticVariables.CharacterHistory = characterLoreController.CharacterHistory;
             StaticVariables.PlayerController = playerController;
         }
     }

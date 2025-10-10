@@ -10,9 +10,9 @@ namespace Game.Character.Player
         public ClassType Class { get => _class; set => _class = value; }
         public PlayerHealth Health => _health;
 
-        public override void LoadCharacter(string name, CharacterType type)
+        public override void LoadCharacter(string name, CharacterType type, int level = 1)
         {
-            base.LoadCharacter(name, type);
+            base.LoadCharacter(name, type, level);
             _health = new PlayerHealth();
         }
     }

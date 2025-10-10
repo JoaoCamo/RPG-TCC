@@ -1,12 +1,12 @@
-using System.Collections;
 using System.Text;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.Networking;
 using Game.UI;
 using Game.UI.Data;
-using Game.Backend.Data;
 using Game.Item.Enum;
 using Game.Item.Data;
+using Game.Backend.Data;
 
 namespace Game.Item
 {
@@ -23,7 +23,7 @@ namespace Game.Item
         {
             string url = "http://127.0.0.1:5000/generate/item/";
 
-            ItemRequestData itemRequestData = new ItemRequestData() { character = character, itemType = ItemType.Armor.ToString() };
+            ItemRequestData itemRequestData = new ItemRequestData(character, ItemType.Armor.ToString());
             string dataJson = JsonUtility.ToJson(itemRequestData);
             byte[] bodyRaw = Encoding.UTF8.GetBytes(dataJson);
 
@@ -39,8 +39,7 @@ namespace Game.Item
             else
             {
                 string response = request.downloadHandler.text;
-                ItemCreationDataWrapper wrapper = JsonUtility.FromJson<ItemCreationDataWrapper>(response);
-                ItemCreationData itemData = JsonUtility.FromJson<ItemCreationData>(wrapper.item);
+                ItemCreationData itemData = JsonUtility.FromJson<ItemCreationData>(response);
                 GenerateItem(armorBase, itemData);
             }
         }
@@ -49,7 +48,7 @@ namespace Game.Item
         {
             string url = "http://127.0.0.1:5000/generate/item/";
 
-            ItemRequestData itemRequestData = new ItemRequestData() { character = character, itemType = ItemType.Weapon.ToString() };
+            ItemRequestData itemRequestData = new ItemRequestData(character, ItemType.Weapon.ToString());
             string dataJson = JsonUtility.ToJson(itemRequestData);
             byte[] bodyRaw = Encoding.UTF8.GetBytes(dataJson);
 
@@ -65,8 +64,7 @@ namespace Game.Item
             else
             {
                 string response = request.downloadHandler.text;
-                ItemCreationDataWrapper wrapper = JsonUtility.FromJson<ItemCreationDataWrapper>(response);
-                ItemCreationData itemData = JsonUtility.FromJson<ItemCreationData>(wrapper.item);
+                ItemCreationData itemData = JsonUtility.FromJson<ItemCreationData>(response);
                 GenerateItem(weaponBase, itemData);
             }
         }
@@ -86,8 +84,8 @@ namespace Game.Item
             ArmorData armorData = new ArmorData()
             {
                 armorClass = ArmorClass.Cloth,
-                armorValue = data.itemType.armorValue,
-                type = data.itemType.armorType,
+                armorValue = data.itemData.armorValue,
+                type = data.itemData.armorType,
             };
 
             armorBase.ItemData = itemData;
@@ -108,8 +106,8 @@ namespace Game.Item
 
             WeaponData weaponData = new WeaponData()
             {
-                rawDamage = data.itemType.rawDamage,
-                dicesToRoll = data.itemType.dicesToRoll,
+                rawDamage = data.itemData.rawDamage,
+                dicesToRoll = data.itemData.dicesToRoll,
                 itemBonus = new ItemBonus[0]
             };
 

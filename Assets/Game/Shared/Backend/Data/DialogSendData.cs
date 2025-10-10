@@ -4,5 +4,10 @@ namespace Game.Backend.Data
     public struct DialogSendData
     {
         public string choice;
+
+        public DialogSendData(string choice)
+        {
+            this.choice = choice;
+        }
     }
 }

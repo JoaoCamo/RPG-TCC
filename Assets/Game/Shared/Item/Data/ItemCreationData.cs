@@ -5,7 +5,7 @@ namespace Game.Item.Data
     [System.Serializable]
     public struct ItemCreationData
     {
-        public ItemCreationDataTypeInfo itemType;
+        public ItemCreationDataTypeInfo itemData;
         public string itemName;
         public string itemDescription;
         public int itemWeight;
@@ -14,15 +14,9 @@ namespace Game.Item.Data
     }
 
     [System.Serializable]
-    public struct ItemCreationDataWrapper
-    {
-        public string item;
-    }
-
-    [System.Serializable]
     public struct ItemCreationDataTypeInfo
     {
-        public string itemType;
+        public ItemType itemType;
         public int armorValue;
         public ArmorType armorType;
         public int rawDamage;

@@ -8,15 +8,9 @@ namespace Game.Map.Data
     }
 
     [System.Serializable]
-    public struct DungeonRoomWrapper
-    {
-        public string dungeon_room;
-    }
-
-    [System.Serializable]
     public struct EnemiesPresent
     {
-        public bool enemiesPresent;
+        public bool isEnemiesPresent;
         public int enemyAmount;
     }
 }

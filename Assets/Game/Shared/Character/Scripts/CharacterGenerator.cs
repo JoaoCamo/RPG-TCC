@@ -2,14 +2,15 @@ using System.Text;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.Networking;
-using Game.Character.Enemy;
+using Game.UI;
+using Game.Item;
+using Game.Static;
+using Game.UI.Data;
+using Game.Backend.Data;
 using Game.Character.Data;
 using Game.Character.Enum;
-using Game.Backend.Data;
-using Game.UI;
-using Game.UI.Data;
-using Game.Static;
-using Game.Item;
+using Game.Character.Enemy;
+using Assets.Game.Shared.Character.Data;
 
 namespace Game.Character
 {
@@ -27,7 +28,7 @@ namespace Game.Character
         {
             string url = "http://127.0.0.1:5000/generate/character/";
 
-            LevelSendData data = new LevelSendData() { level = StaticVariables.PlayerController.Stats.level };
+            CharacterRequestData data = new CharacterRequestData(StaticVariables.PlayerController.Stats.level, StaticVariables.CampaignStartInfo.dungeon.description);
             string dataJson = JsonUtility.ToJson(data);
             byte[] bodyRaw = Encoding.UTF8.GetBytes(dataJson);
 
@@ -43,9 +44,8 @@ namespace Game.Character
             else
             {
                 string response = request.downloadHandler.text;
-                CharacterCreationDataWrapper wrapper = JsonUtility.FromJson<CharacterCreationDataWrapper>(response);
-                CharacterCreationData characterCreationData = JsonUtility.FromJson<CharacterCreationData>(wrapper.character);
-                yield return StartCoroutine(FillCharacterData(enemyController, characterCreationData, wrapper.character));
+                CharacterCreationData characterCreationData = JsonUtility.FromJson<CharacterCreationData>(response);
+                yield return StartCoroutine(FillCharacterData(enemyController, characterCreationData, JsonUtility.ToJson(new CharacterDataWrapper(response))));
             }
         }
 

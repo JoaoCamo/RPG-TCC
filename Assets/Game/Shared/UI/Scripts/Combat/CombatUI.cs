@@ -3,10 +3,10 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Events;
 using TMPro;
-using Game.Character.Enemy;
 using Game.Static;
-using Game.Controllers;
 using Game.Character;
+using Game.Controllers;
+using Game.Character.Enemy;
 
 namespace Game.UI
 {
@@ -19,6 +19,7 @@ namespace Game.UI
         [SerializeField] private CanvasGroup canvasGroup;
 
         private readonly List<EnemyInfoButton> _enemyInfoButtons = new List<EnemyInfoButton>();
+        private EnemyInfoButton _selectedEnemyButton = null;
 
         public void LoadUI(CharacterBase[] characters)
         {
@@ -84,16 +85,40 @@ namespace Game.UI
             combatInfoTextMesh.text = text;
         }
 
+        public void UpdatedSelectedButton(EnemyInfoButton enemyInfoButton)
+        {
+            if (_selectedEnemyButton != null)
+                _selectedEnemyButton.ToggleSelectedOutline();
+
+            _selectedEnemyButton = enemyInfoButton;
+            _selectedEnemyButton.ToggleSelectedOutline();
+        }
+
+        public void RemoveSelectedOutline()
+        {
+            if (_selectedEnemyButton != null)
+                _selectedEnemyButton.ToggleSelectedOutline();
+
+            _selectedEnemyButton = null;
+        }
+
         public void GetClickedEnemy(CombatController combatController)
         {
             continueButton.interactable = false;
 
             foreach (EnemyInfoButton enemyInfoButton in _enemyInfoButtons)
             {
-                enemyInfoButton.UpdateButtonAction( () =>  { continueButton.interactable = true;
-                                                             UpdateInfoText("You selected " + enemyInfoButton.EnemyController.Name);
-                                                             UpdateContinueButton( () => combatController.PerformAttack(enemyInfoButton.Index) ); 
-                                                             } );
+                enemyInfoButton.UpdateButtonAction( () =>  
+                {
+                    continueButton.interactable = true;
+                    UpdatedSelectedButton(enemyInfoButton);
+                    UpdateInfoText("You selected " + enemyInfoButton.EnemyController.Name);
+                    UpdateContinueButton(() =>
+                    {
+                        combatController.PerformAttack(enemyInfoButton.Index);
+                        RemoveSelectedOutline();
+                    });
+                });
             }
         }
     }
