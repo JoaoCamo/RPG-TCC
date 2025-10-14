@@ -8,5 +8,12 @@ namespace Game.Item.Data
         public int armorValue;
         public ArmorType type;
         public ArmorClass armorClass;
+
+        public ArmorData(int armorValue, ArmorType type, ArmorClass armorClass)
+        {
+            this.armorValue = armorValue;
+            this.type = type;
+            this.armorClass = armorClass;
+        }
     }
 }

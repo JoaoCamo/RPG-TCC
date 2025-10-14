@@ -8,6 +8,7 @@ using Game.Static;
 using Game.Character;
 using Game.Character.Enum;
 using Game.Character.Enemy;
+using Game.Character.Player;
 
 namespace Game.Controllers
 {
@@ -83,13 +84,14 @@ namespace Game.Controllers
 
         private void PerformAttack(EnemyController enemyController)
         {
-            int totalArmorPoints = StaticVariables.PlayerController.Equipment.GetTotalArmor();
+            PlayerController player = StaticVariables.PlayerController;
+            int totalArmorPoints = player.Equipment.GetTotalArmor();
 
             int hitRoll = UnityEngine.Random.Range(0, 21);
-            int strengthModifier = Math.Max(0, (enemyController.Stats.strength - 10) / 2);
+            int statModifier = Math.Max(0, (enemyController.Stats.GetStat(enemyController.Equipment.Weapon.WeaponData.modifierStat) - 10) / 2);
 
             bool isCrit = hitRoll == 20;
-            hitRoll += isCrit ? 0 : strengthModifier;
+            hitRoll += isCrit ? 0 : statModifier;
 
             int dicesToRoll = enemyController.Equipment.Weapon.WeaponData.dicesToRoll;
             dicesToRoll *= isCrit ? 2 : 1;
@@ -97,39 +99,40 @@ namespace Game.Controllers
             int totalDamage = 0;
 
             for (int i = 0; i < dicesToRoll; i++)
-                totalDamage += UnityEngine.Random.Range(1,enemyController.Equipment.Weapon.WeaponData.rawDamage+1) + strengthModifier;
+                totalDamage += UnityEngine.Random.Range(1,enemyController.Equipment.Weapon.WeaponData.rawDamage+1) + statModifier;
 
-            StaticVariables.PlayerController.Health.ReceiveDamage(totalArmorPoints, hitRoll, totalDamage, isCrit);
+            player.Health.ReceiveDamage(totalArmorPoints, hitRoll, totalDamage, isCrit);
 
             _currentIndex = _currentIndex == (_charactersInCombat.Count - 1) ? 0 : _currentIndex + 1;
             combatUI.UpdateInfoText(totalArmorPoints, hitRoll, totalDamage, isCrit, enemyController.Name);
-            playerStatsUI.UpdateHealth(StaticVariables.PlayerController.Health);
+            playerStatsUI.UpdateHealth(player.Health);
             combatUI.UpdateContinueButton(ContinueCombat);
         }
 
         public void PerformAttack(int enemyIndex)
         {
+            PlayerController player = StaticVariables.PlayerController;
             EnemyController selectedEnemy = _charactersInCombat[enemyIndex] as EnemyController;
             int totalArmorPoints = selectedEnemy.Equipment.GetTotalArmor();
 
             int hitRoll = UnityEngine.Random.Range(0, 21);
-            int strengthModifier = Math.Max(0 ,(StaticVariables.PlayerController.Stats.strength - 10) / 2);
+            int statModifier = Math.Max(0 ,(player.Stats.GetStat(player.Equipment.Weapon.WeaponData.modifierStat) - 10) / 2);
 
             bool isCrit = hitRoll == 20;
-            hitRoll += isCrit ? 0 : strengthModifier;
+            hitRoll += isCrit ? 0 : statModifier;
 
-            int dicesToRoll = StaticVariables.PlayerController.Equipment.Weapon.WeaponData.dicesToRoll;
+            int dicesToRoll = player.Equipment.Weapon.WeaponData.dicesToRoll;
             dicesToRoll *= isCrit ? 2 : 1;
             
             int totalDamage = 0;
 
             for (int i = 0; i < dicesToRoll; i++)
-                totalDamage += UnityEngine.Random.Range(1,StaticVariables.PlayerController.Equipment.Weapon.WeaponData.rawDamage+1) + strengthModifier;
+                totalDamage += UnityEngine.Random.Range(1, player.Equipment.Weapon.WeaponData.rawDamage+1) + statModifier;
 
             selectedEnemy.Health.ReceiveDamage(totalArmorPoints, hitRoll, totalDamage, isCrit);
 
             _currentIndex = _currentIndex == (_charactersInCombat.Count - 1) ? 0 : _currentIndex + 1;
-            combatUI.UpdateInfoText(totalArmorPoints, hitRoll, totalDamage, isCrit, StaticVariables.PlayerController.Name);
+            combatUI.UpdateInfoText(totalArmorPoints, hitRoll, totalDamage, isCrit, player.Name);
             combatUI.UpdateEnemies(_charactersInCombat.ToArray());
             combatUI.UpdateContinueButton(ContinueCombat);
         }

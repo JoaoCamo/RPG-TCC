@@ -36,5 +36,19 @@ namespace Game.Character
                     break;
             }
         }
+
+        public int GetStat(StatsType statsType)
+        {
+            return statsType switch
+            {
+                StatsType.Strength => strength,
+                StatsType.Dexterity => dexterity,
+                StatsType.Constitution => constitution,
+                StatsType.Intelligence => intelligence,
+                StatsType.Wisdom => wisdom,
+                StatsType.Charisma => charisma,
+                _ => 0
+            };
+        }
     }
 }

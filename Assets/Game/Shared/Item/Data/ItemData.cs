@@ -11,5 +11,15 @@ namespace Game.Item.Data
         public int weight;
         public int value;
         public ItemRarity rarity;
+
+        public ItemData(ItemType itemType, string itemName, string description, int weight, int value, ItemRarity rarity)
+        {
+            this.itemType = itemType;
+            this.itemName = itemName;
+            this.description = description;
+            this.weight = weight;
+            this.value = value;
+            this.rarity = rarity;
+        }
     }
 }
