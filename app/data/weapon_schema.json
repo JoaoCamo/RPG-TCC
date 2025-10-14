@@ -11,9 +11,14 @@
           "properties": {
             "itemType": { "type": "integer", "const": 1 },
             "rawDamage": { "type": "integer" },
-            "dicesToRoll": { "type": "integer" }
+            "dicesToRoll": { "type": "integer" },
+            "modifierStat": {
+              "type": "integer",
+              "enum": [0, 1, 2, 3, 4, 5],
+              "description": "Enum index of StatsType (0=Strength, 1=Dexterity, 2=Constitution, 3=Intelligence, 4=Wisdom, 5=Charisma)"
+            }
           },
-          "required": ["itemType", "rawDamage", "dicesToRoll"],
+          "required": ["itemType", "rawDamage", "dicesToRoll", "modifierStat"],
           "additionalProperties": false
         },
         "itemName": { "type": "string" },
