@@ -51,7 +51,7 @@ namespace Game.Character
                     break;
                 case ArmorType.Shield:
                     if (CheckForItem(armorBase))
-                        _chestArmor = new ArmorBase();
+                        _shield = new ArmorBase();
                     else
                         _shield = armor;
                     break;

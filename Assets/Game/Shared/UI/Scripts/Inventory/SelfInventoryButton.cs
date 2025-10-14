@@ -1,11 +1,11 @@
-using UnityEngine;
-using UnityEngine.UI;
-using UnityEngine.EventSystems;
-using TMPro;
 using Game.Item;
-using Game.Static;
+using TMPro;
+using UnityEngine;
+using UnityEngine.Events;
+using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
-namespace Game.UI
+namespace Game.Shared.UI.Scripts.Inventory
 {
     public class SelfInventoryButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     {
@@ -20,19 +20,13 @@ namespace Game.UI
         private readonly Color _unselectedColor = Color.white;
 
         public ItemBase ItemBase => _itemBase;
-        public bool SetItemEquipped { set { _isItemEquipped = value; } }
+        public bool SetItemEquipped { set => _isItemEquipped = value; }
 
-        public void Initialize(ItemBase itemBase)
+        public void Initialize(ItemBase itemBase, UnityAction onClick)
         {
             _itemBase = itemBase;
             textMesh.text = itemBase.ItemData.itemName;
-            button.onClick.AddListener(OnClick);
-        }
-
-        public void OnClick()
-        {
-            _itemBase.UseItem();
-            StaticEvents.OnItemUse();
+            button.onClick.AddListener(onClick);
         }
 
         public void OnPointerEnter(PointerEventData eventData)
