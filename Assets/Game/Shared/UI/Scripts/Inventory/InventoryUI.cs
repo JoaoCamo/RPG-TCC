@@ -26,8 +26,7 @@ namespace Game.UI
 
         private void ToggleUI()
         {
-            changeModeButton.gameObject.SetActive(StaticVariables.CurrentGameState == Static.Enum.GameState.Dungeon);
-            changeModeButtonTextMesh.text = _isInExchange ? "Return to Inventory" : "Search floor for items";
+            ToggleChangeModeButton();
 
             _isOpen = !_isOpen;
 
@@ -38,6 +37,14 @@ namespace Game.UI
             selfInventoryUI.ToggleUI(!_isInExchange);
             inventoryExchangeUI.ToggleUI(_isInExchange);
             GetButtonText();
+        }
+
+        private void ToggleChangeModeButton()
+        {
+            bool dungeonInventory = StaticVariables.CurrentGameState == Static.Enum.GameState.Dungeon;
+
+            changeModeButton.enabled = dungeonInventory;
+            changeModeButtonTextMesh.text = !dungeonInventory ? "Inventory" : _isInExchange ? "Return to Inventory" : "Search floor for items";
         }
 
         private void ToggleMode()

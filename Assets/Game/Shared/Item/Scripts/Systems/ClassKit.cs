@@ -1,9 +1,9 @@
 using System;
 using Game.Item;
+using Game.Item.Enum;
+using Game.Item.Data;
 using Game.Character.Enum;
 using Game.Character.Player;
-using Game.Item.Data;
-using Game.Item.Enum;
 
 namespace Game.Shared.Item.Scripts.Systems
 {
@@ -12,7 +12,10 @@ namespace Game.Shared.Item.Scripts.Systems
         public static void GiveClassKit(PlayerController playerController)
         {
             foreach (ItemBase item in GetItems(playerController.Class))
+            {
                 playerController.Inventory.AddItem(item);
+                playerController.Equipment.EquipItem(item);
+            }
         }
 
         private static ItemBase[] GetItems(ClassType classType)

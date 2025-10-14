@@ -29,6 +29,12 @@ namespace Game.Shared.UI.Scripts.Inventory
             button.onClick.AddListener(onClick);
         }
 
+        public void UpdateItemStatus(bool isEquipped)
+        {
+            _isItemEquipped = isEquipped;
+            textMesh.color = _isItemEquipped ? _equippedItemColor : _unselectedColor;
+        }
+
         public void OnPointerEnter(PointerEventData eventData)
         {
             textMesh.color = _selectedColor;

@@ -60,6 +60,8 @@ namespace Game.UI
                 button.SetItemEquipped = StaticVariables.PlayerController.Equipment.CheckForItem(button.ItemBase);
                 _itemButtons.Add(button);
             }
+
+            UpdateItems();
         }
 
         private void InventoryButtonAction(ItemBase item)
@@ -81,15 +83,14 @@ namespace Game.UI
                 return;
             
             _selectedItem.UseItem();
-            StaticEvents.OnItemUse();
-            
+            UpdateItems();
             equipItemButtonTextMesh.text = StaticVariables.PlayerController.Equipment.CheckForItem(_selectedItem) ? "Unequip Item" : "Equip Item";
         }
 
         private void UpdateItems()
         {
             foreach (SelfInventoryButton button in _itemButtons)
-                button.SetItemEquipped = StaticVariables.PlayerController.Equipment.CheckForItem(button.ItemBase);
+                button.UpdateItemStatus(StaticVariables.PlayerController.Equipment.CheckForItem(button.ItemBase));
         }
 
         private void RemoveItems()

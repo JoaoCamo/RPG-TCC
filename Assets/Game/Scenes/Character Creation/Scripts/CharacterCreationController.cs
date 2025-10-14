@@ -86,6 +86,7 @@ namespace Game.Scenes.Character_Creation.Scripts
             playerController.Class = characterLoreController.SelectedClass;
             statSelectionController.SetCharacterStats(playerController);
             playerController.Health.CalculateHealth(10, 1, playerController.Stats.constitution);
+            playerController.Inventory.UpdateCapacity(playerController.Stats.strength);
             ClassKit.GiveClassKit(playerController);
             
             StaticVariables.HistoryContext = historyContextController.Context;
