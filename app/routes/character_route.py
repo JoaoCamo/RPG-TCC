@@ -8,5 +8,6 @@ character_blueprint = Blueprint("character", __name__)
 def character():
     data = request.get_json()
     level = data.get("level")
-    character = generate_character(level)
-    return jsonify({"character": character})
+    context = data.get("context")
+    character = generate_character(level, context)
+    return jsonify(character)
