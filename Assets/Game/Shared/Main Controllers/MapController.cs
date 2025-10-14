@@ -13,6 +13,7 @@ using System.Collections.Generic;
 using System.Text;
 using UnityEngine;
 using UnityEngine.Networking;
+using UnityEngine.SceneManagement;
 
 namespace Game.Controllers
 {
@@ -141,7 +142,7 @@ namespace Game.Controllers
             yield return request.SendWebRequest();
 
             if (request.result != UnityWebRequest.Result.Success)
-                messageUI.RequestMessageBox(request.error, new MessageBoxButtonData(messageUI.CloseMessageBox, "Close"), new MessageBoxButtonData());
+                messageUI.RequestMessageBox(request.error, new MessageBoxButtonData(() => SceneManager.LoadSceneAsync(0, LoadSceneMode.Single), "Return to main menu"), new MessageBoxButtonData());
             else
             {
                 string response = request.downloadHandler.text;

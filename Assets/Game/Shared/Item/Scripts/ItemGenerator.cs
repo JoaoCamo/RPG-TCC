@@ -1,12 +1,13 @@
-using System.Text;
-using System.Collections;
-using UnityEngine;
-using UnityEngine.Networking;
+using Game.Backend.Data;
+using Game.Item.Data;
+using Game.Item.Enum;
 using Game.UI;
 using Game.UI.Data;
-using Game.Item.Enum;
-using Game.Item.Data;
-using Game.Backend.Data;
+using System.Collections;
+using System.Text;
+using UnityEngine;
+using UnityEngine.Networking;
+using UnityEngine.SceneManagement;
 
 namespace Game.Item
 {
@@ -35,7 +36,7 @@ namespace Game.Item
             yield return request.SendWebRequest();
 
             if (request.result != UnityWebRequest.Result.Success)
-                messageUI.RequestMessageBox(request.error, new MessageBoxButtonData(messageUI.CloseMessageBox, "Close"), new MessageBoxButtonData());
+                messageUI.RequestMessageBox(request.error, new MessageBoxButtonData(() => SceneManager.LoadSceneAsync(0, LoadSceneMode.Single), "Return to main menu"), new MessageBoxButtonData());
             else
             {
                 string response = request.downloadHandler.text;
@@ -60,7 +61,7 @@ namespace Game.Item
             yield return request.SendWebRequest();
         
             if (request.result != UnityWebRequest.Result.Success)
-                messageUI.RequestMessageBox(request.error, new MessageBoxButtonData(messageUI.CloseMessageBox, "Close"), new MessageBoxButtonData());
+                messageUI.RequestMessageBox(request.error, new MessageBoxButtonData(() => SceneManager.LoadSceneAsync(0, LoadSceneMode.Single), "Return to main menu"), new MessageBoxButtonData());
             else
             {
                 string response = request.downloadHandler.text;

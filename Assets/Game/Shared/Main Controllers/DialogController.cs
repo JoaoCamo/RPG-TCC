@@ -2,6 +2,7 @@ using System.Text;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.Networking;
+using UnityEngine.SceneManagement;
 using Game.UI;
 using Game.Static;
 using Game.UI.Data;
@@ -41,7 +42,7 @@ namespace Game.Controllers
             yield return request.SendWebRequest();
 
             if (request.result != UnityWebRequest.Result.Success)
-                messageUI.RequestMessageBox(request.error, new MessageBoxButtonData(messageUI.CloseMessageBox, "Close"), new MessageBoxButtonData());
+                messageUI.RequestMessageBox(request.error, new MessageBoxButtonData(() => SceneManager.LoadSceneAsync(0, LoadSceneMode.Single), "Return to main menu"), new MessageBoxButtonData());
             else
             {
                 string response = request.downloadHandler.text;
@@ -70,7 +71,7 @@ namespace Game.Controllers
             yield return request.SendWebRequest();
 
             if (request.result != UnityWebRequest.Result.Success)
-                messageUI.RequestMessageBox(request.error, new MessageBoxButtonData(messageUI.CloseMessageBox, "Close"), new MessageBoxButtonData());
+                messageUI.RequestMessageBox(request.error, new MessageBoxButtonData(() => SceneManager.LoadSceneAsync(0, LoadSceneMode.Single), "Return to main menu"), new MessageBoxButtonData());
             else
             {
                 string response = request.downloadHandler.text;

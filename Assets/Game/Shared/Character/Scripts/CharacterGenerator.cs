@@ -2,15 +2,16 @@ using System.Text;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.Networking;
-using Game.UI;
-using Game.Item;
-using Game.Static;
-using Game.UI.Data;
+using UnityEngine.SceneManagement;
+using Assets.Game.Shared.Character.Data;
 using Game.Backend.Data;
 using Game.Character.Data;
-using Game.Character.Enum;
 using Game.Character.Enemy;
-using Assets.Game.Shared.Character.Data;
+using Game.Character.Enum;
+using Game.Item;
+using Game.Static;
+using Game.UI;
+using Game.UI.Data;
 
 namespace Game.Character
 {
@@ -40,7 +41,7 @@ namespace Game.Character
             yield return request.SendWebRequest();
 
             if (request.result != UnityWebRequest.Result.Success)
-                messageUI.RequestMessageBox(request.error, new MessageBoxButtonData(messageUI.CloseMessageBox, "Close"), new MessageBoxButtonData());
+                messageUI.RequestMessageBox(request.error, new MessageBoxButtonData(() => SceneManager.LoadSceneAsync(0, LoadSceneMode.Single), "Return to main menu"), new MessageBoxButtonData());
             else
             {
                 string response = request.downloadHandler.text;
