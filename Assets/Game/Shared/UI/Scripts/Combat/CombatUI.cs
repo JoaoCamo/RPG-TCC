@@ -27,17 +27,20 @@ namespace Game.UI
                 Destroy(enemyInfoButton.gameObject);
 
             _enemyInfoButtons.Clear();
-
+            
             for (int i = 0; i < characters.Length; i++)
             {
-                if(characters[i].CharacterType != Character.Enum.CharacterType.Player)
-                {
-                    EnemyInfoButton enemyInfoButton = Instantiate(enemyButtonPrefab, enemyInfoParent);
-                    enemyInfoButton.Initialize(characters[i] as EnemyController, i);
-                    _enemyInfoButtons.Add(enemyInfoButton);
-                }
+                if (characters[i].CharacterType == Character.Enum.CharacterType.Player) 
+                    continue;
+                
+                EnemyInfoButton enemyInfoButton = Instantiate(enemyButtonPrefab, enemyInfoParent);
+                enemyInfoButton.Initialize(characters[i] as EnemyController, i);
+                _enemyInfoButtons.Add(enemyInfoButton);
             }
 
+            foreach (Transform child in enemyInfoParent)
+                child.SetAsFirstSibling();
+            
             StaticFunctions.ChangeCurrentUI(canvasGroup);
         }
 
@@ -57,8 +60,8 @@ namespace Game.UI
 
         public void UpdateEnemyButtons(UnityAction onClick)
         {
-            for (int i = 0; i < _enemyInfoButtons.Count; i++)
-                _enemyInfoButtons[i].UpdateButtonAction(onClick);
+            foreach (EnemyInfoButton enemyInfoButton in _enemyInfoButtons)
+                enemyInfoButton.UpdateButtonAction(onClick);
         }
 
         public void UpdateContinueButton(UnityAction onClick)
@@ -67,15 +70,15 @@ namespace Game.UI
             continueButton.onClick.AddListener(onClick);
         }
 
-        public void UpdateInfoText(int totalArmor, int hitroll, int totalDamage, bool isCrit, string characterName)
+        public void UpdateInfoText(int totalArmor, int hitRoll, int totalDamage, bool isCrit, string characterName)
         {
-            if (hitroll < totalArmor)
+            if (hitRoll < totalArmor)
             {
                 combatInfoTextMesh.text = characterName + " missed the attack!";
             }
             else
             {
-                string critText = isCrit ? " made a critical roll" : " rolled " + hitroll;
+                string critText = isCrit ? " made a critical roll" : " rolled " + hitRoll;
                 combatInfoTextMesh.text = characterName + critText + " and dealt " + totalDamage + "!";
             }
         }
@@ -84,24 +87,7 @@ namespace Game.UI
         {
             combatInfoTextMesh.text = text;
         }
-
-        public void UpdatedSelectedButton(EnemyInfoButton enemyInfoButton)
-        {
-            if (_selectedEnemyButton != null)
-                _selectedEnemyButton.ToggleSelectedOutline();
-
-            _selectedEnemyButton = enemyInfoButton;
-            _selectedEnemyButton.ToggleSelectedOutline();
-        }
-
-        public void RemoveSelectedOutline()
-        {
-            if (_selectedEnemyButton != null)
-                _selectedEnemyButton.ToggleSelectedOutline();
-
-            _selectedEnemyButton = null;
-        }
-
+        
         public void GetClickedEnemy(CombatController combatController)
         {
             continueButton.interactable = false;
@@ -120,6 +106,26 @@ namespace Game.UI
                     });
                 });
             }
+        }
+        
+        public void UpdateEnemyTurnOutline(int index)
+        {
+            foreach (EnemyInfoButton enemyInfoButton in _enemyInfoButtons)
+                enemyInfoButton.ToggleEnemyTurnOutline(enemyInfoButton.Index == index);
+        }
+
+        private void UpdatedSelectedButton(EnemyInfoButton enemyInfoButton)
+        {
+            _selectedEnemyButton?.ToggleSelectedOutline();
+            
+            _selectedEnemyButton = enemyInfoButton;
+            _selectedEnemyButton.ToggleSelectedOutline();
+        }
+
+        private void RemoveSelectedOutline()
+        {
+            _selectedEnemyButton?.ToggleSelectedOutline();
+            _selectedEnemyButton = null;
         }
     }
 }

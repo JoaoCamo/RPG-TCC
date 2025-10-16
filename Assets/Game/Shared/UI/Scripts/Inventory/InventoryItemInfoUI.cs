@@ -13,6 +13,15 @@ namespace Game.Shared.UI.Scripts.Inventory
         [SerializeField] private InventoryWeaponInfoUI weaponInfoUI;
         [SerializeField] private InventoryArmorInfoUI armorInfoUI;
 
+        public void ClearItemInfo()
+        {
+            itemNameTextMesh.text = string.Empty;
+            itemDescriptionTextMesh.text = string.Empty;
+            itemRarityTextMesh.text = string.Empty;
+            weaponInfoUI.DisableUI();
+            armorInfoUI.DisableUI();
+        }
+        
         public void SetWeaponInfo(WeaponBase weaponBase)
         {
             SetItemInfo(weaponBase.ItemData);

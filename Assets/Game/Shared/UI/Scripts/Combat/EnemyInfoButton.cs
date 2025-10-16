@@ -16,8 +16,9 @@ namespace Game.UI
         private EnemyController _enemyController;
         private int _index;
 
-        private readonly Color _selectedColor = new Color32(230,180,130,255);
-        private readonly Color _unselectedColor = new Color32(40,40,40,255);
+        private readonly Color _selectedColor = Color.cyan;
+        private readonly Color _unselectedColor = new Color32(42,42,42,255);
+        private readonly Color _turnColor = Color.red;
 
         public EnemyController EnemyController => _enemyController;
         public int Index => _index;
@@ -50,6 +51,11 @@ namespace Game.UI
         public void ToggleSelectedOutline()
         {
             outline.color = outline.color == _selectedColor ? _unselectedColor : _selectedColor;
+        }
+
+        public void ToggleEnemyTurnOutline(bool mode)
+        {
+            outline.color = mode ? _turnColor :  _unselectedColor;
         }
     }
 }

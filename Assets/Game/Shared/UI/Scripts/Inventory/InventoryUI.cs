@@ -34,9 +34,16 @@ namespace Game.UI
             canvasGroup.interactable = _isOpen;
             canvasGroup.blocksRaycasts = _isOpen;
 
-            selfInventoryUI.ToggleUI(!_isInExchange);
-            inventoryExchangeUI.ToggleUI(_isInExchange);
-            GetButtonText();
+            if (_isOpen)
+            {
+                selfInventoryUI.ToggleUI(!_isInExchange);
+                inventoryExchangeUI.ToggleUI(_isInExchange);
+                GetButtonText();
+            }
+            else
+            {
+                selfInventoryUI.ClearSelectedItem();
+            }
         }
 
         private void ToggleChangeModeButton()

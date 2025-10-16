@@ -1,12 +1,12 @@
 using System.Collections.Generic;
 using UnityEngine;
-using Game.Character;
-using Game.Item;
-using Game.Item.Enum;
-using Game.Shared.UI.Scripts.Inventory;
-using Game.Static;
-using TMPro;
 using UnityEngine.UI;
+using TMPro;
+using Game.Item;
+using Game.Static;
+using Game.Item.Enum;
+using Game.Character;
+using Game.Shared.UI.Scripts.Inventory;
 
 namespace Game.UI
 {
@@ -49,6 +49,11 @@ namespace Game.UI
                 RemoveItems();
         }
 
+        public void ClearSelectedItem()
+        {
+            inventoryItemInfoUI.ClearItemInfo();
+        }
+
         private void LoadContent(CharacterInventory playerInventory)
         {
             RemoveItems();
@@ -83,7 +88,7 @@ namespace Game.UI
                 return;
             
             _selectedItem.UseItem();
-            UpdateItems();
+            StaticEvents.OnItemUse();
             equipItemButtonTextMesh.text = StaticVariables.PlayerController.Equipment.CheckForItem(_selectedItem) ? "Unequip Item" : "Equip Item";
         }
 
@@ -95,6 +100,8 @@ namespace Game.UI
 
         private void RemoveItems()
         {
+            ClearSelectedItem();
+            
             foreach (SelfInventoryButton button in _itemButtons)
                 Destroy(button.gameObject);
 

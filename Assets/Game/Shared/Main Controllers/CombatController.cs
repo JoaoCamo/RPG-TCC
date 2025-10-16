@@ -65,14 +65,14 @@ namespace Game.Controllers
             {
                 combatUI.UpdateInfoText("Select an enemy to attack");
                 combatUI.GetClickedEnemy(this); 
+                combatUI.UpdateEnemyTurnOutline(-1);
             }
             else
             {
                 combatUI.UpdateEnemyButtons(null);
+                combatUI.UpdateEnemyTurnOutline(_currentIndex);
 
-                EnemyController enemy = _charactersInCombat[_currentIndex] as EnemyController;
-
-                if(enemy.Health.CurrentHealth > 0)
+                if(_charactersInCombat[_currentIndex] is EnemyController enemy && enemy.Health.CurrentHealth > 0)
                     PerformAttack(_charactersInCombat[_currentIndex] as EnemyController);
                 else
                 {
@@ -112,41 +112,41 @@ namespace Game.Controllers
         public void PerformAttack(int enemyIndex)
         {
             PlayerController player = StaticVariables.PlayerController;
-            EnemyController selectedEnemy = _charactersInCombat[enemyIndex] as EnemyController;
-            int totalArmorPoints = selectedEnemy.Equipment.GetTotalArmor();
-
-            int hitRoll = UnityEngine.Random.Range(0, 21);
-            int statModifier = Math.Max(0 ,(player.Stats.GetStat(player.Equipment.Weapon.WeaponData.modifierStat) - 10) / 2);
-
-            bool isCrit = hitRoll == 20;
-            hitRoll += isCrit ? 0 : statModifier;
-
-            int dicesToRoll = player.Equipment.Weapon.WeaponData.dicesToRoll;
-            dicesToRoll *= isCrit ? 2 : 1;
             
-            int totalDamage = 0;
+            if (_charactersInCombat[enemyIndex] is EnemyController selectedEnemy)
+            {
+                int totalArmorPoints = selectedEnemy.Equipment.GetTotalArmor();
 
-            for (int i = 0; i < dicesToRoll; i++)
-                totalDamage += UnityEngine.Random.Range(1, player.Equipment.Weapon.WeaponData.rawDamage+1) + statModifier;
+                int hitRoll = UnityEngine.Random.Range(0, 21);
+                int statModifier = Math.Max(0 ,(player.Stats.GetStat(player.Equipment.Weapon.WeaponData.modifierStat) - 10) / 2);
 
-            selectedEnemy.Health.ReceiveDamage(totalArmorPoints, hitRoll, totalDamage, isCrit);
+                bool isCrit = hitRoll == 20;
+                hitRoll += isCrit ? 0 : statModifier;
 
-            _currentIndex = _currentIndex == (_charactersInCombat.Count - 1) ? 0 : _currentIndex + 1;
-            combatUI.UpdateInfoText(totalArmorPoints, hitRoll, totalDamage, isCrit, player.Name);
+                int dicesToRoll = player.Equipment.Weapon.WeaponData.dicesToRoll;
+                dicesToRoll *= isCrit ? 2 : 1;
+            
+                int totalDamage = 0;
+
+                for (int i = 0; i < dicesToRoll; i++)
+                    totalDamage += UnityEngine.Random.Range(1, player.Equipment.Weapon.WeaponData.rawDamage+1) + statModifier;
+
+                selectedEnemy.Health.ReceiveDamage(totalArmorPoints, hitRoll, totalDamage, isCrit);
+
+                _currentIndex = _currentIndex == (_charactersInCombat.Count - 1) ? 0 : _currentIndex + 1;
+                combatUI.UpdateInfoText(totalArmorPoints, hitRoll, totalDamage, isCrit, player.Name);
+            }
+
             combatUI.UpdateEnemies(_charactersInCombat.ToArray());
             combatUI.UpdateContinueButton(ContinueCombat);
         }
 
         private bool CheckForCombatEnd()
         {
-            foreach (CharacterBase character in _charactersInCombat)
+            foreach (CharacterBase character in _charactersInCombat.Where(character => character.CharacterType == CharacterType.Enemy))
             {
-                if(character.CharacterType == CharacterType.Enemy)
-                {
-                    EnemyController enemyController = character as EnemyController;
-                    if(enemyController.Health.CurrentHealth > 0)
-                        return false;
-                }
+                if(character is EnemyController enemyController && enemyController.Health.CurrentHealth > 0)
+                    return false;
             }
 
             return true;
