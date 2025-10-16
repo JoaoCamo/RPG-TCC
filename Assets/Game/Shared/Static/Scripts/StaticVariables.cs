@@ -1,7 +1,7 @@
 using UnityEngine;
 using Game.UI.Data;
 using Game.Static.Enum;
-using Game.Character.Player;
+using Game.Character;
 
 namespace Game.Static
 {

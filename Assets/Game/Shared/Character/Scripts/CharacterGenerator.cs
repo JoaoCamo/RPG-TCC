@@ -3,15 +3,15 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.Networking;
 using UnityEngine.SceneManagement;
-using Assets.Game.Shared.Character.Data;
-using Game.Backend.Data;
-using Game.Character.Data;
-using Game.Character.Enemy;
-using Game.Character.Enum;
+using Game.UI;
 using Game.Item;
 using Game.Static;
-using Game.UI;
 using Game.UI.Data;
+using Game.Backend.Data;
+using Game.Character.Enum;
+using Game.Character.Data;
+using Game.Character.Enemy;
+using Assets.Game.Shared.Character.Data;
 
 namespace Game.Character
 {
@@ -29,7 +29,7 @@ namespace Game.Character
         {
             string url = "http://127.0.0.1:5000/generate/character/";
 
-            CharacterRequestData data = new CharacterRequestData(StaticVariables.PlayerController.Stats.level, StaticVariables.CampaignStartInfo.dungeon.description);
+            CharacterRequestData data = new CharacterRequestData(StaticVariables.PlayerController.Experience.Level, StaticVariables.CampaignStartInfo.dungeon.description);
             string dataJson = JsonUtility.ToJson(data);
             byte[] bodyRaw = Encoding.UTF8.GetBytes(dataJson);
 
@@ -52,17 +52,17 @@ namespace Game.Character
 
         private IEnumerator FillCharacterData(EnemyController enemyController, CharacterCreationData data, string characterJson)
         {
-            enemyController.LoadCharacter(data.name, CharacterType.Enemy);
+            enemyController.LoadCharacter(data.name, CharacterType.Enemy, data.level);
             enemyController.Size = data.size;
-            enemyController.Stats.level = data.level;
             enemyController.Stats.strength = data.stats.strength;
             enemyController.Stats.dexterity = data.stats.dexterity;
             enemyController.Stats.constitution = data.stats.constitution;
             enemyController.Stats.intelligence = data.stats.intelligence;
             enemyController.Stats.wisdom = data.stats.wisdom;
             enemyController.Stats.charisma = data.stats.charisma;
-            enemyController.Health.CalculateHealth((int)enemyController.Size, enemyController.Stats.level, enemyController.Stats.constitution);
+            enemyController.Health.CalculateHealth((int)enemyController.Size, enemyController.Experience.Level, enemyController.Stats.constitution);
             enemyController.Inventory.UpdateCapacity(enemyController.Stats.strength);
+            enemyController.ChallengeRating = data.challengeRating;
 
             for (int i = 0; i < data.dropQuantity; i++)
             {

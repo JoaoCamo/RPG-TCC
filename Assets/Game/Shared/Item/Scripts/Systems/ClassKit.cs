@@ -2,8 +2,8 @@ using System;
 using Game.Item;
 using Game.Item.Enum;
 using Game.Item.Data;
+using Game.Character;
 using Game.Character.Enum;
-using Game.Character.Player;
 
 namespace Game.Shared.Item.Scripts.Systems
 {
@@ -35,7 +35,7 @@ namespace Game.Shared.Item.Scripts.Systems
         private static ItemBase[] FighterKit()
         {
             ItemData weaponItemData = new ItemData(ItemType.Weapon, "Rusty iron sword", "A worn but reliable sword", 5, 10, ItemRarity.Common);
-            WeaponData weaponData = new WeaponData(2, 2, StatsType.Strength, Array.Empty<ItemBonus>());
+            WeaponData weaponData = new WeaponData(5, 1, StatsType.Strength, Array.Empty<ItemBonus>());
             WeaponBase weapon = new WeaponBase();
             weapon.ItemData = weaponItemData;
             weapon.SetInfoItem(weaponData);
@@ -74,8 +74,8 @@ namespace Game.Shared.Item.Scripts.Systems
             weapon.ItemData = weaponItemData;
             weapon.SetInfoItem(weaponData);
 
-            ItemData armorItemData = new ItemData(ItemType.Armor, "Fur Vest", "Provides minimal protection but doesn’t hinder your rage fueled attacks.", 6, 12, ItemRarity.Common);
-            ArmorData armorData = new ArmorData(10, ArmorType.Chest, ArmorClass.Light);
+            ItemData armorItemData = new ItemData(ItemType.Armor, "Fur Vest", "Provides minimal protection but doesnï¿½t hinder your rage fueled attacks.", 6, 12, ItemRarity.Common);
+            ArmorData armorData = new ArmorData(8, ArmorType.Chest, ArmorClass.Cloth);
             ArmorBase armor = new ArmorBase();
             armor.ItemData = armorItemData;
             armor.SetInfoItem(armorData);
@@ -120,7 +120,7 @@ namespace Game.Shared.Item.Scripts.Systems
         private static ItemBase[] ClericKit()
         {
             ItemData weaponItemData = new ItemData(ItemType.Weapon, "Mace", "A sturdy mace, perfect for smashing enemies and delivering divine justice.", 5, 15, ItemRarity.Common);
-            WeaponData weaponData = new WeaponData(3, 2, StatsType.Wisdom, Array.Empty<ItemBonus>());
+            WeaponData weaponData = new WeaponData(3, 2, StatsType.Strength, Array.Empty<ItemBonus>());
             WeaponBase weapon = new WeaponBase();
             weapon.ItemData = weaponItemData;
             weapon.SetInfoItem(weaponData);

@@ -1,7 +1,7 @@
 using Game.Character.Enum;
 using UnityEngine;
 using TMPro;
-using Game.Character.Player;
+using Game.Character;
 
 namespace Game.Scenes.Character_Creation.Scripts.Character_Lore
 {

@@ -1,7 +1,6 @@
 using Game.Backend.Data;
 using Game.Character;
 using Game.Character.Enemy;
-using Game.Character.Player;
 using Game.Map;
 using Game.Map.Data;
 using Game.Static;
@@ -183,11 +182,6 @@ namespace Game.Controllers
             {
                 messageUI.CloseMessageBox();
                 StaticVariables.CurrentGameState = GameState.Dialogue;
-
-                PlayerController player = StaticVariables.PlayerController;
-                player.Stats.level++;
-                player.Health.CalculateHealth(10, player.Stats.level, player.Stats.constitution);
-
                 StartCoroutine(dialogController.SendDialogToAI($"{StaticVariables.PlayerController.Name} found the dungeon objective, and now exits the dungeon."));
             }, "Exit Dungeon");
 

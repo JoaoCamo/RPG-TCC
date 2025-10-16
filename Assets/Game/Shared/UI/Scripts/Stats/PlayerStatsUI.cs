@@ -2,7 +2,7 @@ using UnityEngine;
 using TMPro;
 using Game.Static;
 using Game.Character;
-using Game.Character.Player;
+using Game.Shared.Character.Scripts.Player;
 
 namespace Game.UI
 {
@@ -21,18 +21,20 @@ namespace Game.UI
         private void OnEnable()
         {
             StaticEvents.OnItemUse += FillUI;
+            StaticEvents.OnLevelUp += FillUI;
         }
 
         private void OnDisable()
         {
             StaticEvents.OnItemUse -= FillUI;
+            StaticEvents.OnLevelUp -= FillUI;
         }
 
         public void FillUI()
         {
             nameTextMesh.text = StaticVariables.PlayerController.Name;
             UpdateHealth(StaticVariables.PlayerController.Health);
-            UpdatePlayerStats(StaticVariables.PlayerController.Stats);
+            UpdatePlayerStats(StaticVariables.PlayerController.Stats, StaticVariables.PlayerController.Experience);
             UpdateItemsStats(StaticVariables.PlayerController.Equipment, StaticVariables.PlayerController.Inventory);
         }
 
@@ -41,21 +43,21 @@ namespace Game.UI
             healthTextMesh.text = healthInfo.CurrentHealth + "/" + healthInfo.MaxHealth;
         }
 
-        public void UpdatePlayerStats(CharacterStats stats)
+        public void UpdatePlayerStats(CharacterStats stats, PlayerExperience experience)
         {
-            statsTextMeshes[0].text = "Level: " + stats.level.ToString();
-            statsTextMeshes[1].text = "Strength: " + stats.strength.ToString();
-            statsTextMeshes[2].text = "Dexterity: " + stats.dexterity.ToString();
-            statsTextMeshes[3].text = "Constitution: " + stats.constitution.ToString();
-            statsTextMeshes[4].text = "Intelligence: " + stats.intelligence.ToString();
-            statsTextMeshes[5].text = "Wisdom: " + stats.wisdom.ToString();
-            statsTextMeshes[6].text = "Charisma: " + stats.charisma.ToString();
+            statsTextMeshes[0].text = "Level: " + experience;
+            statsTextMeshes[1].text = "Strength: " + stats.strength;
+            statsTextMeshes[2].text = "Dexterity: " + stats.dexterity;
+            statsTextMeshes[3].text = "Constitution: " + stats.constitution;
+            statsTextMeshes[4].text = "Intelligence: " + stats.intelligence;
+            statsTextMeshes[5].text = "Wisdom: " + stats.wisdom;
+            statsTextMeshes[6].text = "Charisma: " + stats.charisma;
         }
 
         public void UpdateItemsStats(CharacterEquipment equipment, CharacterInventory inventory)
         {
-            itemStatsTextMeshes[0].text = "Armor Class: " + equipment.GetTotalArmor().ToString();
-            itemStatsTextMeshes[1].text = "Damage: " + equipment.Weapon.WeaponData.dicesToRoll + "d" + equipment.Weapon.WeaponData.rawDamage.ToString();
+            itemStatsTextMeshes[0].text = "Armor Class: " + equipment.GetTotalArmor();
+            itemStatsTextMeshes[1].text = "Damage: " + equipment.Weapon.WeaponData.dicesToRoll + "d" + equipment.Weapon.WeaponData.rawDamage;
             itemStatsTextMeshes[2].text = "Gold: " + inventory.CurrentGold;
         }
     }
