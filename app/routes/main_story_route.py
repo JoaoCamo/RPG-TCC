@@ -1,5 +1,6 @@
 from flask import Blueprint, request, jsonify
 from app.services.main_story_service import generate_main_story
+from app.utils.save_context import clear_context
 
 main_story_blueprint = Blueprint("story", __name__)
 
@@ -11,5 +12,6 @@ def main_story():
     name = data.get("name")
     character_history = data.get("character_history")
     context = data.get("context")
+    clear_context("context.txt")
     main_story = generate_main_story(type, name, character_history, context)
     return jsonify(main_story)

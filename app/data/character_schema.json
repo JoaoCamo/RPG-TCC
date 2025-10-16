@@ -1,44 +1,32 @@
 {
-    "format":{
-        "type":"json_schema",
-        "name":"character",
-        "strict":true,
-        "schema":{
-            "type":"object",
-            "properties":{
-                "level":{
-                    "type":"integer"
+    "format": {
+        "type": "json_schema",
+        "name": "character",
+        "strict": true,
+        "schema": {
+            "type": "object",
+            "properties": {
+                "level": {
+                    "type": "integer"
                 },
-                "name":{
-                    "type":"string"
+                "name": {
+                    "type": "string"
                 },
-                "size":{
+                "size": {
                     "type": "integer",
                     "enum": [2,3,5,7,10,15]
                 },
-                "stats":{
-                    "type":"object",
-                    "properties":{
-                        "strength":{
-                            "type":"integer"
-                        },
-                        "dexterity":{
-                            "type":"integer"
-                        },
-                        "constitution":{
-                            "type":"integer"
-                        },
-                        "intelligence":{
-                            "type":"integer"
-                        },
-                        "wisdom":{
-                            "type":"integer"
-                        },
-                        "charisma":{
-                            "type":"integer"
-                        }
+                "stats": {
+                    "type": "object",
+                    "properties": {
+                        "strength": { "type": "integer" },
+                        "dexterity": { "type": "integer" },
+                        "constitution": { "type": "integer" },
+                        "intelligence": { "type": "integer" },
+                        "wisdom": { "type": "integer" },
+                        "charisma": { "type": "integer" }
                     },
-                    "required":[
+                    "required": [
                         "strength",
                         "dexterity",
                         "constitution",
@@ -46,20 +34,24 @@
                         "wisdom",
                         "charisma"
                     ],
-                    "additionalProperties":false
+                    "additionalProperties": false
                 },
-                "dropQuantity":{
-                    "type":"integer"
+                "dropQuantity": {
+                    "type": "integer"
+                },
+                "challengeRating": {
+                    "type": "integer"
                 }
             },
-            "required":[
+            "required": [
                 "level",
                 "name",
                 "size",
                 "stats",
-                "dropQuantity"
+                "dropQuantity",
+                "challengeRating"
             ],
-            "additionalProperties":false
+            "additionalProperties": false
         }
     }
 }

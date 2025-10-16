@@ -33,3 +33,15 @@ def load_context(file: str):
             return f.read().strip()
     except FileNotFoundError:
         return ""
+
+def clear_context(file: str):
+    base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    data_dir = os.path.join(base_dir, "data")
+    context_path = os.path.join(data_dir, file)
+
+    os.makedirs(data_dir, exist_ok=True)
+
+    with open(context_path, "w", encoding="utf-8") as f:
+        f.write("")
+
+    return True
