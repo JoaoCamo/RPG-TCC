@@ -16,7 +16,7 @@ namespace Game.Character.Enemy
             base.ReceiveDamage(armorPoints, hitRoll, totalDamage, isCrit);
             
             if (currentHealth <= 0)
-                StaticVariables.PlayerController.Experience.AddXp(StaticFunctions.GetXpValue(_controller.ChallengeRating));
+                StaticVariables.PlayerController.Experience.AddXp(StaticFunctions.GetXpValue(1));
         }
     }
 }

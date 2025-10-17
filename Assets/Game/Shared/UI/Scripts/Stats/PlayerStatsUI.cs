@@ -45,7 +45,7 @@ namespace Game.UI
 
         public void UpdatePlayerStats(CharacterStats stats, PlayerExperience experience)
         {
-            statsTextMeshes[0].text = "Level: " + experience;
+            statsTextMeshes[0].text = "Level: " + experience.Level;
             statsTextMeshes[1].text = "Strength: " + stats.strength;
             statsTextMeshes[2].text = "Dexterity: " + stats.dexterity;
             statsTextMeshes[3].text = "Constitution: " + stats.constitution;

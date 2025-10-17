@@ -69,7 +69,7 @@ TextureImporter:
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
-    maxTextureSize: 128
+    maxTextureSize: 256
     resizeAlgorithm: 0
     textureFormat: -1
     textureCompression: 0
@@ -106,7 +106,7 @@ TextureImporter:
         height: 32
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
-      border: {x: 5, y: 0, z: 5, w: 0}
+      border: {x: 5, y: 6, z: 5, w: 5}
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -127,13 +127,34 @@ TextureImporter:
         height: 32
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
-      border: {x: 6, y: 0, z: 5, w: 0}
+      border: {x: 5, y: 6, z: 5, w: 7}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
       spriteID: 3fb3c23edc00fdc4ab700a5ae1345ac1
       internalID: -505329450
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BUTTON_RED_2
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 0
+        width: 64
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 5, y: 6, z: 5, w: 5}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dd761a64d3d2e8d4282159601571aabe
+      internalID: -158629137
       vertices: []
       indices: 
       edges: []
@@ -151,6 +172,7 @@ TextureImporter:
     nameFileIdTable:
       BUTTON_RED_0: -1726659529
       BUTTON_RED_1: -505329450
+      BUTTON_RED_2: -158629137
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

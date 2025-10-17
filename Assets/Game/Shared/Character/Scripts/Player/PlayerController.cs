@@ -19,5 +19,11 @@ namespace Game.Character
             _experience = new PlayerExperience(level);
             _health = new PlayerHealth();
         }
+
+        public void LevelUp()
+        {
+            Health.CalculateHealth(6, Experience.Level, Stats.constitution);
+            Inventory.UpdateCapacity(Stats.strength);
+        }
     }
 }

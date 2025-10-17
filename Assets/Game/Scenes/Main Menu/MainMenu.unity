@@ -359,6 +359,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f30b252b4c39830409be2d3f248b2245, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  button: {fileID: 296615034}
   textMesh: {fileID: 1178506497}
   unselectedColor: {r: 1, g: 1, b: 1, a: 1}
   selectedColor: {r: 0.39215687, g: 0.39215687, b: 0.39215687, a: 1}
@@ -465,6 +466,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f30b252b4c39830409be2d3f248b2245, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  button: {fileID: 583878666}
   textMesh: {fileID: 601766065}
   unselectedColor: {r: 1, g: 1, b: 1, a: 1}
   selectedColor: {r: 0.39215687, g: 0.39215687, b: 0.39215687, a: 1}
@@ -1275,6 +1277,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f30b252b4c39830409be2d3f248b2245, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  button: {fileID: 1851185564}
   textMesh: {fileID: 283556292}
   unselectedColor: {r: 1, g: 1, b: 1, a: 1}
   selectedColor: {r: 0.39215687, g: 0.39215687, b: 0.39215687, a: 1}

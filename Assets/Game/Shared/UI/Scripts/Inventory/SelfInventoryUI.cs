@@ -52,6 +52,7 @@ namespace Game.UI
         public void ClearSelectedItem()
         {
             inventoryItemInfoUI.ClearItemInfo();
+            equipItemButton.gameObject.SetActive(false);
         }
 
         private void LoadContent(CharacterInventory playerInventory)
