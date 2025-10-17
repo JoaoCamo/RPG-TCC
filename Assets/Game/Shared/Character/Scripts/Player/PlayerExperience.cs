@@ -23,7 +23,11 @@ namespace Game.Shared.Character.Scripts.Player
             _skillPoints++;
 
             StaticEvents.RequestMessageBoxUIWithOptions?.Invoke("Level Up!",
-                new MessageBoxButtonData(() => SceneManager.LoadSceneAsync(4, LoadSceneMode.Additive), "Proceed"),
+                new MessageBoxButtonData(() =>
+                { 
+                    SceneManager.LoadSceneAsync(4, LoadSceneMode.Additive);
+                    StaticEvents.CloseMessageBoxUI();
+                }, "Proceed"),
                 new MessageBoxButtonData(null, string.Empty));
         }
     }

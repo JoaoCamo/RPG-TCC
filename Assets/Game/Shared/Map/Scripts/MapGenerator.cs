@@ -1,8 +1,8 @@
 using System.Collections.Generic;
 using UnityEngine;
+using Game.Static;
 using Game.Map.Enum;
 using Game.Map.Data;
-using Game.Static;
 using Game.Static.Enum;
 
 namespace Game.Map

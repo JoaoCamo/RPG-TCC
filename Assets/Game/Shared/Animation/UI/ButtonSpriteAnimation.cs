@@ -19,5 +19,10 @@ namespace Game.Shared.Animation.UI
         {
             spriteRenderer.sprite = button.interactable ? sprites[0] : sprites[2];
         }
+
+        public void ToggleButton(bool mode)
+        {
+            spriteRenderer.sprite = mode ? sprites[0] : sprites[2];
+        }
     }
 }

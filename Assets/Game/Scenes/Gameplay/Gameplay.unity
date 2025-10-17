@@ -268,6 +268,7 @@ GameObject:
   - component: {fileID: 58852949}
   - component: {fileID: 58852948}
   - component: {fileID: 58852947}
+  - component: {fileID: 58852951}
   - component: {fileID: 58852950}
   m_Layer: 5
   m_Name: '[Button] Move Left'
@@ -396,6 +397,20 @@ MonoBehaviour:
   - {fileID: -505329450, guid: 14626a663106956428e1b527897c9caa, type: 3}
   - {fileID: -158629137, guid: 14626a663106956428e1b527897c9caa, type: 3}
   spriteRenderer: {fileID: 58852948}
+--- !u!114 &58852951
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 58852945}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 231eed8863b0e3841bb0b0258f725b5e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  button: {fileID: 58852947}
+  buttonAnimation: {fileID: 58852950}
 --- !u!1 &60589795
 GameObject:
   m_ObjectHideFlags: 0
@@ -587,6 +602,7 @@ GameObject:
   - component: {fileID: 90657345}
   - component: {fileID: 90657344}
   - component: {fileID: 90657343}
+  - component: {fileID: 90657347}
   - component: {fileID: 90657346}
   m_Layer: 5
   m_Name: '[Button] Move Right'
@@ -715,6 +731,20 @@ MonoBehaviour:
   - {fileID: -505329450, guid: 14626a663106956428e1b527897c9caa, type: 3}
   - {fileID: -158629137, guid: 14626a663106956428e1b527897c9caa, type: 3}
   spriteRenderer: {fileID: 90657344}
+--- !u!114 &90657347
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 90657341}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 231eed8863b0e3841bb0b0258f725b5e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  button: {fileID: 90657343}
+  buttonAnimation: {fileID: 90657346}
 --- !u!1 &94396008
 GameObject:
   m_ObjectHideFlags: 0
@@ -3479,14 +3509,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: 3a3cf0a85bf9d0545ab50d00795b167d, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -4599,6 +4629,7 @@ GameObject:
   - component: {fileID: 899149623}
   - component: {fileID: 899149622}
   - component: {fileID: 899149621}
+  - component: {fileID: 899149625}
   - component: {fileID: 899149624}
   m_Layer: 5
   m_Name: '[Button] Move Down'
@@ -4727,6 +4758,20 @@ MonoBehaviour:
   - {fileID: -505329450, guid: 14626a663106956428e1b527897c9caa, type: 3}
   - {fileID: -158629137, guid: 14626a663106956428e1b527897c9caa, type: 3}
   spriteRenderer: {fileID: 899149622}
+--- !u!114 &899149625
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 899149619}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 231eed8863b0e3841bb0b0258f725b5e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  button: {fileID: 899149621}
+  buttonAnimation: {fileID: 899149624}
 --- !u!1 &907191236
 GameObject:
   m_ObjectHideFlags: 0
@@ -8443,10 +8488,10 @@ MonoBehaviour:
   grid: {fileID: 290860766}
   descriptionTextMesh: {fileID: 964155761}
   movementButtons:
-  - {fileID: 58852947}
-  - {fileID: 899149621}
-  - {fileID: 1769032402}
-  - {fileID: 90657343}
+  - {fileID: 58852951}
+  - {fileID: 899149625}
+  - {fileID: 1769032406}
+  - {fileID: 90657347}
   canvasGroup: {fileID: 1736513674}
 --- !u!1 &1737729906
 GameObject:
@@ -8606,6 +8651,7 @@ GameObject:
   - component: {fileID: 1769032404}
   - component: {fileID: 1769032403}
   - component: {fileID: 1769032402}
+  - component: {fileID: 1769032406}
   - component: {fileID: 1769032405}
   m_Layer: 5
   m_Name: '[Button] Move Up'
@@ -8734,6 +8780,20 @@ MonoBehaviour:
   - {fileID: -505329450, guid: 14626a663106956428e1b527897c9caa, type: 3}
   - {fileID: -158629137, guid: 14626a663106956428e1b527897c9caa, type: 3}
   spriteRenderer: {fileID: 1769032403}
+--- !u!114 &1769032406
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1769032400}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 231eed8863b0e3841bb0b0258f725b5e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  button: {fileID: 1769032402}
+  buttonAnimation: {fileID: 1769032405}
 --- !u!1 &1791383878
 GameObject:
   m_ObjectHideFlags: 0

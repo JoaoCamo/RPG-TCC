@@ -22,7 +22,7 @@ namespace Game.LevelUp
         private void LoadStats()
         {
             PlayerController playerController = StaticVariables.PlayerController;
-            pointsRemainingTextMesh.text = playerController.Experience.SkillPoints.ToString();
+            pointsRemainingTextMesh.text = $"{playerController.Experience.SkillPoints} Points Left";
             statGroups[0].Initialize(playerController.Stats.strength, () => StatButtonActionUp(statGroups[0], playerController), () => StatButtonActionDown(statGroups[0], playerController));
             statGroups[1].Initialize(playerController.Stats.dexterity, () => StatButtonActionUp(statGroups[1], playerController), () => StatButtonActionDown(statGroups[1], playerController));
             statGroups[2].Initialize(playerController.Stats.constitution, () => StatButtonActionUp(statGroups[2], playerController), () => StatButtonActionDown(statGroups[2], playerController));
