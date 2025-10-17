@@ -2,7 +2,7 @@ using UnityEngine.SceneManagement;
 using Game.Static;
 using Game.UI.Data;
 
-namespace Game.Character.Player
+namespace Game.Character
 {
     public class PlayerHealth : CharacterHealth
     {
@@ -10,7 +10,7 @@ namespace Game.Character.Player
         {
             base.ReceiveDamage(armorPoints, hitRoll, totalDamage, isCrit);
 
-            if (_currentHealth > 0)
+            if (currentHealth > 0)
                 return;
 
             StaticEvents.RequestMessageBoxUIWithOptions?.Invoke("You have been defeated",

@@ -149,9 +149,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d3c5018123e21a4a8e0ff3961602637, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  button: {fileID: 4575777198390282159}
   sprites:
   - {fileID: -1726659529, guid: 14626a663106956428e1b527897c9caa, type: 3}
   - {fileID: -505329450, guid: 14626a663106956428e1b527897c9caa, type: 3}
+  - {fileID: -158629137, guid: 14626a663106956428e1b527897c9caa, type: 3}
   spriteRenderer: {fileID: 1805476523300784893}
 --- !u!1 &4010778782350934184
 GameObject:

@@ -1,7 +1,6 @@
-using System;
 using UnityEngine;
 using TMPro;
-using Game.Character.Player;
+using Game.Character;
 
 namespace Game.Scenes.Character_Creation.Scripts.Stats_Selection
 {

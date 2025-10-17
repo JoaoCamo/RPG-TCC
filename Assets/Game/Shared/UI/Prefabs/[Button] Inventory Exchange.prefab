@@ -283,6 +283,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f30b252b4c39830409be2d3f248b2245, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  button: {fileID: 8507317379553986172}
   textMesh: {fileID: 5941673723741371202}
   unselectedColor: {r: 1, g: 1, b: 1, a: 1}
   selectedColor: {r: 1, g: 1, b: 0, a: 1}

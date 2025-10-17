@@ -8,7 +8,6 @@ using Game.Static;
 using Game.Character;
 using Game.Character.Enum;
 using Game.Character.Enemy;
-using Game.Character.Player;
 
 namespace Game.Controllers
 {

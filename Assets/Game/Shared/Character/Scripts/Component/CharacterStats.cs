@@ -4,7 +4,6 @@ namespace Game.Character
 {
     public class CharacterStats
     {
-        public int level = 1;
         public int strength = 0;
         public int dexterity = 0;
         public int constitution = 0;

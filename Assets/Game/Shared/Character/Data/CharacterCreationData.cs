@@ -10,6 +10,7 @@ namespace Game.Character.Data
         public EnemySize size;
         public StatsData stats;
         public int dropQuantity;
+        public int challengeRating;
     }
 
     [System.Serializable]

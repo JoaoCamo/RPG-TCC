@@ -4,7 +4,7 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using Game.Static;
 using Game.Character.Enum;
-using Game.Character.Player;
+using Game.Character;
 using Game.Shared.Item.Scripts.Systems;
 using Game.Scenes.Character_Creation.Scripts.Character_Lore;
 using Game.Scenes.Character_Creation.Scripts.History_Context;
