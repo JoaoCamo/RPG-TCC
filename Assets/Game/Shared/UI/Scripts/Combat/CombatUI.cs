@@ -1,22 +1,25 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
-using UnityEngine.UI;
 using UnityEngine.Events;
 using TMPro;
 using Game.Static;
 using Game.Character;
 using Game.Controllers;
 using Game.Character.Enemy;
+using Game.Shared.UI.Scripts.Combat;
 
 namespace Game.UI
 {
     public class CombatUI : MonoBehaviour
     {
+        [SerializeField] private CanvasGroup canvasGroup;
         [SerializeField] private EnemyInfoButton enemyButtonPrefab;
         [SerializeField] private Transform enemyInfoParent;
         [SerializeField] private TextMeshProUGUI combatInfoTextMesh;
-        [SerializeField] private Button continueButton;
-        [SerializeField] private CanvasGroup canvasGroup;
+        [SerializeField] private CombatActionButton continueButton;
+        [SerializeField] private CombatActionButton attackButton;
+        [SerializeField] private CombatActionButton potionButton;
 
         private readonly List<EnemyInfoButton> _enemyInfoButtons = new List<EnemyInfoButton>();
         private EnemyInfoButton _selectedEnemyButton = null;
@@ -38,9 +41,7 @@ namespace Game.UI
                 _enemyInfoButtons.Add(enemyInfoButton);
             }
 
-            foreach (Transform child in enemyInfoParent)
-                child.SetAsFirstSibling();
-            
+            OrderEnemyButtons();
             StaticFunctions.ChangeCurrentUI(canvasGroup);
         }
 
@@ -66,8 +67,12 @@ namespace Game.UI
 
         public void UpdateContinueButton(UnityAction onClick)
         {
-            continueButton.onClick.RemoveAllListeners();
-            continueButton.onClick.AddListener(onClick);
+            continueButton.UpdateButtonAction(onClick);
+        }
+
+        public void UpdatePotionButton(UnityAction onClick)
+        {
+            potionButton.UpdateButtonAction(onClick);
         }
 
         public void UpdateInfoText(int totalArmor, int hitRoll, int totalDamage, bool isCrit, string characterName)
@@ -90,16 +95,16 @@ namespace Game.UI
         
         public void GetClickedEnemy(CombatController combatController)
         {
-            continueButton.interactable = false;
-
+            attackButton.ToggleButton(false);
+            
             foreach (EnemyInfoButton enemyInfoButton in _enemyInfoButtons)
             {
                 enemyInfoButton.UpdateButtonAction( () =>  
                 {
-                    continueButton.interactable = true;
+                    attackButton.ToggleButton(true);
                     UpdatedSelectedButton(enemyInfoButton);
                     UpdateInfoText("You selected " + enemyInfoButton.EnemyController.Name);
-                    UpdateContinueButton(() =>
+                    attackButton.UpdateButtonAction(() =>
                     {
                         combatController.PerformAttack(enemyInfoButton.Index);
                         RemoveSelectedOutline();
@@ -114,10 +119,16 @@ namespace Game.UI
                 enemyInfoButton.ToggleEnemyTurnOutline(enemyInfoButton.Index == index);
         }
 
+        public void ToggleControlMode(bool isPlayerTurn)
+        {
+            continueButton.ToggleDisplay(!isPlayerTurn);
+            attackButton.ToggleDisplay(isPlayerTurn);
+            potionButton.ToggleDisplay(isPlayerTurn);
+        }
+
         private void UpdatedSelectedButton(EnemyInfoButton enemyInfoButton)
         {
             _selectedEnemyButton?.ToggleSelectedOutline();
-            
             _selectedEnemyButton = enemyInfoButton;
             _selectedEnemyButton.ToggleSelectedOutline();
         }
@@ -126,6 +137,14 @@ namespace Game.UI
         {
             _selectedEnemyButton?.ToggleSelectedOutline();
             _selectedEnemyButton = null;
+        }
+
+        private void OrderEnemyButtons()
+        {
+            IEnumerable<EnemyInfoButton> enemyInfoButtons = _enemyInfoButtons.OrderByDescending(e => e.Index);
+
+            foreach (EnemyInfoButton enemyInfoButton in enemyInfoButtons)
+                enemyInfoButton.transform.SetAsFirstSibling();
         }
     }
 }

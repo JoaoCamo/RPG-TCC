@@ -1,18 +1,18 @@
-using Game.Backend.Data;
-using Game.Character;
-using Game.Character.Enemy;
-using Game.Map;
-using Game.Map.Data;
-using Game.Static;
-using Game.Static.Enum;
-using Game.UI;
-using Game.UI.Data;
+using System.Text;
 using System.Collections;
 using System.Collections.Generic;
-using System.Text;
 using UnityEngine;
 using UnityEngine.Networking;
 using UnityEngine.SceneManagement;
+using Game.UI;
+using Game.Map;
+using Game.Static;
+using Game.UI.Data;
+using Game.Map.Data;
+using Game.Character;
+using Game.Static.Enum;
+using Game.Backend.Data;
+using Game.Character.Enemy;
 
 namespace Game.Controllers
 {
@@ -25,8 +25,9 @@ namespace Game.Controllers
         [SerializeField] private MessageBoxUI messageUI;
         [SerializeField] private MapUI mapUI;
 
+        private int _dungeonLevel;
         private MapSection[,] _currentMap;
-        private int[] _currentPosition = new int[2];
+        private readonly int[] _currentPosition = new int[2];
 
         private void Awake()
         {
@@ -36,6 +37,7 @@ namespace Game.Controllers
         public void LoadNewMap()
         {
             int mapSize = GetMapSize();
+            _dungeonLevel = StaticVariables.PlayerController.Experience.Level;
 
             _currentPosition[0] = Random.Range(0,mapSize);
             _currentPosition[1] = Random.Range(0,mapSize);
@@ -76,7 +78,7 @@ namespace Game.Controllers
                         charactersToEnterCombat[i] = currentSection.TileEnemies[i];
                     }
 
-                    charactersToEnterCombat[charactersToEnterCombat.Length - 1] = StaticVariables.PlayerController;
+                    charactersToEnterCombat[^1] = StaticVariables.PlayerController;
 
                     combatController.StartCombat(charactersToEnterCombat, GetCurrentSection().isObjective);
                 }
@@ -165,7 +167,7 @@ namespace Game.Controllers
             for (int i = 0; i < dungeonRoom.enemiesPresent.enemyAmount; i++)
             {
                 EnemyController enemy = new EnemyController();
-                yield return StartCoroutine(characterGenerator.GenerateEnemy(enemy));
+                yield return StartCoroutine(characterGenerator.GenerateEnemy(enemy, _dungeonLevel));
                 characters.Add(enemy);
             }
 

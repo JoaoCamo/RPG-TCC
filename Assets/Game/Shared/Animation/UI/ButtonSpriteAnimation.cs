@@ -7,8 +7,8 @@ namespace Game.Shared.Animation.UI
     public class ButtonSpriteAnimation : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     {
         [SerializeField] private Button button;
-        [SerializeField] private Sprite[] sprites;
         [SerializeField] private Image spriteRenderer;
+        [SerializeField] private Sprite[] sprites;
         
         public void OnPointerEnter(PointerEventData eventData)
         {
