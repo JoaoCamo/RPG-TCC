@@ -25,11 +25,11 @@ namespace Game.Character
             messageUI = messageBoxUI;
         }
 
-        public IEnumerator GenerateEnemy(EnemyController enemyController)
+        public IEnumerator GenerateEnemy(EnemyController enemyController, int dungeonLevel)
         {
             string url = "http://127.0.0.1:5000/generate/character/";
 
-            CharacterRequestData data = new CharacterRequestData(StaticVariables.PlayerController.Experience.Level, StaticVariables.CampaignStartInfo.dungeon.description);
+            CharacterRequestData data = new CharacterRequestData(dungeonLevel, StaticVariables.CampaignStartInfo.dungeon.description);
             string dataJson = JsonUtility.ToJson(data);
             byte[] bodyRaw = Encoding.UTF8.GetBytes(dataJson);
 

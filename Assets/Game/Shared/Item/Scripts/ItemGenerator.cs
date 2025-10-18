@@ -24,7 +24,7 @@ namespace Game.Item
         {
             string url = "http://127.0.0.1:5000/generate/item/";
 
-            ItemRequestData itemRequestData = new ItemRequestData(character, ItemType.Armor.ToString());
+            ItemRequestData itemRequestData = new ItemRequestData(character, nameof(ItemType.Armor));
             string dataJson = JsonUtility.ToJson(itemRequestData);
             byte[] bodyRaw = Encoding.UTF8.GetBytes(dataJson);
 

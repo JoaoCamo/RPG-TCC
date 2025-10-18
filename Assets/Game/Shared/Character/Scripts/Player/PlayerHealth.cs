@@ -17,5 +17,10 @@ namespace Game.Character
                 new MessageBoxButtonData(() => SceneManager.LoadSceneAsync(0, LoadSceneMode.Single), "Return to main menu"),
                 new MessageBoxButtonData(null, string.Empty));
         }
+
+        public void AddHealth(int amount)
+        {
+            currentHealth = currentHealth + amount > MaxHealth ? MaxHealth : currentHealth + amount;
+        }
     }
 }

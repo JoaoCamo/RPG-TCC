@@ -1,10 +1,10 @@
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
-using Game.Static;
-using Game.Controllers;
 using Game.Map;
+using Game.Static;
 using Game.Map.Enum;
+using Game.Controllers;
 
 namespace Game.UI
 {
@@ -13,7 +13,7 @@ namespace Game.UI
         [SerializeField] private Image tilePrefab;
         [SerializeField] private GridLayoutGroup grid;
         [SerializeField] private TextMeshProUGUI descriptionTextMesh;
-        [SerializeField] private Button[] movementButtons;
+        [SerializeField] private MapMovementButton[] movementButtons;
         [SerializeField] private CanvasGroup canvasGroup;
 
         private Image[,] _mapTiles = new Image[0,0];
@@ -44,10 +44,10 @@ namespace Game.UI
 
         public void LoadButtons(MapController mapController)
         {
-            movementButtons[0].onClick.AddListener(() => StartCoroutine(mapController.MovePlayer(0,-1)));
-            movementButtons[1].onClick.AddListener(() => StartCoroutine(mapController.MovePlayer(1,0)));
-            movementButtons[2].onClick.AddListener(() => StartCoroutine(mapController.MovePlayer(-1,0)));
-            movementButtons[3].onClick.AddListener(() => StartCoroutine(mapController.MovePlayer(0,1)));
+            movementButtons[0].Initialize(() => StartCoroutine(mapController.MovePlayer(0,-1)));
+            movementButtons[1].Initialize(() => StartCoroutine(mapController.MovePlayer(1,0)));
+            movementButtons[2].Initialize(() => StartCoroutine(mapController.MovePlayer(-1,0)));
+            movementButtons[3].Initialize(() => StartCoroutine(mapController.MovePlayer(0,1)));
         }
 
         public void UpdateMap(MapSection[,] map, int[] currentPosition, string roomDescription)
@@ -76,10 +76,10 @@ namespace Game.UI
             int x = currentPosition[0];
             int y = currentPosition[1];
 
-            movementButtons[0].interactable = y > 0 && CheckForConnection(currentMap[x,y].SectionInfo.connections, TileConnection.Left);
-            movementButtons[1].interactable = x < mapSize -1 && CheckForConnection(currentMap[x,y].SectionInfo.connections, TileConnection.Bottom);
-            movementButtons[2].interactable = x > 0 && CheckForConnection(currentMap[x,y].SectionInfo.connections, TileConnection.Top);
-            movementButtons[3].interactable = y < mapSize - 1 && CheckForConnection(currentMap[x,y].SectionInfo.connections, TileConnection.Right);
+            movementButtons[0].ToggleButton(y > 0 && CheckForConnection(currentMap[x,y].SectionInfo.connections, TileConnection.Left));
+            movementButtons[1].ToggleButton(x < mapSize -1 && CheckForConnection(currentMap[x,y].SectionInfo.connections, TileConnection.Bottom));
+            movementButtons[2].ToggleButton(x > 0 && CheckForConnection(currentMap[x,y].SectionInfo.connections, TileConnection.Top));
+            movementButtons[3].ToggleButton(y < mapSize - 1 && CheckForConnection(currentMap[x,y].SectionInfo.connections, TileConnection.Right));
         }
 
         private bool CheckForConnection(TileConnection[] tileConnections, TileConnection desiredConnection)

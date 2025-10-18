@@ -7,8 +7,8 @@ namespace Game.Shared.Animation.UI
     public class ButtonSpriteAnimation : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     {
         [SerializeField] private Button button;
-        [SerializeField] private Sprite[] sprites;
         [SerializeField] private Image spriteRenderer;
+        [SerializeField] private Sprite[] sprites;
         
         public void OnPointerEnter(PointerEventData eventData)
         {
@@ -18,6 +18,11 @@ namespace Game.Shared.Animation.UI
         public void OnPointerExit(PointerEventData eventData)
         {
             spriteRenderer.sprite = button.interactable ? sprites[0] : sprites[2];
+        }
+
+        public void ToggleButton(bool mode)
+        {
+            spriteRenderer.sprite = mode ? sprites[0] : sprites[2];
         }
     }
 }

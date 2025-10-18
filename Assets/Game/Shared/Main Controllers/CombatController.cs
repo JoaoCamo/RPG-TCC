@@ -11,6 +11,8 @@ using Game.Character.Enemy;
 
 namespace Game.Controllers
 {
+    using Random = UnityEngine.Random;
+    
     public class CombatController : MonoBehaviour
     {
         [SerializeField] private MapController mapController;
@@ -28,6 +30,7 @@ namespace Game.Controllers
             _charactersInCombat = OrderCharacterList(characterBases);
             combatUI.LoadUI(characterBases);
             combatUI.UpdateContinueButton(ContinueCombat);
+            combatUI.UpdatePotionButton(HealPlayer);
             combatUI.UpdateInfoText("Click continue to start combat");
         }
 
@@ -65,6 +68,7 @@ namespace Game.Controllers
                 combatUI.UpdateInfoText("Select an enemy to attack");
                 combatUI.GetClickedEnemy(this); 
                 combatUI.UpdateEnemyTurnOutline(-1);
+                combatUI.ToggleControlMode(true);
             }
             else
             {
@@ -86,7 +90,7 @@ namespace Game.Controllers
             PlayerController player = StaticVariables.PlayerController;
             int totalArmorPoints = player.Equipment.GetTotalArmor();
 
-            int hitRoll = UnityEngine.Random.Range(0, 21);
+            int hitRoll = Random.Range(0, 21);
             int statModifier = Math.Max(0, (enemyController.Stats.GetStat(enemyController.Equipment.Weapon.WeaponData.modifierStat) - 10) / 2);
 
             bool isCrit = hitRoll == 20;
@@ -98,14 +102,13 @@ namespace Game.Controllers
             int totalDamage = 0;
 
             for (int i = 0; i < dicesToRoll; i++)
-                totalDamage += UnityEngine.Random.Range(1,enemyController.Equipment.Weapon.WeaponData.rawDamage+1) + statModifier;
+                totalDamage += Random.Range(1,enemyController.Equipment.Weapon.WeaponData.rawDamage+1) + statModifier;
 
             player.Health.ReceiveDamage(totalArmorPoints, hitRoll, totalDamage, isCrit);
 
             _currentIndex = _currentIndex == (_charactersInCombat.Count - 1) ? 0 : _currentIndex + 1;
             combatUI.UpdateInfoText(totalArmorPoints, hitRoll, totalDamage, isCrit, enemyController.Name);
             playerStatsUI.UpdateHealth(player.Health);
-            combatUI.UpdateContinueButton(ContinueCombat);
         }
 
         public void PerformAttack(int enemyIndex)
@@ -116,7 +119,7 @@ namespace Game.Controllers
             {
                 int totalArmorPoints = selectedEnemy.Equipment.GetTotalArmor();
 
-                int hitRoll = UnityEngine.Random.Range(0, 21);
+                int hitRoll = Random.Range(0, 21);
                 int statModifier = Math.Max(0 ,(player.Stats.GetStat(player.Equipment.Weapon.WeaponData.modifierStat) - 10) / 2);
 
                 bool isCrit = hitRoll == 20;
@@ -128,7 +131,7 @@ namespace Game.Controllers
                 int totalDamage = 0;
 
                 for (int i = 0; i < dicesToRoll; i++)
-                    totalDamage += UnityEngine.Random.Range(1, player.Equipment.Weapon.WeaponData.rawDamage+1) + statModifier;
+                    totalDamage += Random.Range(1, player.Equipment.Weapon.WeaponData.rawDamage+1) + statModifier;
 
                 selectedEnemy.Health.ReceiveDamage(totalArmorPoints, hitRoll, totalDamage, isCrit);
 
@@ -137,7 +140,22 @@ namespace Game.Controllers
             }
 
             combatUI.UpdateEnemies(_charactersInCombat.ToArray());
-            combatUI.UpdateContinueButton(ContinueCombat);
+            combatUI.ToggleControlMode(false);
+        }
+
+        private void HealPlayer()
+        {
+            PlayerController player = StaticVariables.PlayerController;
+            int totalHealing = 0;
+            
+            for (int i = 0; i < 2; i++)
+                totalHealing += Random.Range(1, 5);
+            
+            player.Health.AddHealth(totalHealing);
+            _currentIndex = _currentIndex == (_charactersInCombat.Count - 1) ? 0 : _currentIndex + 1;
+            combatUI.UpdateInfoText("You healed " + totalHealing);
+            playerStatsUI.UpdateHealth(player.Health);
+            combatUI.ToggleControlMode(false);
         }
 
         private bool CheckForCombatEnd()

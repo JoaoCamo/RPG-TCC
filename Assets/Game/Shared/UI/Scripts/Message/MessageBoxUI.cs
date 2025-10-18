@@ -22,12 +22,14 @@ namespace Game.UI
         {
             StaticEvents.RequestMessageBoxUI += RequestMessageBox;
             StaticEvents.RequestMessageBoxUIWithOptions += RequestMessageBox;
+            StaticEvents.CloseMessageBoxUI += CloseMessageBox;
         }
 
         private void OnDisable()
         {
             StaticEvents.RequestMessageBoxUI -= RequestMessageBox;
             StaticEvents.RequestMessageBoxUIWithOptions -= RequestMessageBox;
+            StaticEvents.CloseMessageBoxUI -= CloseMessageBox;
         }
 
         private void ToggleCanvas(bool mode)
