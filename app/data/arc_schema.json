@@ -1,0 +1,25 @@
+﻿{
+    "format": {
+        "type": "json_schema",
+        "name": "arc",
+        "strict": true,
+        "schema": {
+            "type": "object",
+            "properties": {
+                "title": {
+                    "type": "string",
+                    "description": "The title of the current story arc, such as 'Arc 2 – Shadows of the Deep'."
+                },
+                "arcIntroduction": {
+                    "type": "string",
+                    "description": "A short but immersive introduction describing the events, tone, and setup of the current story arc."
+                }
+            },
+            "required": [
+                "title",
+                "arcIntroduction"
+            ],
+            "additionalProperties": false
+        }
+    }
+}

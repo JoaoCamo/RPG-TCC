@@ -1,53 +1,42 @@
 {
-    "format":{
-        "type":"json_schema",
-        "name":"main_story",
-        "strict":true,
-        "schema":{
-            "type":"object",
-            "properties":{
-                "kingdom":{
-                    "type":"object",
-                    "properties":{
-                        "name":{
-                            "type":"string"
+    "format": {
+        "type": "json_schema",
+        "name": "main_story",
+        "strict": true,
+        "schema": {
+            "type": "object",
+            "properties": {
+                "title": {
+                    "type": "string",
+                    "description": "The story title, which must include the current arc number (always 'Arc 1')."
+                },
+                "introduction": {
+                    "type": "string",
+                    "description": "A detailed and immersive introduction describing the beginning of the character’s adventure, tone, and setting."
+                },
+                "dungeon": {
+                    "type": "object",
+                    "properties": {
+                        "name": {
+                            "type": "string"
                         },
-                        "description":{
-                            "type":"string"
+                        "description": {
+                            "type": "string"
                         }
                     },
-                    "required":[
+                    "required": [
                         "name",
                         "description"
                     ],
-                    "additionalProperties":false
-                },
-                "dungeon":{
-                    "type":"object",
-                    "properties":{
-                        "name":{
-                            "type":"string"
-                        },
-                        "description":{
-                            "type":"string"
-                        }
-                    },
-                    "required":[
-                        "name",
-                        "description"
-                    ],
-                    "additionalProperties":false
-                },
-                "introduction":{
-                    "type":"string"
+                    "additionalProperties": false
                 }
             },
-            "required":[
-                "kingdom",
-                "dungeon",
-                "introduction"
+            "required": [
+                "title",
+                "introduction",
+                "dungeon"
             ],
-            "additionalProperties":false
+            "additionalProperties": false
         }
     }
 }

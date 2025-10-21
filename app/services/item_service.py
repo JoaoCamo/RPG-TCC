@@ -5,7 +5,6 @@ from app.utils.schema_util import load_json_schema
 
 client = OpenAI()
 
-
 def generate_item(character: str, item_type: str):
     item_system = "You are an imaginative Dungeon Master."
     item_user = f"Generate a {item_type}, based on the character that will drop it, the item should be corresponding to the character: {character}"
