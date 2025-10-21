@@ -7,5 +7,11 @@ namespace Game.UI.Data
     {
         public string text;
         public GameState game_state;
+
+        public DialogOptionData(string text, GameState gameState)
+        {
+            this.text = text;
+            game_state = gameState;
+        }
     }
 }

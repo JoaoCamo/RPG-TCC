@@ -184,7 +184,7 @@ namespace Game.Controllers
             {
                 messageUI.CloseMessageBox();
                 StaticVariables.CurrentGameState = GameState.Dialogue;
-                StartCoroutine(dialogController.SendDialogToAI($"{StaticVariables.PlayerController.Name} found the dungeon objective, and now exits the dungeon."));
+                StartCoroutine(dialogController.AdvanceArc($"{StaticVariables.PlayerController.Name} found the dungeon objective, and now exits the dungeon."));
             }, "Exit Dungeon");
 
             MessageBoxButtonData boxButtonDataContinue = new MessageBoxButtonData(messageUI.CloseMessageBox, "Continue Fighting");

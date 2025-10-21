@@ -9,6 +9,8 @@ using Game.UI.Data;
 using Game.Static.Enum;
 using Game.Backend.Data;
 using Game.Character.Enum;
+using Game.Shared.Backend.Data;
+using Game.Shared.UI.Data;
 
 namespace Game.Controllers
 {
@@ -18,6 +20,9 @@ namespace Game.Controllers
         [SerializeField] private MessageBoxUI messageUI;
         [SerializeField] private DialogUI dialogUI;
         [SerializeField] private PlayerStatsUI playerStatsUI;
+
+        private const int MaxHistoryArcs = 3;
+        private int _currentArc = 1;
 
         private void Awake()
         {
@@ -81,6 +86,34 @@ namespace Game.Controllers
             }
         }
 
+        public IEnumerator AdvanceArc(string lastPlayerAction)
+        {
+            messageUI.RequestMessageBox("Waiting for Response");
+            
+            string url = "http://127.0.0.1:5000/generate/arc/";
+
+            HistoryArcRequestData data = new HistoryArcRequestData(lastPlayerAction, ++_currentArc, _currentArc == MaxHistoryArcs);
+            string dataJson = JsonUtility.ToJson(data);
+            byte[] bodyRaw = Encoding.UTF8.GetBytes(dataJson);
+            
+            UnityWebRequest request = new UnityWebRequest(url, "POST");
+            request.uploadHandler = new UploadHandlerRaw(bodyRaw);
+            request.downloadHandler = new DownloadHandlerBuffer();
+            request.SetRequestHeader("Content-Type", "application/json");
+            
+            yield return request.SendWebRequest();
+
+            if (request.result != UnityWebRequest.Result.Success)
+                messageUI.RequestMessageBox(request.error, new MessageBoxButtonData(() => SceneManager.LoadSceneAsync(0, LoadSceneMode.Single), "Return to main menu"), new MessageBoxButtonData());
+            else
+            {
+                string response = request.downloadHandler.text;
+                ArcData arcData = JsonUtility.FromJson<ArcData>(response);
+                dialogUI.SetNewDialog(arcData, this, _currentArc == MaxHistoryArcs);
+                messageUI.CloseMessageBox();
+            }
+        }
+
         public void ShowDungeonMessage()
         {
             string message = "Selecting this dialogue will lead you into the dungeon. Do you wish to proceed?";
@@ -93,6 +126,19 @@ namespace Game.Controllers
             }, "Enter Dungeon");
 
             messageUI.RequestMessageBox(message, boxButtonDataExit, boxButtonDataContinue);
+        }
+
+        public void ShowEndingMessage()
+        {
+            string message = "Thus ends your adventure… The main menu awaits your next tale.";
+            MessageBoxButtonData boxButtonDataContinue = new MessageBoxButtonData(() => 
+            {   
+                StaticVariables.CurrentGameState = GameState.Dungeon;
+                messageUI.CloseMessageBox();
+                mapController.LoadNewMap(); 
+            }, "Enter Dungeon");
+            
+            messageUI.RequestMessageBox(message, boxButtonDataContinue, new MessageBoxButtonData(null, string.Empty));
         }
     }
 }
