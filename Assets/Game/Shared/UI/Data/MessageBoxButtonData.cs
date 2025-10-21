@@ -4,8 +4,8 @@ namespace Game.UI.Data
 {
     public struct MessageBoxButtonData
     {
-        public UnityAction onClick;
-        public string text;
+        public readonly UnityAction onClick;
+        public readonly string text;
 
         public MessageBoxButtonData(UnityAction onClick, string text)
         {

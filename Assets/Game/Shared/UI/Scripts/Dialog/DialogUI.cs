@@ -4,7 +4,7 @@ using Game.Static;
 using Game.UI.Data;
 using Game.Static.Enum;
 using Game.Controllers;
-
+using Game.Shared.UI.Data;
 
 namespace Game.UI
 {
@@ -12,31 +12,26 @@ namespace Game.UI
     {
         [SerializeField] private DialogButton dialogButtonPrefab;
         [SerializeField] private Transform dialogButtonParent;
-        [SerializeField] private TextMeshProUGUI objectiveTextMesh;
+        [SerializeField] private TextMeshProUGUI titleTextMesh;
         [SerializeField] private TextMeshProUGUI dialogTextMesh;
         [SerializeField] private CanvasGroup canvasGroup;
 
         public void SetCampaignStartText(CampaignStartInfo campaignStartInfo, DialogController dialogController)
         {
-            objectiveTextMesh.text = campaignStartInfo.kingdom.name;
-            string dialog = campaignStartInfo.kingdom.description + "\n";
-            dialog += campaignStartInfo.dungeon.description + "\n";
-            dialog += campaignStartInfo.introduction;
-            dialogTextMesh.text = dialog;
+            titleTextMesh.text = campaignStartInfo.title;
+            dialogTextMesh.text = $"{campaignStartInfo.introduction}\n{campaignStartInfo.dungeon.description}";
 
-            DialogOptionData data = new DialogOptionData() { text = "Proceed", game_state = GameState.Dialogue};
+            DialogOptionData data = new DialogOptionData() { text = "Begin Adventure", game_state = GameState.Dialogue};
             DialogButton dialogButton = Instantiate(dialogButtonPrefab, dialogButtonParent);
             dialogButton.Initialize(() => DialogButtonOnClick(dialogController, data.text, data.game_state), data.text);
         }
 
         public void SetNewDialog(DialogData dialogData, DialogController dialogController)
         {
-            StaticFunctions.ChangeCurrentUI(canvasGroup);
-
-            objectiveTextMesh.text = dialogData.name;
-            dialogTextMesh.text = dialogData.dialogue;
-
             ClearPreviousDialog();
+            
+            titleTextMesh.text = dialogData.name;
+            dialogTextMesh.text = dialogData.dialogue;
 
             for (int i = 0; i < dialogData.options.Length; i++)
             {
@@ -44,6 +39,28 @@ namespace Game.UI
                 DialogButton dialogButton = Instantiate(dialogButtonPrefab, dialogButtonParent);
                 dialogButton.Initialize(() => DialogButtonOnClick(dialogController, dialogOption.text, dialogOption.game_state), dialogOption.text);
             }
+            
+            StaticFunctions.ChangeCurrentUI(canvasGroup);
+        }
+
+        public void SetNewDialog(ArcData arcData, DialogController dialogController, bool isEnding)
+        {
+            ClearPreviousDialog();
+
+            titleTextMesh.text = arcData.title;
+            dialogTextMesh.tag = arcData.arcIntroduction;
+
+            DialogOptionData data;
+
+            if (isEnding)
+                data = new DialogOptionData("Return to Main Menu", GameState.Dialogue);
+            else
+                data = new DialogOptionData("Continue Adventure", GameState.Dialogue);
+            
+            DialogButton dialogButton = Instantiate(dialogButtonPrefab, dialogButtonParent);
+            dialogButton.Initialize(dialogController.ShowEndingMessage, data.text);
+            
+            StaticFunctions.ChangeCurrentUI(canvasGroup);
         }
 
         private void DialogButtonOnClick(DialogController dialogController, string text, GameState newGameState)
