@@ -133,10 +133,9 @@ namespace Game.Controllers
             string message = "Thus ends your adventure… The main menu awaits your next tale.";
             MessageBoxButtonData boxButtonDataContinue = new MessageBoxButtonData(() => 
             {   
-                StaticVariables.CurrentGameState = GameState.Dungeon;
-                messageUI.CloseMessageBox();
-                mapController.LoadNewMap(); 
-            }, "Enter Dungeon");
+                StaticVariables.CurrentGameState = GameState.Dialogue;
+                SceneManager.LoadSceneAsync(0, LoadSceneMode.Single);
+            }, "Return to Main Menu");
             
             messageUI.RequestMessageBox(message, boxButtonDataContinue, new MessageBoxButtonData(null, string.Empty));
         }

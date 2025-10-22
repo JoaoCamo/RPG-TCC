@@ -5,6 +5,7 @@ using Game.UI.Data;
 using Game.Static.Enum;
 using Game.Controllers;
 using Game.Shared.UI.Data;
+using UnityEngine.Events;
 
 namespace Game.UI
 {
@@ -50,15 +51,11 @@ namespace Game.UI
             titleTextMesh.text = arcData.title;
             dialogTextMesh.text = arcData.arcIntroduction;
 
-            DialogOptionData data;
-
-            if (isEnding)
-                data = new DialogOptionData("Return to Main Menu", GameState.Dialogue);
-            else
-                data = new DialogOptionData("Continue Adventure", GameState.Dialogue);
+            DialogOptionData data = isEnding ? new DialogOptionData("Return to Main Menu", GameState.Dialogue) : new DialogOptionData("Continue Adventure", GameState.Dialogue);
+            UnityAction onClick = isEnding ? dialogController.ShowEndingMessage : () => DialogButtonOnClick(dialogController, data.text, data.game_state);
             
             DialogButton dialogButton = Instantiate(dialogButtonPrefab, dialogButtonParent);
-            dialogButton.Initialize(dialogController.ShowEndingMessage, data.text);
+            dialogButton.Initialize(isEnding ? dialogController.ShowEndingMessage : onClick, data.text);
             
             StaticFunctions.ChangeCurrentUI(canvasGroup);
         }
