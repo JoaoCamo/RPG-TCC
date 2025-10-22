@@ -1,6 +1,6 @@
 from flask import Blueprint, request, jsonify
 from app.services.main_story_service import generate_main_story
-from app.utils.save_context import clear_context
+from app.utils.context_helper import clear_context
 
 main_story_blueprint = Blueprint("story", __name__)
 

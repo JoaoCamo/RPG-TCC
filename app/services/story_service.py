@@ -2,7 +2,7 @@ import json
 from openai import OpenAI
 
 from app.utils.schema_util import load_json_schema
-from app.utils.save_context import save_context, load_context
+from app.utils.context_helper import save_context, load_context
 
 client = OpenAI()
 
