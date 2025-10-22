@@ -48,7 +48,7 @@ namespace Game.UI
             ClearPreviousDialog();
 
             titleTextMesh.text = arcData.title;
-            dialogTextMesh.tag = arcData.arcIntroduction;
+            dialogTextMesh.text = arcData.arcIntroduction;
 
             DialogOptionData data;
 
