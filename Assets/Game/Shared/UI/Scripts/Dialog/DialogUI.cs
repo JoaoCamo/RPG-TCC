@@ -1,11 +1,11 @@
 using UnityEngine;
+using UnityEngine.Events;
 using TMPro;
 using Game.Static;
 using Game.UI.Data;
 using Game.Static.Enum;
 using Game.Controllers;
 using Game.Shared.UI.Data;
-using UnityEngine.Events;
 
 namespace Game.UI
 {
@@ -20,7 +20,7 @@ namespace Game.UI
         public void SetCampaignStartText(CampaignStartInfo campaignStartInfo, DialogController dialogController)
         {
             titleTextMesh.text = campaignStartInfo.title;
-            dialogTextMesh.text = $"{campaignStartInfo.introduction}\n{campaignStartInfo.dungeon.description}";
+            dialogTextMesh.text = campaignStartInfo.introduction;
 
             DialogOptionData data = new DialogOptionData() { text = "Begin Adventure", game_state = GameState.Dialogue};
             DialogButton dialogButton = Instantiate(dialogButtonPrefab, dialogButtonParent);
