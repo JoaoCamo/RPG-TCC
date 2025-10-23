@@ -11,7 +11,11 @@
           "properties": {
             "itemType": { "type": "integer", "const": 0 },
             "armorValue": { "type": "integer" },
-            "armorType": { "type": "integer", "enum": [0, 1] }
+            "armorType": {
+              "type": "integer",
+              "enum": [0, 1],
+              "description": "Enum index of ArmorType (0=Chest, 1=Shield)"
+            }
           },
           "required": ["itemType", "armorValue", "armorType"],
           "additionalProperties": false

@@ -18,12 +18,13 @@ def generate_arc(last_action: str, current_arc: int, is_ending: bool):
                 The player's last major action was: {last_action}.
                 This begins Arc {current_arc}.
 
-                If isEnding = {is_ending}, treat this as the final chapter:
+                If isEnding = true, treat this as the story conclusion:
+                    - The title should not include the current arc number (e.g, 'Victory of the hero')
                     - The story should reach a complete and satisfying conclusion.
                     - Do not include the arc number or suggest future events.
                     - Focus on wrapping up the narrative and giving closure to the characters and world.
 
-                If not ending, generate a creative and immersive continuation for this new story arc:
+                If isEnding = false, generate a creative and immersive continuation for this new story arc:
                     - Include the current arc number in the title (e.g., 'Arc {current_arc} – ...').
                     - Write an engaging introduction that sets the tone, atmosphere, and direction for this stage of the adventure.
 
@@ -32,7 +33,7 @@ def generate_arc(last_action: str, current_arc: int, is_ending: bool):
 
     arc_schema = load_json_schema("arc_schema.json")
     response = client.responses.create(
-        model="gpt-4.1-nano",
+        model="gpt-4.1",
         input=[
             {"role": "system", "content": arc_system},
             {"role": "user", "content": arc_user},

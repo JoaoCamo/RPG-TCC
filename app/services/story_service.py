@@ -10,10 +10,23 @@ client = OpenAI()
 def generate_story(choice):
     context = load_context("context.txt")
     story_system = "You are an imaginative Dungeon Master."
-    story_user = f"Story Context: {context}\nPlayer choice: {choice}\nPrompt: Generate a story/response dialogue given by a named npc, based on the previous contexts of the story, then give the player three choices about what to say/do next. One of these choices must be about the story (game_state: 0), another one must be about the dungeon (game_state: 1), and another one an agressive option towards the npc. The npc might change depending on the players choice"
+    story_user = f"""
+                    Story Context: {context}
+                    Player choice: {choice}
+                    
+                    Prompt: 
+                    Generate a story or dialogue response from a named NPC based on the previous story context. 
+                    
+                    Then, provide the player with **at least 5 possible choices with a maximum of 7** for what to say or do next:
+                        - The choices can cover different approaches: advancing the story (game_state: 0), interacting with the dungeon (game_state: 1), being aggressive or confrontational towards the NPC, or other creative actions.
+                        - It is not required for a dungeon-related choice to appear immediately; as the player continues interacting, choices should naturally lead towards the dungeon over time.
+                        - The NPC may change depending on the player's choice, and future dialogues and options should reflect these changes.
+                    
+                    Ensure the dialogue and choices feel natural, engaging, and consistent with the story context.
+                  """
     story_schema = load_json_schema("story_schema.json")
     response = client.responses.create(
-        model="gpt-4.1-nano",
+        model="gpt-4.1",
         input=[
             {"role": "system", "content": story_system},
             {"role": "user", "content": story_user},
