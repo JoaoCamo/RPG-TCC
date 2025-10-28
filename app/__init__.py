@@ -1,4 +1,6 @@
 from flask import Flask
+
+from app.routes.image_route import image_blueprint
 from app.routes.main_story_route import main_story_blueprint
 from app.routes.arc_route_py import arc_blueprint
 from app.routes.story_route import story_blueprint
@@ -15,5 +17,6 @@ def create_app():
     app.register_blueprint(dungeon_room_blueprint, url_prefix="/generate/dungeon_room")
     app.register_blueprint(character_blueprint, url_prefix="/generate/character")
     app.register_blueprint(item_blueprint, url_prefix="/generate/item")
+    app.register_blueprint(image_blueprint, url_prefix="/generate/image")
 
     return app

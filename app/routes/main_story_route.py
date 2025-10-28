@@ -4,7 +4,6 @@ from app.utils.context_helper import clear_context
 
 main_story_blueprint = Blueprint("story", __name__)
 
-
 @main_story_blueprint.route("/", methods=["POST"])
 def main_story():
     data = request.get_json()
