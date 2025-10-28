@@ -7,7 +7,7 @@ from app.utils.context_helper import save_context, load_context
 client = OpenAI()
 
 
-def generate_story(choice):
+def generate_story(selected_model: str, choice):
     context = load_context("context.txt")
     story_system = "You are an imaginative Dungeon Master."
     story_user = f"""
@@ -26,7 +26,7 @@ def generate_story(choice):
                   """
     story_schema = load_json_schema("story_schema.json")
     response = client.responses.create(
-        model="gpt-4.1",
+        model=selected_model,
         input=[
             {"role": "system", "content": story_system},
             {"role": "user", "content": story_user},

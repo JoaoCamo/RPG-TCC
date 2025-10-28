@@ -6,7 +6,7 @@ from app.utils.context_helper import save_context, summarize_context
 
 client = OpenAI()
 
-def generate_arc(last_action: str, current_arc: int, is_ending: bool):
+def generate_arc(selected_model: str, last_action: str, current_arc: int, is_ending: bool):
     summarize_context(client)
     context = summarize_context(client)
     arc_system = "You are an imaginative worldbuilder Dungeon Master for a fantasy game."
@@ -33,7 +33,7 @@ def generate_arc(last_action: str, current_arc: int, is_ending: bool):
 
     arc_schema = load_json_schema("arc_schema.json")
     response = client.responses.create(
-        model="gpt-4.1",
+        model=selected_model,
         input=[
             {"role": "system", "content": arc_system},
             {"role": "user", "content": arc_user},

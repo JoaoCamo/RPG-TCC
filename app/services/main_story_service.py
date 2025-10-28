@@ -6,7 +6,7 @@ from app.utils.context_helper import save_context
 
 client = OpenAI()
 
-def generate_main_story(type: str, name: str, character_history: str, context: str):
+def generate_main_story(selected_model: str, type: str, name: str, character_history: str, context: str):
     main_story_system = "You are an imaginative worldbuilder Dungeon Master for a fantasy game."
     main_story_user = f"""
                         Generate a creative and immersive introductory story about {type} called {name}, whose adventure is just beginning. 
@@ -22,7 +22,7 @@ def generate_main_story(type: str, name: str, character_history: str, context: s
                        """
     main_story_schema = load_json_schema("main_story_schema.json")
     response = client.responses.create(
-        model="gpt-4.1",
+        model=selected_model,
         input=[
             {"role": "system", "content": main_story_system},
             {"role": "user", "content": main_story_user},

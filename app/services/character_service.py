@@ -7,7 +7,7 @@ from app.utils.schema_util import load_json_schema
 client = OpenAI()
 
 
-def generate_character(level: int, context: str):
+def generate_character(selected_model: str, level: int, context: str):
     character_system = "You are an imaginative Dungeon Master."
     character_user = f"""
                         Generate a creative character sheet for a level {level} character based on the following context: {context}.
@@ -28,7 +28,7 @@ def generate_character(level: int, context: str):
                       """
     character_schema = load_json_schema("character_schema.json")
     response = client.responses.create(
-        model="gpt-4.1",
+        model=selected_model,
         input=[
             {"role": "system", "content": character_system},
             {"role": "user", "content": character_user},

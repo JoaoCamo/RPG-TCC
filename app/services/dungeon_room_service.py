@@ -5,7 +5,7 @@ from app.utils.schema_util import load_json_schema
 
 client = OpenAI()
 
-def generate_dungeon_room(context: str):
+def generate_dungeon_room(selected_model: str, context: str):
     dungeon_room_system = "You are an imaginative Dungeon Master."
     dungeon_room_user = f"""
                             Generate a dungeon room based on the following context: {context}.
@@ -20,7 +20,7 @@ def generate_dungeon_room(context: str):
                          """
     dungeon_room_schema = load_json_schema("dungeon_room_schema.json")
     response = client.responses.create(
-        model="gpt-4.1",
+        model=selected_model,
         input=[
             {"role": "system", "content": dungeon_room_system},
             {"role": "user", "content": dungeon_room_user},
