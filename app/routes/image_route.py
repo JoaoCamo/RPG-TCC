@@ -8,4 +8,4 @@ def get_image():
     data = request.get_json()
     image_context = data.get("imageContext")
     image_b64 = generate_image(image_context)
-    return jsonify(image_b64)
+    return jsonify({"imageBase64": image_b64})
