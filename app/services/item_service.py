@@ -18,7 +18,7 @@ def generate_item(selected_model: str, character: str, item_type: str):
                         - Description and lore
                         - Any special abilities, effects, or stats
                     
-                    The item should be creative, immersive, and consistent with the character's theme.
+                    The item should be creative, immersive, and consistent with the character's theme. Keep the description concise and not too long.
                  """
 
     if item_type == "Weapon":

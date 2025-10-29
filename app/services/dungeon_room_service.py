@@ -16,7 +16,7 @@ def generate_dungeon_room(selected_model: str, context: str):
                                 - 35% chance of having 2 enemies
                                 - 20% chance of having 3 enemies
                             
-                            Ensure the dungeon room feels immersive, balanced, and consistent with the context of the dungeon.
+                            Ensure the dungeon room feels immersive, balanced, and consistent with the overall dungeon theme. The description should be concise and not too long.
                          """
     dungeon_room_schema = load_json_schema("dungeon_room_schema.json")
     response = client.responses.create(
