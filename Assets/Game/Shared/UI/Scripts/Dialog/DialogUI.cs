@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.Events;
 using TMPro;
 using Game.Static;
@@ -15,6 +16,8 @@ namespace Game.UI
         [SerializeField] private Transform dialogButtonParent;
         [SerializeField] private TextMeshProUGUI titleTextMesh;
         [SerializeField] private TextMeshProUGUI dialogTextMesh;
+        [SerializeField] private GameObject generatedImageParent;
+        [SerializeField] private Image generatedImage;
         [SerializeField] private CanvasGroup canvasGroup;
 
         public void SetCampaignStartText(CampaignStartInfo campaignStartInfo, DialogController dialogController)
@@ -58,6 +61,18 @@ namespace Game.UI
             dialogButton.Initialize(isEnding ? dialogController.ShowEndingMessage : onClick, data.text);
             
             StaticFunctions.ChangeCurrentUI(canvasGroup);
+        }
+
+        public void SetImage(Sprite imageSprite)
+        {
+            if (imageSprite == null)
+            {
+                generatedImageParent.gameObject.SetActive(false);
+                return;
+            }
+
+            generatedImage.sprite = imageSprite;
+            generatedImageParent.gameObject.SetActive(true);
         }
 
         private void DialogButtonOnClick(DialogController dialogController, string text, GameState newGameState)

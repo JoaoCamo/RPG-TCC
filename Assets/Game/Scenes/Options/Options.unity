@@ -242,7 +242,7 @@ GameObject:
   - component: {fileID: 190357833}
   - component: {fileID: 190357834}
   m_Layer: 5
-  m_Name: '[ImageToggleButton] Image Toggle'
+  m_Name: '[ImageToggle Button] Image Toggle'
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -916,7 +916,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Disabled
+  m_text: <status>
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: c78f2e7a89e24ea4493a61255236d11b, type: 2}
   m_sharedMaterial: {fileID: 1500555903255787455, guid: c78f2e7a89e24ea4493a61255236d11b, type: 2}
@@ -1817,7 +1817,7 @@ GameObject:
   - component: {fileID: 1896270269487148241}
   - component: {fileID: 5878321754495549140}
   m_Layer: 5
-  m_Name: '[ModelSelectionGroup] Model Selection'
+  m_Name: '[Model Selection Group] Model Selection'
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1921,7 +1921,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: gpt-4
+  m_text: <model>
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: c78f2e7a89e24ea4493a61255236d11b, type: 2}
   m_sharedMaterial: {fileID: 1500555903255787455, guid: c78f2e7a89e24ea4493a61255236d11b, type: 2}

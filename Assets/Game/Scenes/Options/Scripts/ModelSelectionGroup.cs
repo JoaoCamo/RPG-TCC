@@ -18,7 +18,7 @@ namespace Game.Scenes.Options.Scripts
         {
             downButton.onClick.AddListener(DownButtonOnClick);
             upButton.onClick.AddListener(UpButtonOnClick);
-            _currentIndex = GetCurrentIndex();
+            GetCurrentIndex();
         }
 
         private void DownButtonOnClick()
@@ -35,15 +35,17 @@ namespace Game.Scenes.Options.Scripts
             SaveModel();
         }
 
-        private int GetCurrentIndex()
+        private void GetCurrentIndex()
         {
             string currentModel = PlayerPrefs.GetString(ModelKey, "gpt-4.1");
 
             for (int i = 0; i < _availableModels.Length; i++)
                 if (currentModel == _availableModels[i])
-                    return i;
-
-            return 0;
+                {
+                    modelTextMesh.text = _availableModels[i];
+                    _currentIndex = i;
+                    break;
+                }
         }
         
         private void SaveModel()

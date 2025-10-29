@@ -15,7 +15,7 @@ namespace Game.Scenes.Options.Scripts
         private void Awake()
         {
             toggleButton.onClick.AddListener(ToggleButtonOnClick);
-            _isEnabled = PlayerPrefs.GetInt(ImageKey, 0) == 1;
+            GetConfiguration();
         }
 
         private void ToggleButtonOnClick()
@@ -23,6 +23,12 @@ namespace Game.Scenes.Options.Scripts
             _isEnabled = !_isEnabled;
             statusTextMesh.text = _isEnabled ? "Enabled" : "Disabled";
             SaveImageSetting();
+        }
+
+        private void GetConfiguration()
+        {
+            _isEnabled = PlayerPrefs.GetInt(ImageKey, 1) == 1;
+            statusTextMesh.text = _isEnabled ? "Enabled" : "Disabled";
         }
 
         private void SaveImageSetting()
