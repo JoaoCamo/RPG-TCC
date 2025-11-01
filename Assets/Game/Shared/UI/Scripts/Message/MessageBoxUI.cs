@@ -16,7 +16,7 @@ namespace Game.UI
         private bool _isOpen = false;
 
         private const Ease CANVAS_FADE_EASE = Ease.Linear;
-        private const float CANVAS_FADE_DELAY = 0.5f;
+        private const float CANVAS_FADE_DELAY = 0.25f;
 
         private void OnEnable()
         {

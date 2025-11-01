@@ -61,7 +61,6 @@ namespace Game.Character
             enemyController.Stats.wisdom = data.stats.wisdom;
             enemyController.Stats.charisma = data.stats.charisma;
             enemyController.Health.CalculateHealth((int)enemyController.Size, enemyController.Experience.Level, enemyController.Stats.constitution);
-            enemyController.Inventory.UpdateCapacity(enemyController.Stats.strength);
             enemyController.ChallengeRating = data.challengeRating;
 
             for (int i = 0; i < data.dropQuantity; i++)

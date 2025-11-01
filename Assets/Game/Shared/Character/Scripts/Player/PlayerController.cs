@@ -23,7 +23,6 @@ namespace Game.Character
         public void LevelUp()
         {
             Health.CalculateHealth(6, Experience.Level, Stats.constitution);
-            Inventory.UpdateCapacity(Stats.strength);
         }
     }
 }

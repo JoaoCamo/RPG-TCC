@@ -12,12 +12,14 @@ using Game.Backend.Data;
 using Game.Shared.UI.Data;
 using Game.Character.Enum;
 using Game.Shared.Backend.Data;
+using Game.Shared.Main_Controllers;
 
 namespace Game.Controllers
 {
     public class DialogController : MonoBehaviour
     {
         [SerializeField] private MapController mapController;
+        [SerializeField] private ShopController shopController;
         [SerializeField] private MessageBoxUI messageUI;
         [SerializeField] private DialogUI dialogUI;
         [SerializeField] private PlayerStatsUI playerStatsUI;
@@ -117,6 +119,7 @@ namespace Game.Controllers
                 string response = request.downloadHandler.text;
                 ArcData arcData = JsonUtility.FromJson<ArcData>(response);
                 dialogUI.SetNewDialog(arcData, this, _currentArc == MaxHistoryArcs);
+                shopController.ReloadItems = true;
                 
                 if (PlayerPrefs.GetInt(ImageKey, 1) == 1)
                     yield return StartCoroutine(GetImage(arcData.arcIntroduction));
