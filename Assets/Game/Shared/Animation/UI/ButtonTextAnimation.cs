@@ -11,13 +11,14 @@ namespace Game.Shared.Animation.UI
         [SerializeField] private TextMeshProUGUI textMesh;
         [SerializeField] private Color unselectedColor;
         [SerializeField] private Color selectedColor;
+        [SerializeField] private Color disabledColor;
         
         public void OnPointerEnter(PointerEventData eventData)
         {
             if (!button.interactable)
                 return;
 
-            textMesh.color = selectedColor;
+            textMesh.color = button.interactable ? selectedColor : disabledColor;
         }
 
         public void OnPointerExit(PointerEventData eventData)
@@ -25,7 +26,12 @@ namespace Game.Shared.Animation.UI
             if (!button.interactable)
                 return;
 
-            textMesh.color = unselectedColor;
+            textMesh.color = button.interactable ? unselectedColor : disabledColor;
+        }
+        
+        public void ToggleButton(bool mode)
+        {
+            textMesh.color = mode ? unselectedColor : disabledColor;
         }
     }
 }

@@ -1,3 +1,5 @@
+using Game.Shared.UI.Scripts.Inventory;
+using Game.Shared.UI.Scripts.Shop;
 using Game.Static;
 using TMPro;
 using UnityEngine;
@@ -7,9 +9,10 @@ namespace Game.UI
 {
     public class InventoryUI : MonoBehaviour
     {
+        [SerializeField] private ShopUI shopUI;
         [SerializeField] private SelfInventoryUI selfInventoryUI;
         [SerializeField] private InventoryExchangeUI inventoryExchangeUI;
-        [SerializeField] private Button toggleInventoryButton;
+        [SerializeField] private InventoryToggleButton inventoryToggleButton;
         [SerializeField] private Button changeModeButton;
         [SerializeField] private TextMeshProUGUI inventoryButtonTextMesh;
         [SerializeField] private TextMeshProUGUI changeModeButtonTextMesh;
@@ -21,7 +24,7 @@ namespace Game.UI
         private void Awake()
         {
             changeModeButton.onClick.AddListener(ToggleMode);
-            toggleInventoryButton.onClick.AddListener(ToggleUI);
+            inventoryToggleButton.Initialize(ToggleUI);
         }
 
         private void ToggleUI()
@@ -33,6 +36,9 @@ namespace Game.UI
             canvasGroup.alpha = _isOpen ? 1 : 0;
             canvasGroup.interactable = _isOpen;
             canvasGroup.blocksRaycasts = _isOpen;
+            
+            shopUI.ToggleShopButton(!_isOpen);
+            GetButtonText();
 
             if (_isOpen)
             {
@@ -41,8 +47,6 @@ namespace Game.UI
             }
             else
                 selfInventoryUI.ClearSelectedItem();
-
-            GetButtonText();
         }
 
         private void ToggleChangeModeButton()
@@ -67,6 +71,11 @@ namespace Game.UI
                 inventoryButtonTextMesh.text = StaticVariables.CurrentGameState == Static.Enum.GameState.Dungeon ? "Dungeon" : "Dialog";
             else
                 inventoryButtonTextMesh.text = "Inventory";
+        }
+
+        public void ToggleInventoryButton(bool mode)
+        {
+            inventoryToggleButton.ToggleButton(mode);
         }
     }  
 }

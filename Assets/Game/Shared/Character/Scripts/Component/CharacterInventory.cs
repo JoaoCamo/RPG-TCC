@@ -8,32 +8,19 @@ namespace Game.Character
     {
         private readonly CharacterBase _base;
         private readonly List<ItemBase> _items = new List<ItemBase>();
-        private int _maxInventoryCapacity = 0;
-        private int _currentWeight = 0;
         private int _currentGold = 0;
 
         public List<ItemBase> Items => _items;
-        public int MaxInventoryCapacity => _maxInventoryCapacity;
-        public int CurrentWeight => _currentWeight; 
-        public int CurrentGold => _currentGold;
+        public int CurrentGold { get => _currentGold; set => _currentGold = value; }
 
         public CharacterInventory(CharacterBase characterBase)
         {
             _base = characterBase;
         }
 
-        public void UpdateCapacity(int characterStrength)
-        {
-            _maxInventoryCapacity = characterStrength * 15;
-        }
-
         public void AddItem(ItemBase item)
         {
-            if (_currentWeight + item.ItemData.weight > _maxInventoryCapacity)
-                return;
-
             _items.Add(item);
-            _currentWeight++;
         }
 
         public void RemoveItem(ItemBase item)

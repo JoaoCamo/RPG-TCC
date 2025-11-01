@@ -1,19 +1,19 @@
-using UnityEngine;
-using TMPro;
 using Game.Item;
 using Game.Item.Data;
+using TMPro;
+using UnityEngine;
 
-namespace Game.Shared.UI.Scripts.Inventory
+namespace Game.Shared.UI.Scripts.Shop
 {
-    public class InventoryItemInfoUI : MonoBehaviour
+    public class ShopItemInfoUI : MonoBehaviour
     {
         [SerializeField] private TextMeshProUGUI itemNameTextMesh;
         [SerializeField] private TextMeshProUGUI itemDescriptionTextMesh;
         [SerializeField] private TextMeshProUGUI itemRarityTextMesh;
         [SerializeField] private TextMeshProUGUI itemPriceTextMesh;
-        [SerializeField] private InventoryWeaponInfoUI weaponInfoUI;
-        [SerializeField] private InventoryArmorInfoUI armorInfoUI;
-
+        [SerializeField] private ShopWeaponInfoUI weaponInfoUI;
+        [SerializeField] private ShopArmorInfoUI armorInfoUI;
+        
         public void ClearItemInfo()
         {
             itemNameTextMesh.text = string.Empty;
