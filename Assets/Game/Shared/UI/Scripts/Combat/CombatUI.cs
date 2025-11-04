@@ -1,5 +1,5 @@
-using System.Collections.Generic;
 using System.Linq;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using TMPro;
@@ -124,6 +124,11 @@ namespace Game.UI
             continueButton.ToggleDisplay(!isPlayerTurn);
             attackButton.ToggleDisplay(isPlayerTurn);
             potionButton.ToggleDisplay(isPlayerTurn);
+        }
+
+        public void TogglePotionButton(bool mode)
+        {
+            potionButton.ToggleButton(mode);
         }
 
         private void UpdatedSelectedButton(EnemyInfoButton enemyInfoButton)

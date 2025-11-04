@@ -32,6 +32,7 @@ namespace Game.Controllers
             combatUI.UpdateContinueButton(ContinueCombat);
             combatUI.UpdatePotionButton(HealPlayer);
             combatUI.UpdateInfoText("Click continue to start combat");
+            combatUI.TogglePotionButton(true);
         }
 
         private void ContinueCombat()
@@ -156,6 +157,7 @@ namespace Game.Controllers
             combatUI.UpdateInfoText("You healed " + totalHealing);
             playerStatsUI.UpdateHealth(player.Health);
             combatUI.ToggleControlMode(false);
+            combatUI.TogglePotionButton(false);
         }
 
         private bool CheckForCombatEnd()
