@@ -82,6 +82,8 @@ namespace Game.UI
 
         private void DialogButtonOnClick(DialogController dialogController, string text, GameState newGameState)
         {
+            StaticVariables.CurrentGameState = newGameState;
+            
             if (newGameState == GameState.Dungeon)
                 dialogController.ShowDungeonMessage();
             else
