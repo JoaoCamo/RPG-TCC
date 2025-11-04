@@ -81,6 +81,7 @@ namespace Game.Shared.UI.Scripts.Shop
                 
                 buyAction(_selectedItem);
                 RemoveBoughtItem();
+                ClearSelectedItem();
             });
         }
         
