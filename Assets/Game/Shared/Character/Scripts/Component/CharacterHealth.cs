@@ -20,6 +20,12 @@ namespace Game.Character
             currentHealth = _maxHealth;
         }
 
+        public void CalculateHealth(int hitDice, int characterConstitution)
+        {
+            _maxHealth += UnityEngine.Random.Range(1, hitDice + 1) + Math.Max(0, (characterConstitution - 10) / 2);
+            currentHealth = _maxHealth;
+        }
+
         public virtual void ReceiveDamage(int armorPoints, int hitRoll, int totalDamage, bool isCrit)
         {
             if(!isCrit && hitRoll < armorPoints)
