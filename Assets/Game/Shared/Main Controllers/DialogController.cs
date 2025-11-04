@@ -147,7 +147,7 @@ namespace Game.Controllers
             string message = "Thus ends your adventure… The main menu awaits your next tale.";
             MessageBoxButtonData boxButtonDataContinue = new MessageBoxButtonData(() => 
             {   
-                StaticVariables.CurrentGameState = GameState.Dialogue;
+                StaticVariables.CurrentGameState = GameState.Introduction;
                 SceneManager.LoadSceneAsync(0, LoadSceneMode.Single);
             }, "Return to Main Menu");
             

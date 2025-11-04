@@ -39,7 +39,7 @@ namespace Game.UI
             canvasGroup.interactable = _isOpen;
             canvasGroup.blocksRaycasts = _isOpen;
             
-            shopUI.ToggleShopButton(!_isOpen);
+            shopUI.ToggleShopButton(!_isOpen && StaticVariables.CurrentGameState == GameState.Dialogue);
             GetButtonText();
 
             if (_isOpen)

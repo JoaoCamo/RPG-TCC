@@ -58,7 +58,7 @@ namespace Game.UI
             titleTextMesh.text = arcData.title;
             dialogTextMesh.text = arcData.arcIntroduction;
 
-            DialogOptionData data = isEnding ? new DialogOptionData("Return to Main Menu", GameState.Dialogue) : new DialogOptionData("Continue Adventure", GameState.Dialogue);
+            DialogOptionData data = isEnding ? new DialogOptionData("Return to Main Menu", GameState.Introduction) : new DialogOptionData("Continue Adventure", GameState.Dialogue);
             UnityAction onClick = isEnding ? dialogController.ShowEndingMessage : () => DialogButtonOnClick(dialogController, data.text, data.game_state);
             
             DialogButton dialogButton = Instantiate(dialogButtonPrefab, dialogButtonParent);

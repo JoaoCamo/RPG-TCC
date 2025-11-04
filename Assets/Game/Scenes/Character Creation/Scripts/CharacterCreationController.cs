@@ -9,6 +9,7 @@ using Game.Shared.Item.Scripts.Systems;
 using Game.Scenes.Character_Creation.Scripts.Character_Lore;
 using Game.Scenes.Character_Creation.Scripts.History_Context;
 using Game.Scenes.Character_Creation.Scripts.Stats_Selection;
+using Game.Static.Enum;
 
 namespace Game.Scenes.Character_Creation.Scripts
 {
@@ -41,6 +42,7 @@ namespace Game.Scenes.Character_Creation.Scripts
             else
             {
                 _currentPosition++;
+                StaticVariables.CurrentGameState = GameState.Introduction;
                 SetCurrentCanvasGroup(GetCanvasToShow());
             }
         }
