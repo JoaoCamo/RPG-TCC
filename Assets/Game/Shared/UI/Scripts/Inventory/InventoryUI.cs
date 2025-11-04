@@ -33,7 +33,7 @@ namespace Game.UI
             ToggleChangeModeButton();
 
             _isOpen = !_isOpen;
-            _isInExchange &= StaticVariables.CurrentGameState != GameState.Dialogue;
+            _isInExchange &= StaticVariables.CurrentGameState == GameState.Dungeon;
 
             canvasGroup.alpha = _isOpen ? 1 : 0;
             canvasGroup.interactable = _isOpen;
