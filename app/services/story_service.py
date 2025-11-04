@@ -18,7 +18,7 @@ def generate_story(selected_model: str, choice):
                     Generate a story or dialogue response from a named NPC based on the previous story context. 
                     
                     Then, provide the player with **at least 5 possible choices with a maximum of 7** for what to say or do next:
-                        - The choices can cover different approaches: advancing the story (game_state: 0), interacting with the dungeon (game_state: 1), being aggressive or confrontational towards the NPC, or other creative actions.
+                        - The choices can cover different approaches: advancing the story (game_state: 1), interacting with the dungeon (game_state: 2), being aggressive or confrontational towards the NPC, or other creative actions.
                         - It is not required for a dungeon-related choice to appear immediately; as the player continues interacting, choices should naturally lead towards the dungeon over time.
                         - The NPC may change depending on the player's choice, and future dialogues and options should reflect these changes.
                     

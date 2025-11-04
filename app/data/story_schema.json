@@ -22,7 +22,7 @@
               "text": { "type": "string" },
               "game_state": {
                 "type": "integer",
-                "enum": [0, 1]
+                "enum": [1, 2]
               }
             },
             "required": ["text", "game_state"],
