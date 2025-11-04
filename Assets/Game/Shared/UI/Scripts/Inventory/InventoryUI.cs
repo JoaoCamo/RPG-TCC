@@ -1,6 +1,7 @@
 using Game.Shared.UI.Scripts.Inventory;
 using Game.Shared.UI.Scripts.Shop;
 using Game.Static;
+using Game.Static.Enum;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -32,6 +33,7 @@ namespace Game.UI
             ToggleChangeModeButton();
 
             _isOpen = !_isOpen;
+            _isInExchange &= StaticVariables.CurrentGameState != GameState.Dialogue;
 
             canvasGroup.alpha = _isOpen ? 1 : 0;
             canvasGroup.interactable = _isOpen;
