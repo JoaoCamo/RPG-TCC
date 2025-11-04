@@ -7,11 +7,13 @@ using Game.UI.Data;
 using Game.Static.Enum;
 using Game.Controllers;
 using Game.Shared.UI.Data;
+using Game.Shared.UI.Scripts.Shop;
 
 namespace Game.UI
 {
     public class DialogUI : MonoBehaviour
     {
+        [SerializeField] private ShopToggleButton shopToggleButton;
         [SerializeField] private DialogButton dialogButtonPrefab;
         [SerializeField] private Transform dialogButtonParent;
         [SerializeField] private TextMeshProUGUI titleTextMesh;
@@ -28,6 +30,7 @@ namespace Game.UI
             DialogOptionData data = new DialogOptionData() { text = "Begin Adventure", game_state = GameState.Dialogue};
             DialogButton dialogButton = Instantiate(dialogButtonPrefab, dialogButtonParent);
             dialogButton.Initialize(() => DialogButtonOnClick(dialogController, data.text, data.game_state), data.text);
+            shopToggleButton.ToggleButton(false);
         }
 
         public void SetNewDialog(DialogData dialogData, DialogController dialogController)
@@ -44,6 +47,7 @@ namespace Game.UI
                 dialogButton.Initialize(() => DialogButtonOnClick(dialogController, dialogOption.text, dialogOption.game_state), dialogOption.text);
             }
             
+            shopToggleButton.ToggleButton(true);
             StaticFunctions.ChangeCurrentUI(canvasGroup);
         }
 
@@ -59,6 +63,7 @@ namespace Game.UI
             
             DialogButton dialogButton = Instantiate(dialogButtonPrefab, dialogButtonParent);
             dialogButton.Initialize(isEnding ? dialogController.ShowEndingMessage : onClick, data.text);
+            shopToggleButton.ToggleButton(false);
             
             StaticFunctions.ChangeCurrentUI(canvasGroup);
         }

@@ -5,11 +5,13 @@ using Game.Map;
 using Game.Static;
 using Game.Map.Enum;
 using Game.Controllers;
+using Game.Shared.UI.Scripts.Shop;
 
 namespace Game.UI
 {
     public class MapUI : MonoBehaviour
     {
+        [SerializeField] private ShopToggleButton shopToggleButton;
         [SerializeField] private Image tilePrefab;
         [SerializeField] private GridLayoutGroup grid;
         [SerializeField] private TextMeshProUGUI descriptionTextMesh;
@@ -39,6 +41,7 @@ namespace Game.UI
                 }
             }
             
+            shopToggleButton.ToggleButton(false);
             StaticFunctions.ChangeCurrentUI(canvasGroup);
         }
 

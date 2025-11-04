@@ -9226,7 +9226,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mapController: {fileID: 671251515}
-  shopController: {fileID: 0}
+  shopController: {fileID: 1301357958}
   messageUI: {fileID: 593425433}
   dialogUI: {fileID: 2101586110}
   playerStatsUI: {fileID: 169882327}
@@ -11528,6 +11528,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8cd7ab97c5b176d6a9b561773f25ab71, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  shopToggleButton: {fileID: 1429253158}
   tilePrefab: {fileID: 4445118689210371689, guid: f495485bbdcc4b20a9f984133a4c9e54, type: 3}
   grid: {fileID: 290860766}
   descriptionTextMesh: {fileID: 964155761}
@@ -13852,6 +13853,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d929bc42d9e0bb611a2e363dbf16df11, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  shopToggleButton: {fileID: 1429253158}
   dialogButtonPrefab: {fileID: 7748005247611580516, guid: 71d759d26f06b7b4a9e78f5f952e022d, type: 3}
   dialogButtonParent: {fileID: 798113500}
   titleTextMesh: {fileID: 1077695263}
