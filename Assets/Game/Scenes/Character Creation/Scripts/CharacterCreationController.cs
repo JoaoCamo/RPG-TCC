@@ -21,7 +21,8 @@ namespace Game.Scenes.Character_Creation.Scripts
         [SerializeField] private Button returnButton;
         [SerializeField] private Button continueButton;
         
-        private readonly PlayerController playerController = new PlayerController();
+        private const string DifficultyKey = "GAME_DIFFICULTY";
+        private readonly PlayerController _playerController = new PlayerController();
         private CanvasGroup _currentCanvasGroup;
         private int _currentPosition = 0;
         
@@ -37,6 +38,7 @@ namespace Game.Scenes.Character_Creation.Scripts
             if (_currentPosition == 2)
             {
                 SetPlayerData();
+                StaticVariables.GameDifficulty = (GameDifficulty)PlayerPrefs.GetInt(DifficultyKey, 1);
                 SceneManager.LoadScene(2, LoadSceneMode.Single);
             }
             else
@@ -84,16 +86,16 @@ namespace Game.Scenes.Character_Creation.Scripts
 
         private void SetPlayerData()
         {
-            playerController.LoadCharacter(characterLoreController.CharacterName, CharacterType.Player);
-            playerController.Class = characterLoreController.SelectedClass;
-            statSelectionController.SetCharacterStats(playerController);
-            playerController.Health.CalculateHealth(10, 1, playerController.Stats.constitution);
-            ClassKit.GiveClassKit(playerController);
-            playerController.Inventory.CurrentGold += 200;
+            _playerController.LoadCharacter(characterLoreController.CharacterName, CharacterType.Player);
+            _playerController.Class = characterLoreController.SelectedClass;
+            statSelectionController.SetCharacterStats(_playerController);
+            _playerController.Health.CalculateHealth(10, 1, _playerController.Stats.constitution);
+            ClassKit.GiveClassKit(_playerController);
+            _playerController.Inventory.CurrentGold += 200;
             
             StaticVariables.HistoryContext = historyContextController.Context;
             StaticVariables.CharacterHistory = characterLoreController.CharacterHistory;
-            StaticVariables.PlayerController = playerController;
+            StaticVariables.PlayerController = _playerController;
         }
     }
 }
