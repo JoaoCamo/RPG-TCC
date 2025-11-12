@@ -5,6 +5,7 @@ using Game.UI;
 using Game.UI.Data;
 using System.Collections;
 using System.Text;
+using Game.Static;
 using UnityEngine;
 using UnityEngine.Networking;
 using UnityEngine.SceneManagement;
@@ -22,7 +23,7 @@ namespace Game.Item
 
         public IEnumerator GenerateItem(ArmorBase armorBase, string character)
         {
-            string url = "http://127.0.0.1:5000/generate/item/";
+            string url = $"{StaticVariables.APIPath}/generate/item/";
 
             ItemRequestData itemRequestData = new ItemRequestData(character, nameof(ItemType.Armor));
             string dataJson = JsonUtility.ToJson(itemRequestData);
@@ -47,7 +48,7 @@ namespace Game.Item
 
         public IEnumerator GenerateItem(WeaponBase weaponBase, string character)
         {
-            string url = "http://127.0.0.1:5000/generate/item/";
+            string url = $"{StaticVariables.APIPath}/generate/item/";
 
             ItemRequestData itemRequestData = new ItemRequestData(character, ItemType.Weapon.ToString());
             string dataJson = JsonUtility.ToJson(itemRequestData);

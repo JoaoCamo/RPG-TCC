@@ -27,7 +27,7 @@ namespace Game.Character
 
         public IEnumerator GenerateEnemy(EnemyController enemyController, int dungeonLevel)
         {
-            string url = "http://127.0.0.1:5000/generate/character/";
+            string url = $"{StaticVariables.APIPath}/generate/character/";
 
             CharacterRequestData data = new CharacterRequestData(dungeonLevel, StaticVariables.CampaignStartInfo.dungeon.description);
             string dataJson = JsonUtility.ToJson(data);

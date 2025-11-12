@@ -37,7 +37,7 @@ namespace Game.Controllers
         {
             messageUI.RequestMessageBox("Waiting for Response");
 
-            string url = "http://127.0.0.1:5000/generate/main_story/";
+            string url = $"{StaticVariables.APIPath}/generate/main_story/";
 
             StartCampaignData startCampaignData = new StartCampaignData(classType.ToString(), playerName, StaticVariables.CharacterHistory, StaticVariables.HistoryContext);
             string dataJson = JsonUtility.ToJson(startCampaignData);
@@ -70,7 +70,7 @@ namespace Game.Controllers
         {
             messageUI.RequestMessageBox("Waiting for Response");
 
-            string url = "http://127.0.0.1:5000/generate/story/";
+            string url = $"{StaticVariables.APIPath}/generate/story/";
 
             DialogSendData data = new DialogSendData(dialog);
             string dataJson = JsonUtility.ToJson(data);
@@ -99,7 +99,7 @@ namespace Game.Controllers
         {
             messageUI.RequestMessageBox("Waiting for Response");
             
-            string url = "http://127.0.0.1:5000/generate/arc/";
+            string url = $"{StaticVariables.APIPath}/generate/arc/";
 
             HistoryArcRequestData data = new HistoryArcRequestData(lastPlayerAction, ++_currentArc, _currentArc == MaxHistoryArcs);
             string dataJson = JsonUtility.ToJson(data);
@@ -158,7 +158,7 @@ namespace Game.Controllers
         {
             messageUI.RequestMessageBox("Generating Image");
             
-            string url = "http://127.0.0.1:5000/generate/image/";
+            string url = $"{StaticVariables.APIPath}/generate/image/";
             
             ImageRequestData data = new ImageRequestData(imageContext);
             string dataJson = JsonUtility.ToJson(data);

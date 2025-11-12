@@ -7,6 +7,8 @@ namespace Game.Static
 {
     public static class StaticVariables
     {
+        public const string APIPath = "https://rpg-tcc-api.onrender.com";
+        
         public static GameState CurrentGameState;
         public static GameDifficulty GameDifficulty;
         public static PlayerController PlayerController;

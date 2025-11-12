@@ -129,7 +129,7 @@ namespace Game.Controllers
         private IEnumerator LoadRoomContent()
         {
             messageUI.RequestMessageBox("Waiting for Response");
-            string url = "http://127.0.0.1:5000/generate/dungeon_room/";
+            string url = $"{StaticVariables.APIPath}/generate/dungeon_room/";
 
             DungeonRoomRequestData data = new DungeonRoomRequestData(StaticVariables.CampaignStartInfo.dungeon.description);
             string dataJson = JsonUtility.ToJson(data);
