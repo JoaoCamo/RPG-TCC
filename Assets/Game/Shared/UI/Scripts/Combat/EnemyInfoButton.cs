@@ -57,5 +57,10 @@ namespace Game.UI
         {
             outline.color = mode ? _turnColor :  _unselectedColor;
         }
+
+        public void ToggleButton(bool mode)
+        {
+            button.interactable = mode;
+        }
     }
 }

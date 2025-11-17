@@ -124,6 +124,9 @@ namespace Game.UI
             continueButton.ToggleDisplay(!isPlayerTurn);
             attackButton.ToggleDisplay(isPlayerTurn);
             potionButton.ToggleDisplay(isPlayerTurn);
+
+            foreach (EnemyInfoButton enemyInfoButton in _enemyInfoButtons)
+                enemyInfoButton.ToggleButton(isPlayerTurn);
         }
 
         public void TogglePotionButton(bool mode)
