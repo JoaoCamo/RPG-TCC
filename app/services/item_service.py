@@ -10,16 +10,24 @@ def generate_item(selected_model: str, character: str, item_type: str):
     item_user = f"""
     Generate a {item_type} that would naturally be dropped by the following character: {character}.
 
-    Items must follow established 5e conventions for rarity, power scaling, and rules.
-    Armor must use correct AC progression for light, medium, and heavy armor, as well as shields. 
-    Weapons must only use official damage dice and weapon properties
+    Items must follow official 5e conventions for rarity, power, balance, and rules.
 
-    Also take into account the level, power, and nature of {character}. 
-    Low-level or weak creatures should not drop overly powerful or world-breaking items; their loot should be simple, modest, 
-    or thematically flavorful. Mid-level foes may drop more impactful but still balanced items. 
-    High-level bosses, extraplanar beings, divine entities, or legendary characters can justify rare or exceptionally powerful items.
+    Armor must follow standard 5e AC ranges:
+        - Light Armor: 11–12
+        - Medium Armor: 12–15
+        - Heavy Armor: 14–18
+        - Shields: always +2 AC
 
-    The item should feel thematically appropriate for {character}, reflecting their abilities, personality, and narrative role.
+    Weapons must use official 5e damage dice and proper weapon properties only.
+
+    Descriptions must be extremely concise: 1–2 short sentences, focusing only on key visual or thematic elements. Avoid long lore or detailed explanations.
+
+    The character's level is extremely important when designing the item.
+    Low-level or weak creatures should only drop simple, modest, or flavorful items.
+    Mid-level foes may drop more impactful but still balanced items.
+    High-level bosses, extraplanar beings, divine entities, or legendary characters can justify rare and powerful items, still within 5e limits.
+
+    The item must feel thematically appropriate for {character}, reflecting their abilities, personality, and narrative role.
     """
 
     if item_type == "Weapon":

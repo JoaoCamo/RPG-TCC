@@ -15,7 +15,9 @@ def generate_arc(selected_model: str, last_action: str, current_arc: int, is_end
     The player's last major action was: {last_action}.
     This begins Arc {current_arc} — unless this is the ending.
 
-    If isEnding = true, this is the **final conclusion of the entire story**, not an arc:
+    The story must naturally progress in a way that leads to its final conclusion by Arc 5 at the latest.
+
+    If isEnding = {is_ending}, this is the **final conclusion of the entire story**, not an arc:
         - Do NOT treat this as an arc and do NOT use arc-style titles.
         - Title format must be like an ending or epilogue (e.g., "Epilogue: The Last Dawn", "The Story's End", "Final Resolution").
         - Provide a complete, definitive ending that resolves all major plotlines.
@@ -24,10 +26,12 @@ def generate_arc(selected_model: str, last_action: str, current_arc: int, is_end
         - The text should read like the last chapter of a book.
         - Do NOT include dialogue options or continue the narrative beyond this ending.
 
-    If isEnding = false, generate a creative and immersive beginning for a new story arc:
+    If isEnding = {is_ending}:
+        - This is a new story arc.
         - The title MUST include the arc number (e.g., "Arc {current_arc} – The Shadow Stirs").
         - The section should introduce the tone, stakes, and direction for this arc.
-        - It must follow naturally from the player's last major action.
+        - Ensure that the story’s progression feels meaningful and moves closer to its eventual ending by Arc 5.
+        - The narrative must follow naturally from the player's last major action.
 
     Ensure the narrative always follows the established story context and respects the consequences of the player's choices.
     """
