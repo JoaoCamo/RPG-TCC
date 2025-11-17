@@ -25,7 +25,7 @@ namespace Game.Controllers
         [SerializeField] private PlayerStatsUI playerStatsUI;
 
         private const string ImageKey = "TOGGLE_IMAGE";
-        private const int MaxHistoryArcs = 4;
+        private const int MaxHistoryArcs = 5;
         private int _currentArc = 1;
 
         private void Awake()
