@@ -3479,8 +3479,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weaponArea: {fileID: 221396341}
-  statTextMesh: {fileID: 1618811735}
-  damageTextMesh: {fileID: 1502119011}
+  statTextMesh: {fileID: 1502119011}
+  damageTextMesh: {fileID: 1618811735}
 --- !u!114 &411168260
 MonoBehaviour:
   m_ObjectHideFlags: 0
