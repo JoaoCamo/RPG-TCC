@@ -8,16 +8,19 @@ client = OpenAI()
 def generate_dungeon_room(selected_model: str, context: str):
     dungeon_room_system = "You are an imaginative Dungeon Master."
     dungeon_room_user = f"""
-                            Generate a dungeon room based on the following context: {context}.
-                            
-                            Randomize the number of enemies present in the room according to these probabilities:
-                                - 15% chance of having no enemies
-                                - 30% chance of having 1 enemy
-                                - 35% chance of having 2 enemies
-                                - 20% chance of having 3 enemies
-                            
-                            Ensure the dungeon room feels immersive, balanced, and consistent with the overall dungeon theme. The description should be concise and not too long.
-                         """
+    Generate a dungeon room based on: {context}.
+
+    Randomize the number of enemies using:
+    - 15%: no enemies
+    - 30%: 1 enemy
+    - 35%: 2 enemies
+    - 20%: 3 enemies
+
+    Keep the room immersive and consistent with the dungeon theme, but keep the final description extremely concise: 
+    2–4 sentences maximum, only highlighting the room’s key features and immediate atmosphere. 
+    Avoid long paragraphs or unnecessary detail.
+    """
+
     dungeon_room_schema = load_json_schema("dungeon_room_schema.json")
     response = client.responses.create(
         model=selected_model,

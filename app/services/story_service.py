@@ -11,19 +11,26 @@ def generate_story(selected_model: str, choice):
     context = load_context("context.txt")
     story_system = "You are an imaginative Dungeon Master."
     story_user = f"""
-                    Story Context: {context}
-                    Player choice: {choice}
-                    
-                    Prompt: 
-                    Generate a story or dialogue response from a named NPC based on the previous story context. 
-                    
-                    Then, provide the player with **at least 5 possible choices with a maximum of 7** for what to say or do next:
-                        - The choices can cover different approaches: advancing the story (game_state: 1), interacting with the dungeon (game_state: 2), being aggressive or confrontational towards the NPC, or other creative actions.
-                        - It is not required for a dungeon-related choice to appear immediately; as the player continues interacting, choices should naturally lead towards the dungeon over time.
-                        - The NPC may change depending on the player's choice, and future dialogues and options should reflect these changes.
-                    
-                    Ensure the dialogue and choices feel natural, engaging, and consistent with the story context.
-                  """
+    Story Context: {context}
+    Player choice: {choice}
+
+    Prompt:
+    Generate a story or dialogue response from a named NPC based on the previous story context. 
+    The NPC should naturally change over time as the story progresses — not only when entering or leaving the dungeon. 
+    NPC transitions should occur organically as conversations evolve, the player explores the world, or new situations unfold.
+
+    All dialogue and choices must update and reflect the current game_state of the dungeon system.
+
+    Provide the player with **at least 5 and at most 7** choices for what to say or do next.
+    The choices should:
+    - Include different approaches (game_state: 1) such as advancing the story, social interaction, exploration, or confrontation.
+    - Include dungeon-related choices (game_state: 2), but these should become more frequent as the narrative progresses.
+    - Gradually shift the story toward the dungeon: after enough interactions, the available options should eventually become **exclusively dungeon-related**.
+    - Reflect changes in NPCs, tone, and situation based on the player’s previous decisions.
+
+    Ensure the dialogue, pacing, NPC changes, and player choices feel natural, engaging, and coherent with the ongoing story context.
+    """
+
     story_schema = load_json_schema("story_schema.json")
     response = client.responses.create(
         model=selected_model,
