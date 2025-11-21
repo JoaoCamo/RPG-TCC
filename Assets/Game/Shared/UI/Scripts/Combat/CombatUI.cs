@@ -136,6 +136,9 @@ namespace Game.UI
 
         private void UpdatedSelectedButton(EnemyInfoButton enemyInfoButton)
         {
+            if (_selectedEnemyButton == enemyInfoButton)
+                return;
+            
             _selectedEnemyButton?.ToggleSelectedOutline();
             _selectedEnemyButton = enemyInfoButton;
             _selectedEnemyButton.ToggleSelectedOutline();
