@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using UnityEngine;
-using Game.Static;
 using Game.Map.Enum;
 using Game.Map.Data;
 using Game.Static.Enum;
@@ -10,6 +9,8 @@ namespace Game.Map
     public class MapGenerator : MonoBehaviour
     {
         [SerializeField] private MapTile[] mapTiles;
+        
+        private const string DifficultyKey = "GAME_DIFFICULTY";
 
         public MapSection[,] GenerateMap(int[] initialPosition)
         {
@@ -204,7 +205,7 @@ namespace Game.Map
 
         private int[] GetMapSizeInfo()
         {
-            return StaticVariables.GameDifficulty switch
+            return (GameDifficulty)PlayerPrefs.GetInt(DifficultyKey, 1) switch
             {
                 GameDifficulty.Easy => new int[] {3,2},
                 GameDifficulty.Normal => new int[] {4,3},

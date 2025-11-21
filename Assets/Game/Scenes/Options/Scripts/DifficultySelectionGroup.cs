@@ -1,4 +1,3 @@
-using Game.Static;
 using Game.Static.Enum;
 using TMPro;
 using UnityEngine;
@@ -21,7 +20,6 @@ namespace Game.Scenes.Options.Scripts
             downButton.onClick.AddListener(DownButtonOnClick);
             
             _currentDifficulty = PlayerPrefs.GetInt(DifficultyKey, 1);
-            StaticVariables.GameDifficulty = (GameDifficulty)_currentDifficulty;
             UpdateText();
         }
 
@@ -31,7 +29,7 @@ namespace Game.Scenes.Options.Scripts
                 return;
 
             _currentDifficulty++;
-            StaticVariables.GameDifficulty = (GameDifficulty)_currentDifficulty;
+            PlayerPrefs.SetInt(DifficultyKey, _currentDifficulty);
             UpdateText();
         }
 
@@ -41,7 +39,7 @@ namespace Game.Scenes.Options.Scripts
                 return;
             
             _currentDifficulty--;
-            StaticVariables.GameDifficulty = (GameDifficulty)_currentDifficulty;
+            PlayerPrefs.SetInt(DifficultyKey, _currentDifficulty);
             UpdateText();
         }
         

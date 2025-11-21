@@ -28,6 +28,7 @@ namespace Game.Controllers
         private int _dungeonLevel;
         private MapSection[,] _currentMap;
         private readonly int[] _currentPosition = new int[2];
+        private const string DifficultyKey = "GAME_DIFFICULTY";
 
         private void Awake()
         {
@@ -95,7 +96,7 @@ namespace Game.Controllers
 
         private int GetMapSize()
         {
-            return StaticVariables.GameDifficulty switch
+            return (GameDifficulty)PlayerPrefs.GetInt(DifficultyKey, 1) switch
             {
                 GameDifficulty.Easy => 3,
                 GameDifficulty.Normal => 4,

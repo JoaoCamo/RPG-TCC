@@ -21,7 +21,6 @@ namespace Game.Scenes.Character_Creation.Scripts
         [SerializeField] private Button returnButton;
         [SerializeField] private Button continueButton;
         
-        private const string DifficultyKey = "GAME_DIFFICULTY";
         private readonly PlayerController _playerController = new PlayerController();
         private CanvasGroup _currentCanvasGroup;
         private int _currentPosition = 0;
@@ -38,7 +37,6 @@ namespace Game.Scenes.Character_Creation.Scripts
             if (_currentPosition == 2)
             {
                 SetPlayerData();
-                StaticVariables.GameDifficulty = (GameDifficulty)PlayerPrefs.GetInt(DifficultyKey, 1);
                 SceneManager.LoadScene(2, LoadSceneMode.Single);
             }
             else

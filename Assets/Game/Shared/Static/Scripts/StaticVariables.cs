@@ -10,7 +10,6 @@ namespace Game.Static
         public const string APIPath = "https://rpg-tcc-api.onrender.com";
         
         public static GameState CurrentGameState;
-        public static GameDifficulty GameDifficulty;
         public static PlayerController PlayerController;
         public static CanvasGroup CurrentCanvasGroup;
         public static CampaignStartInfo CampaignStartInfo;
