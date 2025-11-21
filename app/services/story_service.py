@@ -21,12 +21,13 @@ def generate_story(selected_model: str, choice):
 
     All dialogue and choices must update and reflect the current game_state of the dungeon system.
 
-    Provide the player with **at least 5 and at most 7** choices for what to say or do next.
+    Provide the player with at least 5 and at most 7 choices for what to say or do next.
     The choices should:
     - Include different approaches (game_state: 1) such as advancing the story, social interaction, exploration, or confrontation.
     - Include dungeon-related choices (game_state: 2), but these should become more frequent as the narrative progresses.
-    - Gradually shift the story toward the dungeon: after enough interactions, the available options should eventually become **exclusively dungeon-related**.
+    - Gradually shift the story toward the dungeon: after enough interactions, the available options should eventually become exclusively dungeon-related.
     - Reflect changes in NPCs, tone, and situation based on the player’s previous decisions.
+    - Do NOT include choices where the player asks an NPC for an item or asks an NPC for help. The system does not support these actions, so these types of choices must never appear.
 
     Ensure the dialogue, pacing, NPC changes, and player choices feel natural, engaging, and coherent with the ongoing story context.
     """
