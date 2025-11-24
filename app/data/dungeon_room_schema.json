@@ -1,0 +1,55 @@
+{
+    "format": {
+        "type": "json_schema",
+        "name": "dungeon_room",
+        "strict": true,
+        "schema": {
+            "type": "object",
+            "properties": {
+                "roomDescription": {
+                    "type": "string"
+                },
+                "enemiesPresent": {
+                    "anyOf": [
+                        {
+                            "type": "object",
+                            "properties": {
+                                "isEnemiesPresent": {
+                                    "type": "boolean",
+                                    "const": false
+                                }
+                            },
+                            "required": [
+                                "isEnemiesPresent"
+                            ],
+                            "additionalProperties": false
+                        },
+                        {
+                            "type": "object",
+                            "properties": {
+                                "isEnemiesPresent": {
+                                    "type": "boolean",
+                                    "const": true
+                                },
+                                "enemyAmount": {
+                                    "type": "integer",
+                                    "minimum": 1
+                                }
+                            },
+                            "required": [
+                                "isEnemiesPresent",
+                                "enemyAmount"
+                            ],
+                            "additionalProperties": false
+                        }
+                    ]
+                }
+            },
+            "required": [
+                "roomDescription",
+                "enemiesPresent"
+            ],
+            "additionalProperties": false
+        }
+    }
+}
