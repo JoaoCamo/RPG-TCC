@@ -1,0 +1,42 @@
+{
+    "format": {
+        "type": "json_schema",
+        "name": "main_story",
+        "strict": true,
+        "schema": {
+            "type": "object",
+            "properties": {
+                "title": {
+                    "type": "string",
+                    "description": "The story title, which must include the current arc number (always 'Arc 1')."
+                },
+                "introduction": {
+                    "type": "string",
+                    "description": "A detailed and immersive introduction describing the beginning of the character’s adventure, tone, and setting."
+                },
+                "dungeon": {
+                    "type": "object",
+                    "properties": {
+                        "name": {
+                            "type": "string"
+                        },
+                        "description": {
+                            "type": "string"
+                        }
+                    },
+                    "required": [
+                        "name",
+                        "description"
+                    ],
+                    "additionalProperties": false
+                }
+            },
+            "required": [
+                "title",
+                "introduction",
+                "dungeon"
+            ],
+            "additionalProperties": false
+        }
+    }
+}

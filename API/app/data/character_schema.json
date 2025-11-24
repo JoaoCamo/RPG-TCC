@@ -1,0 +1,57 @@
+{
+    "format": {
+        "type": "json_schema",
+        "name": "character",
+        "strict": true,
+        "schema": {
+            "type": "object",
+            "properties": {
+                "level": {
+                    "type": "integer"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "size": {
+                    "type": "integer",
+                    "enum": [2,3,5,7,10,15]
+                },
+                "stats": {
+                    "type": "object",
+                    "properties": {
+                        "strength": { "type": "integer" },
+                        "dexterity": { "type": "integer" },
+                        "constitution": { "type": "integer" },
+                        "intelligence": { "type": "integer" },
+                        "wisdom": { "type": "integer" },
+                        "charisma": { "type": "integer" }
+                    },
+                    "required": [
+                        "strength",
+                        "dexterity",
+                        "constitution",
+                        "intelligence",
+                        "wisdom",
+                        "charisma"
+                    ],
+                    "additionalProperties": false
+                },
+                "dropQuantity": {
+                    "type": "integer"
+                },
+                "challengeRating": {
+                    "type": "integer"
+                }
+            },
+            "required": [
+                "level",
+                "name",
+                "size",
+                "stats",
+                "dropQuantity",
+                "challengeRating"
+            ],
+            "additionalProperties": false
+        }
+    }
+}

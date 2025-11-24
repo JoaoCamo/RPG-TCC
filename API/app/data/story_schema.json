@@ -1,0 +1,37 @@
+{
+  "format": {
+    "type": "json_schema",
+    "name": "story",
+    "strict": true,
+    "schema": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "dialogue": {
+          "type": "string"
+        },
+        "options": {
+          "type": "array",
+          "minItems": 5,
+          "maxItems": 7,
+          "items": {
+            "type": "object",
+            "properties": {
+              "text": { "type": "string" },
+              "game_state": {
+                "type": "integer",
+                "enum": [1, 2]
+              }
+            },
+            "required": ["text", "game_state"],
+            "additionalProperties": false
+          }
+        }
+      },
+      "required": ["name", "dialogue", "options"],
+      "additionalProperties": false
+    }
+  }
+}
