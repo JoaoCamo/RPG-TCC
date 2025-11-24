@@ -110,7 +110,7 @@ Player inputs are sent to the API, and the LLM returns responses consistent with
 
 ### **Unity**
 1. Open the `Unity/` folder in Unity Hub.
-2. Load the main scene.
+2. Load the **MainMenu** scene.
 3. Press **Play**.
 
 ### **Python API**
@@ -233,7 +233,7 @@ As entradas do jogador são enviadas para a API, e o LLM retorna respostas consi
 
 ### **Unity**
 1. Abra a pasta `Unity/` pelo Unity Hub.
-2. Carregue a cena principal.
+2. Carregue a cena **MainMenu**.
 3. Pressione **Play**.
 
 ### **API Python**
