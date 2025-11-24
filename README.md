@@ -111,7 +111,7 @@ Player inputs are sent to the API, and the LLM returns responses consistent with
 ### **Unity**
 1. Open the `Unity/` folder in Unity Hub.
 2. Load the main scene.
-3. Press **Play**.# RPG – Sistema de Narrativa Procedural com IA
+3. Press **Play**.
 
 ### **Python API**
 
