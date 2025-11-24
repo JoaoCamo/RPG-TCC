@@ -2,8 +2,6 @@
 
 # 🌐 Documentation / Documentação
 
-Click or tap a language below to expand.
-
 </div>
 
 ---
